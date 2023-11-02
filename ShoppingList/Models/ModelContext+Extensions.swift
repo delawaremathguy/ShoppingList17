@@ -30,6 +30,7 @@ extension ModelContext {
 		}
 	}
 	
+	// a simple "how many items do we have" computation.
 	func itemCount() -> Int {
 		let fetchDescriptor = FetchDescriptor<Item>()
 		do {
@@ -43,6 +44,7 @@ extension ModelContext {
 	
 	// MARK: -- Location Helpers
 	
+	// a simple "how many locations do we have" computation.
 	func locationCount() -> Int {
 		let fetchDescriptor = FetchDescriptor<Location>()
 		do {
@@ -53,7 +55,6 @@ extension ModelContext {
 			return 0
 		}
 	}
-
 		
 	private func updateOrInsert(representation: ItemRepresentation, at location: Location) {
 		if let item = item(withID: representation.id) {

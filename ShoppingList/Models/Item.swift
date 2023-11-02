@@ -11,7 +11,13 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-@Model 
+// an Item, a.k.a., a Shopping Item, is simply something you would
+// purchase at a grocery store.  we allow you to set the isAvailable
+// flag to indicate that something was on the shopping list when you
+// went to the store, but it was no available.  and whenever you
+// purchase an item on the shopping list, we update its timestamp
+// so you can see when it was last purchased.
+@Model
 public class Item {
 	let referenceID: UUID = UUID()
 	
@@ -21,12 +27,13 @@ public class Item {
 	var isAvailable: Bool = true
 	var lastPurchased: Date?
 	
-	// relationship (each item belongs to a single location)
-	// when deleted, .nullify will remove its reference from
-	// the associated Locations
+	// relationship (each item belongs to a single location).
+	// when the item is deleted, .nullify will remove any reference
+	// from its associated Location.
 	@Relationship(deleteRule: .nullify)
 	var location: Location?
 	
+	// initializer used when importing data from Files.
 	init(from representation: ItemRepresentation) {
 		name = representation.name
 		quantity = representation.quantity
@@ -35,12 +42,13 @@ public class Item {
 		lastPurchased = representation.dateLastPurchased
 	}
 	
+	// initializer used when creating an Item
+	// in the AddNewItemView.
 	init(from draft: DraftItem) {
 		name = draft.name
 		quantity = draft.quantity
 		onList = draft.onList
 		isAvailable = draft.isAvailable
-//		draft.location.itemsOptional?.append(self)
 	}
 	
 }
@@ -49,7 +57,7 @@ public class Item {
 
 extension Item {
 	
-	// the color of its association Location
+	// the item's color is the color of its association Location
 	var color: Color { location?.color ?? .green	}
 	
 	// the name of its associated Location
@@ -61,6 +69,7 @@ extension Item {
 
 extension Item {
 
+	// used when updating an Item in the ModifyExistingItemView.
 	func updateValues(from draftItem: DraftItem) {
 		name = draftItem.name
 		quantity = draftItem.quantity
@@ -69,6 +78,8 @@ extension Item {
 		location = draftItem.location
 	}
 	
+	// call this function when tapping on an item in the
+	// shopping list so we can timestamp it.
 	func markAsPurchased() {
 		onList = false
 		lastPurchased = .now

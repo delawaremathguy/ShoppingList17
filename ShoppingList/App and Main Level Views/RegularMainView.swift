@@ -9,16 +9,14 @@
 import SwiftUI
 
 // the RegularMainView is a two-column NavigationSplitView, where
-// the first column has the same role that the TabView has in the
-// CompactMainView.
-
+// the first column has the same role that the tab bar of the TabView
+// has in the CompactMainView.
 struct RegularMainView: View {
 	
 	enum NavigationItem {
 		case shoppingList
 		case purchasedList
 		case locationList
-		//case inStoreTimer
 		case preferences
 		case more
 	}

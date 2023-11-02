@@ -13,6 +13,10 @@ import SwiftUI
 let kUnknownLocationName = "Unknown Location"
 let kUnknownLocationPosition: Int = Int(INT32_MAX)
 
+// a Location, a.k.a., an area of a grocery store where items
+// of a certain type can be found.  the `position` value is
+// used to order the Locations so that you can navigate from
+// one location to another in a sequence defined by you.
 @Model
 public class Location {
 	let referenceID: UUID = UUID()
@@ -28,9 +32,14 @@ public class Location {
 	// relationship (this location has many items).  note that when
 	// we delete a Location, we'll handle all the associated items
 	// ourself, so SwiftData should take no action for us.
+	// note: the name is `itemsOptional` to remind me that this must
+	// be optional to work with iCloud, but also that i do not
+	// want to use this directly: it's really a Set and the order
+	// of the associated Items is unpredictable.
 	@Relationship(deleteRule: .noAction, inverse: \Item.location)
 	var itemsOptional: [Item]?
 	
+	// used only for the creation of the unknown location.
 	init(suggestedName: String? = nil, atPosition position: Int? = nil) {
 		referenceID = UUID()
 		if let suggestedName { name = suggestedName }
@@ -69,6 +78,8 @@ public class Location {
 
 extension Location {
 	
+	// this is the programmatic interface to reading the items associated
+	// with a Location, already ordered by name.
 	var items: [Item] {
 		let array = itemsOptional ?? []
 		return array.sorted(by: \.name)
@@ -77,6 +88,7 @@ extension Location {
 	// simplified test of "is the unknown location"
 	var isUnknownLocation: Bool { position == kUnknownLocationPosition }
 
+	// manages a SwiftUI color in terms of component values
 	var color: Color {
 		get { Color(red: red, green: green, blue: blue, opacity: opacity) }
 		set {

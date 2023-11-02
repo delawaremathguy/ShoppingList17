@@ -11,11 +11,11 @@ import SwiftUI
 
 /*
 the App creates an InStoreTimer and pushes it into the environment,
-for use with the Timer now displayed in the More... tab
+for use with the Timer now displayed in the More... tab.
 we also attach .onReceive modifiers to the MainView to watch being
 moved into and out of the background to properly handle what to do
-with the timer, as well as establish the SwiftData model container
-and its model context that automatically goes into the environment.
+with the timer.  Finally, we establish the SwiftData model container
+which places its model context automatically into the environment.
 */
 
 @main
