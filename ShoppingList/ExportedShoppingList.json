@@ -1,0 +1,1297 @@
+[
+  {
+    "green" : 0.5,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "E976A9E1-0806-4504-99BF-116004C8DED9",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Latex Gloves"
+      }
+    ],
+    "id" : "532B8FBC-D3E1-49DA-9CD2-650CAAE08797",
+    "blue" : 0.5,
+    "red" : 0.5,
+    "opacity" : 0.5,
+    "visitationOrder" : 2147483647,
+    "name" : "Unknown Location"
+  },
+  {
+    "green" : 0.25,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "D3521F21-9530-4093-943D-FD184EB7D74E",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bailey’s Irish Cream"
+      },
+      {
+        "onList" : false,
+        "id" : "B8D6BF87-A422-4DDB-B407-C2E9D0EC7DF7",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Beer"
+      }
+    ],
+    "id" : "8D83AF5B-4281-4AD9-8061-09E597156CC4",
+    "blue" : 0.25,
+    "red" : 0.25,
+    "opacity" : 0.40000000000000002,
+    "visitationOrder" : 100,
+    "name" : "Liquor Store"
+  },
+  {
+    "green" : 0.5,
+    "items" : [
+
+    ],
+    "id" : "0FE45A97-1A14-4BE6-81E1-91E30AFD5672",
+    "blue" : 0.5,
+    "red" : 0.5,
+    "opacity" : 0.5,
+    "visitationOrder" : 60,
+    "name" : "Kitchen gadgets (10)"
+  },
+  {
+    "green" : 0.10000000000000001,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "EA3BF194-D3DB-4B91-B3A6-1F31A1185F8F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Large can of crushed tomatoes"
+      },
+      {
+        "onList" : false,
+        "id" : "946100EF-58BF-49F3-B0BD-3C4E27F5AC2C",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Lasagna noodles"
+      },
+      {
+        "onList" : false,
+        "id" : "6476FF56-0C0C-4748-B2E3-504514DA275E",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Small tomato paste, Contadina or Hunts"
+      },
+      {
+        "onList" : false,
+        "id" : "5C451F03-3F6F-4A8E-81C9-41447C9C98AE",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Soy sauce"
+      },
+      {
+        "onList" : false,
+        "id" : "F81AEA5F-A5DE-4218-A697-3BD30A962C8C",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Spaghetti"
+      },
+      {
+        "onList" : false,
+        "id" : "8CFC7139-B5CA-4959-B730-4444D5FE8DE3",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Tomato sauce, 15 oz. can"
+      },
+      {
+        "onList" : false,
+        "id" : "ECABDA61-F00D-4D08-88C6-969D83840DD3",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Ziti"
+      }
+    ],
+    "id" : "4966F1F1-3FE6-4FD1-B2F6-44B6F3B8849A",
+    "blue" : 0.10000000000000001,
+    "red" : 1,
+    "opacity" : 0.54335260391235352,
+    "visitationOrder" : 64,
+    "name" : "Italian & Ethnic (9)"
+  },
+  {
+    "green" : 0.10000000000000001,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "EF442435-E6CA-4368-8038-F4F5BA50B52D",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Boneless chicken breast "
+      },
+      {
+        "onList" : false,
+        "id" : "22507CE9-4E8C-474E-8FEA-82A5DD405170",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Chicken Breast Tenderloin"
+      },
+      {
+        "onList" : false,
+        "id" : "BE8F84B7-D1FA-4B28-AA15-D1F778C6EDDA",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Giant center sliced smoked ham, 1.4 lb"
+      },
+      {
+        "onList" : false,
+        "id" : "B76FAFC6-38E9-4FED-B50C-D5ADFF180353",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Ground beef"
+      },
+      {
+        "onList" : false,
+        "id" : "C0FACF29-1DDE-4ACB-8FB2-C0CEA8864EF6",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Ham steak (Giant brand)"
+      },
+      {
+        "onList" : false,
+        "id" : "8066A781-862C-452D-AAAD-BC10FD6F877B",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Hot dogs"
+      },
+      {
+        "onList" : false,
+        "id" : "A431CE85-A9D4-45C8-836C-88208D4E3DB4",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Meatloaf mix"
+      },
+      {
+        "onList" : false,
+        "id" : "95A25838-C21B-421A-8F42-02DEFDD26117",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Turkey breast"
+      },
+      {
+        "onList" : false,
+        "id" : "C12E6B8B-A302-45B6-875D-56CAB0E2786E",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Turkey wings"
+      }
+    ],
+    "id" : "4E751F3B-8FE5-4EA8-83BE-86B2D744C6BD",
+    "blue" : 0.92196530103683472,
+    "red" : 0.89306360483169556,
+    "opacity" : 0.22832369804382324,
+    "visitationOrder" : 15,
+    "name" : "Meats"
+  },
+  {
+    "green" : 0,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "098C8D08-9F3A-4BBE-98C0-372A065EC2EB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bayer Aspirin, low dose 81 mg"
+      },
+      {
+        "onList" : false,
+        "id" : "FE9CCEE8-D1E7-4E68-B3C7-4108F428B821",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Vitamin D3 Gel Caps"
+      }
+    ],
+    "id" : "80C4DD76-346B-4C42-995A-08E81D7ED89C",
+    "blue" : 0.85260117053985596,
+    "red" : 0,
+    "opacity" : 0.40000000000000002,
+    "visitationOrder" : 25,
+    "name" : "Pain Relief (15)"
+  },
+  {
+    "green" : 0.10000000000000001,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "BDFE41AC-3752-4DD7-875C-A6A4172387B9",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Oven cleaner"
+      },
+      {
+        "onList" : false,
+        "id" : "3AA5F2C0-2297-45D1-98C9-D4B3718A84CA",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Pam original"
+      },
+      {
+        "onList" : false,
+        "id" : "B9CAACDC-C747-4871-BDA5-0ADF50B02F8F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Tide"
+      },
+      {
+        "onList" : true,
+        "id" : "B4673378-256D-4752-B44E-20350B61185C",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Trash bags for kitchen, tall, 13 gal  "
+      }
+    ],
+    "id" : "0715A544-CEC1-4B37-8B63-8CF29966B913",
+    "blue" : 0.10000000000000001,
+    "red" : 0.90000000000000002,
+    "opacity" : 0.10000000000000001,
+    "visitationOrder" : 53,
+    "name" : "Laundry (11)"
+  },
+  {
+    "green" : 0.5,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "06F65A14-EC4A-4686-85CF-D44CBB2BD27E",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Coffee, decaf"
+      },
+      {
+        "onList" : false,
+        "id" : "8E553DAD-AA5A-4167-8793-70CB3B179D5D",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Propel"
+      }
+    ],
+    "id" : "96403972-D2BC-4C04-A8F8-1358EA0B4667",
+    "blue" : 0.5,
+    "red" : 0.5,
+    "opacity" : 0.10982658714056015,
+    "visitationOrder" : 80,
+    "name" : "Coffee & Tea (6)"
+  },
+  {
+    "green" : 0.65606933832168579,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "9A4C7370-EA74-46D7-981B-9B4E22755DCB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Potato chips"
+      },
+      {
+        "onList" : false,
+        "id" : "05F4CB3E-2FC3-45C9-B05F-273C45C356E6",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Pretzels barrel (bag better)"
+      },
+      {
+        "onList" : false,
+        "id" : "A011E555-CB4B-4AE4-98D8-09D69683C605",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Saltines"
+      }
+    ],
+    "id" : "876C89AC-529E-4CA3-9F58-39005E7B7AD8",
+    "blue" : 0.67919075489044189,
+    "red" : 0,
+    "opacity" : 0.10000000000000001,
+    "visitationOrder" : 85,
+    "name" : "Snacks & Chips (4)"
+  },
+  {
+    "green" : 1,
+    "items" : [
+      {
+        "onList" : true,
+        "id" : "25CC14D1-12B4-44A1-90AA-678A532CB74A",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bread"
+      },
+      {
+        "onList" : true,
+        "id" : "F93F362D-A5AD-4653-A171-0D059422D1B3",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bumble Bee chunk lite tuna in water"
+      },
+      {
+        "onList" : false,
+        "id" : "F027964E-3C73-4A0B-B25C-3B67E0D8BCED",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Catalina Salad Dressing"
+      },
+      {
+        "onList" : false,
+        "id" : "18B3F221-1F8B-4D2A-B60C-41B8F64DE327",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Chili Sauce Heinz"
+      },
+      {
+        "onList" : false,
+        "id" : "44D5C927-EA3A-4D7D-9436-2E4DC96C98CB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Crisco shortening, small can"
+      },
+      {
+        "onList" : false,
+        "id" : "53B8F562-6896-469E-A37B-9A4A9A146D98",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Dijon Mustard"
+      },
+      {
+        "onList" : false,
+        "id" : "724F9B8D-BDA1-4E36-9202-294074AF2348",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "English muffins, Thomas's"
+      },
+      {
+        "onList" : false,
+        "id" : "A91C8326-15CB-4E62-994C-F883639FAC8F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Grape Jelly"
+      },
+      {
+        "onList" : false,
+        "id" : "412F87D0-89B0-4170-BC2B-F3AF59E0E13A",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Gray Poupon, original"
+      },
+      {
+        "onList" : false,
+        "id" : "D78FA137-125A-4CCE-B23F-8F1B0A7BDAE4",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Hamburger rolls"
+      },
+      {
+        "onList" : false,
+        "id" : "9F3687C8-79DF-4610-BCFA-C74E0C94DB93",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Hellman’s Mayonnaise "
+      },
+      {
+        "onList" : false,
+        "id" : "2DFD499A-C351-4915-99D4-340A8CFABD1B",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Hot dog rolls"
+      },
+      {
+        "onList" : false,
+        "id" : "6719EA12-CC0F-4860-8E75-2C415367BB3D",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Ketchup"
+      },
+      {
+        "onList" : false,
+        "id" : "FE614918-94D0-40C8-AC37-A07F2C4A01FB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Pure Wesson Vegetable Oil"
+      },
+      {
+        "onList" : false,
+        "id" : "42AC7504-469C-48F8-89D2-03D0A6D52B2F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Quaker rice cakes"
+      },
+      {
+        "onList" : false,
+        "id" : "3406CE06-A1A4-432E-B574-A2D9DA6C7B14",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Ranch Dressing"
+      },
+      {
+        "onList" : false,
+        "id" : "43EF961B-7904-4629-920D-6DC0660A7FF2",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Raspberry Preserves (or Jam)"
+      },
+      {
+        "onList" : false,
+        "id" : "BF4491B3-4403-4BFD-A2CB-EDBE7C320DEB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Salad Dressing"
+      },
+      {
+        "onList" : false,
+        "id" : "3039E9C7-601A-4527-8B79-AFA76A9176FC",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Skippy Peanutbutter, low fat"
+      },
+      {
+        "onList" : false,
+        "id" : "14499798-B0A9-4338-BA5E-2A51A68C225F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Stubb’s Original BBQ Sauce"
+      }
+    ],
+    "id" : "03CAF335-8D1E-4FA4-A899-1B24724FEAAA",
+    "blue" : 0.25144508481025696,
+    "red" : 0.24855491518974304,
+    "opacity" : 0.15895953774452209,
+    "visitationOrder" : 59,
+    "name" : "Bread & Salad Dressings (10)"
+  },
+  {
+    "green" : 0.41040462255477905,
+    "items" : [
+      {
+        "onList" : true,
+        "id" : "BDD210F1-B58D-48D4-851E-2BC4E4AC07F1",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Diet Root Beer 12 oz A&W"
+      }
+    ],
+    "id" : "5EF8C31D-5C07-48BB-8FD1-4F914839E556",
+    "blue" : 1,
+    "red" : 1,
+    "opacity" : 0.40000000000000002,
+    "visitationOrder" : 82,
+    "name" : "Beverages (5)"
+  },
+  {
+    "green" : 0,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "BF010C78-586C-4C3D-AF94-51AE31E98F32",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bug Spray"
+      },
+      {
+        "onList" : false,
+        "id" : "06C6F61A-A489-495B-8E05-7C9F46C8C7FB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Giant food storage bags, 1 gal, zipper"
+      },
+      {
+        "onList" : false,
+        "id" : "2A567EAC-0CFB-4713-89B2-A61CBF457B70",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Jumbo 2.5 gal storage bags"
+      },
+      {
+        "onList" : false,
+        "id" : "D0675229-958C-442F-93B8-103FC56A54A2",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Sandwich bags"
+      },
+      {
+        "onList" : false,
+        "id" : "8E277003-6523-4203-90AC-5DB73AE47000",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Waxed paper"
+      }
+    ],
+    "id" : "0ADF8456-1F0F-4BE7-A9A8-DA6E4D6D13EA",
+    "blue" : 1,
+    "red" : 0,
+    "opacity" : 0.36127167940139771,
+    "visitationOrder" : 45,
+    "name" : "Bags & Paper Goods (12)"
+  },
+  {
+    "green" : 0,
+    "items" : [
+
+    ],
+    "id" : "048635AF-FC7A-4A37-B29B-6AD9A795D5AE",
+    "blue" : 0.53757226467132568,
+    "red" : 1,
+    "opacity" : 0.28034681081771851,
+    "visitationOrder" : 76,
+    "name" : "Candy (7)"
+  },
+  {
+    "green" : 0.9190751314163208,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "969DA63F-40A7-4A5B-A21E-057FBB8DBEF3",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Baby Carrots"
+      },
+      {
+        "onList" : false,
+        "id" : "67A85A0E-8523-4A82-BCE0-B42BDC1BE47D",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bag of carrots full size"
+      },
+      {
+        "onList" : false,
+        "id" : "8C4A4809-5E12-477B-9E65-63231C95CF96",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bananas"
+      },
+      {
+        "onList" : false,
+        "id" : "F02FC4AA-DD76-4282-AB8A-ED6E0219EB6C",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Blueberries"
+      },
+      {
+        "onList" : false,
+        "id" : "0D896239-2BD4-4DA6-879F-23EB4A31CB42",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Celery (hearts)"
+      },
+      {
+        "onList" : false,
+        "id" : "6BA34412-F779-407F-95C8-5B6C04B61529",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Cherry tomatoes"
+      },
+      {
+        "onList" : false,
+        "id" : "1A84491F-5903-44F6-B67C-D6294A633181",
+        "isAvailable" : true,
+        "quantity" : 6,
+        "name" : "Corn Ears"
+      },
+      {
+        "onList" : false,
+        "id" : "6A2331E6-063C-4E4E-9FCF-FF8B65851D87",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Cucumber"
+      },
+      {
+        "onList" : false,
+        "id" : "9CEDB001-EA99-43D8-9D75-D799D77728E1",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Grape tomatoes"
+      },
+      {
+        "onList" : false,
+        "id" : "B0634A68-36F3-43BE-AE75-81C018D00E18",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Green grapes"
+      },
+      {
+        "onList" : false,
+        "id" : "86208114-0AE1-4BAC-BB54-027B52B2575D",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Green pepper"
+      },
+      {
+        "onList" : false,
+        "id" : "BEF54953-6908-4881-B0D7-7D14A63FF71A",
+        "isAvailable" : true,
+        "quantity" : 3,
+        "name" : "Lemons"
+      },
+      {
+        "onList" : false,
+        "id" : "D709365B-F96E-433F-A008-B95664102C21",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Lettuce"
+      },
+      {
+        "onList" : false,
+        "id" : "B4FEA841-EF4D-4FD5-BB53-77D18711BB00",
+        "isAvailable" : true,
+        "quantity" : 3,
+        "name" : "Oranges"
+      },
+      {
+        "onList" : false,
+        "id" : "DD19DC73-101D-4EE5-9C04-D79F638C9979",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Pineapple Chunks"
+      },
+      {
+        "onList" : false,
+        "id" : "ABD34ADE-3509-4425-A80C-E25335D08619",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Red potatoes, 5 pound bag"
+      },
+      {
+        "onList" : false,
+        "id" : "E4ADBE8E-5BB7-4218-806D-395FB89CB0EF",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Strawberries"
+      },
+      {
+        "onList" : false,
+        "id" : "2BBD6730-9F7F-4208-BA28-6B8296BC6B41",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Watermelon chunks"
+      },
+      {
+        "onList" : false,
+        "id" : "B8EE8C95-F4D2-4C01-A698-0400D6ACB013",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Yellow Onions"
+      }
+    ],
+    "id" : "577260FD-074C-4E84-967F-DBA31755A3EE",
+    "blue" : 0.10000000000000001,
+    "red" : 0.060693640261888504,
+    "opacity" : 0.53468209505081177,
+    "visitationOrder" : 4,
+    "name" : "Fruits & Vegetables"
+  },
+  {
+    "green" : 0.10000000000000001,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "CAA4A86F-1DB2-4573-85BF-1608590DA2C1",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Apple sauce, jar"
+      },
+      {
+        "onList" : false,
+        "id" : "93476EB3-9CE5-4569-9F71-0028BB3DE7FA",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Brown Sugar"
+      },
+      {
+        "onList" : false,
+        "id" : "8CF40D99-1A50-4E81-86FB-E956126C4DA5",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Confectioner’s Sugar (10x)"
+      },
+      {
+        "onList" : false,
+        "id" : "2B481ABC-C771-4B5D-89AC-E60B2B54EEBC",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Cranberry sauce"
+      },
+      {
+        "onList" : false,
+        "id" : "06DABAD6-2118-4709-B4BF-C7FACE2C9E7A",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Crushed pineapple can"
+      },
+      {
+        "onList" : true,
+        "id" : "1C38E280-51BD-47BF-B389-AA37208CB0E7",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Duncan Hines Yellow Cake Mix"
+      },
+      {
+        "onList" : false,
+        "id" : "5648B0AA-3F5B-4205-961A-CAB4608A54BB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Garlic Salt"
+      },
+      {
+        "onList" : false,
+        "id" : "CDAFFD0F-9940-4BFA-BBB1-9463DB0D168A",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Jimmies"
+      },
+      {
+        "onList" : false,
+        "id" : "F55486F6-BE82-486B-ADF6-E3EE949426BF",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "King Arthur flour"
+      },
+      {
+        "onList" : false,
+        "id" : "137D7304-AD6C-4826-9B89-C525E332577A",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Large Baking Cups"
+      },
+      {
+        "onList" : false,
+        "id" : "5DBC8A6D-84F8-47F1-B592-FD4E8B77985E",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "McCormack Ground Nutmeg"
+      },
+      {
+        "onList" : false,
+        "id" : "73F08BBB-7AA3-4EA9-B739-6E4218293121",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "McCormack au jus Gravy Mix"
+      },
+      {
+        "onList" : false,
+        "id" : "A9783624-B64B-44C2-9F24-7CDDDAB28A88",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Milk chocolate chips (not semisweet)"
+      },
+      {
+        "onList" : false,
+        "id" : "9F93731D-086A-4635-AD1B-18487C33EECE",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Poultry seasoning"
+      },
+      {
+        "onList" : false,
+        "id" : "0084C035-B3E0-42B5-A399-4AD72836FE42",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Progresso Plain Bread Crumbs"
+      },
+      {
+        "onList" : false,
+        "id" : "FA961339-25B6-49E5-9762-877E8DF173C8",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Rumford Baking Powder"
+      },
+      {
+        "onList" : false,
+        "id" : "D2E17E7A-411B-4C3A-8739-09ECE45EFE58",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Salt (Morton 26 ounces iodized)"
+      },
+      {
+        "onList" : false,
+        "id" : "68AE31BE-EA96-4D9B-8882-D4BD92B104A3",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Soup"
+      },
+      {
+        "onList" : false,
+        "id" : "EA78FF37-CF97-4B3A-877B-92D953A82985",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Thyme"
+      },
+      {
+        "onList" : true,
+        "id" : "51203CEF-5CA7-4E83-94D4-D72072A473BB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Worcestershire Sauce"
+      }
+    ],
+    "id" : "A4CE3ED7-79A2-4FE0-9B5A-2D6E4EE441A0",
+    "blue" : 0.10000000000000001,
+    "red" : 0.90000000000000002,
+    "opacity" : 0.10000000000000001,
+    "visitationOrder" : 70,
+    "name" : "Baking Supplies (8)"
+  },
+  {
+    "green" : 0.81213873624801636,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "6808BE46-BE04-4AE7-ABC2-C87F5579244A",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Scotch Shipping Tape"
+      }
+    ],
+    "id" : "5A905657-EB51-4539-8C67-2ED7D1813083",
+    "blue" : 0,
+    "red" : 0.78323698043823242,
+    "opacity" : 0.53468209505081177,
+    "visitationOrder" : 30,
+    "name" : "Office Supplies (14)"
+  },
+  {
+    "green" : 0.10000000000000001,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "37CACF59-572F-4B9F-AA3C-CAF948B50477",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Activia yogurt black cherry or peach"
+      },
+      {
+        "onList" : false,
+        "id" : "55CE254E-9990-4B6C-AD40-DAA0E63F94BC",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Butter, 1 pound"
+      },
+      {
+        "onList" : false,
+        "id" : "8983F911-DDD8-4EAE-A6BE-FDC0C5258922",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Butter, unsalted"
+      },
+      {
+        "onList" : false,
+        "id" : "38410996-BF18-452E-B5B7-C0D77B9E90AD",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Buttermilk"
+      },
+      {
+        "onList" : false,
+        "id" : "479485F7-4FD1-47A8-9F85-5F64DCC91607",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Cabot Vermont Xtra Sharp Cheddar Cheese"
+      },
+      {
+        "onList" : false,
+        "id" : "40F53559-F938-4A3A-8445-4D0550D9A9E3",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Cinnamon rolls (Giant brand)"
+      },
+      {
+        "onList" : false,
+        "id" : "D85E36B6-B311-4FC2-88DB-78A6AE65EE0F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Cream cheese, 8 oz."
+      },
+      {
+        "onList" : true,
+        "id" : "3BB37148-38E9-4BA9-A892-6B07A860B759",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Dip for chips"
+      },
+      {
+        "onList" : false,
+        "id" : "EC33373B-A797-44B0-8A42-D827F6B04289",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Eggs, XL (else 1 doz large)"
+      },
+      {
+        "onList" : false,
+        "id" : "E0F35533-6480-4FAF-B137-551AE58A25D4",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Gold’s Horseradish "
+      },
+      {
+        "onList" : true,
+        "id" : "ECF0F256-3B0A-41C3-9980-F3C8F5CF4857",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Half & Half, 1 qt"
+      },
+      {
+        "onList" : false,
+        "id" : "C91B6FFC-CA1E-4710-B300-B3CD44A0162F",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Hazelnut Coffee Creamer, fat free"
+      },
+      {
+        "onList" : false,
+        "id" : "78390E1D-B4B7-417C-8B51-448C110C55EF",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Heavy Cream, small"
+      },
+      {
+        "onList" : true,
+        "id" : "81FF868F-5108-4147-AA83-4CAF47DE3345",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Milk"
+      },
+      {
+        "onList" : false,
+        "id" : "8E42BA5B-1DA8-4F44-8514-4C7682345D3B",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Orange Juice"
+      },
+      {
+        "onList" : false,
+        "id" : "E359FABA-F8AF-47FB-AC2F-ACCB02683204",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Pizza crust"
+      },
+      {
+        "onList" : false,
+        "id" : "A9BB2EDE-3258-4409-A7E7-40D217E33451",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Redi-whip"
+      },
+      {
+        "onList" : false,
+        "id" : "32E458E1-6870-465B-857B-33253BD0BB40",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Ricotta cheese, 8 oz"
+      },
+      {
+        "onList" : false,
+        "id" : "26D138A2-0EEF-4F6B-8F47-9064657C573B",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Seriously Sharp Cheddar"
+      },
+      {
+        "onList" : false,
+        "id" : "98F7B33B-88EF-4284-B156-C8290EAA3E82",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Shredded Mozarella"
+      },
+      {
+        "onList" : true,
+        "id" : "E9E724FF-4743-4653-8F08-8397A7FA8D5D",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Skinny cow"
+      },
+      {
+        "onList" : false,
+        "id" : "134A6531-0B44-4C60-A98D-C0D7A729F919",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Turkey Hill Decaf ice tea, 1 gal"
+      },
+      {
+        "onList" : false,
+        "id" : "6A35B34F-D763-4509-8855-DF98D7D2C2BE",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Whole Milk, small"
+      }
+    ],
+    "id" : "89194EA9-9AD1-47C0-9C58-50DD5542CE31",
+    "blue" : 0.90000000000000002,
+    "red" : 0,
+    "opacity" : 0.65000000000000002,
+    "visitationOrder" : 18,
+    "name" : "Dairy (18)"
+  },
+  {
+    "green" : 0.10115607082843781,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "EEF890A4-B7B8-488E-A35D-8B414EA750CA",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Baked Beans"
+      },
+      {
+        "onList" : false,
+        "id" : "2DE941D8-623B-474F-8DA6-CB27FC29C400",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Creamed corn"
+      },
+      {
+        "onList" : false,
+        "id" : "D2358124-6585-4746-9B6C-E5177CDE910C",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Turkey gravy, 12 oz. jar"
+      }
+    ],
+    "id" : "914207E6-7358-4D1B-B749-01FD943639D7",
+    "blue" : 0.10115607082843781,
+    "red" : 1,
+    "opacity" : 0.53757226467132568,
+    "visitationOrder" : 65,
+    "name" : "Canned Vegetables (9)"
+  },
+  {
+    "green" : 0.89595377445220947,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "DA8EBA10-5B06-4135-82C2-687906A121B7",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Croutons (Caesar Salad)"
+      },
+      {
+        "onList" : true,
+        "id" : "5F99FF26-BA36-472E-A2D7-6DDAD7BC8BF3",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "King’s Hawaiian, small rolls"
+      },
+      {
+        "onList" : false,
+        "id" : "8F93D042-BDFE-4448-8D1E-835A305C9E57",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Sliced Turkey, 1\/2 lb"
+      },
+      {
+        "onList" : false,
+        "id" : "C9300F20-A832-4A92-B4B4-01B0BC39F2E9",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Sliced cheese, LOL, 1\/2 pound"
+      },
+      {
+        "onList" : false,
+        "id" : "E9F0F46A-D0CE-4B75-904B-57C793686018",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Sliced ham, Boar's Head, 1\/2 lb."
+      }
+    ],
+    "id" : "FC638FD5-0CD3-45DD-AACC-931D1C4AF66C",
+    "blue" : 0.10000000000000001,
+    "red" : 0.90000000000000002,
+    "opacity" : 0.52601158618927002,
+    "visitationOrder" : 8,
+    "name" : "Deli"
+  },
+  {
+    "green" : 0,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "DED97A4B-C668-4209-AFD0-E94F4A972586",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Cheerios"
+      },
+      {
+        "onList" : false,
+        "id" : "54671313-C3D0-43BF-9BAB-C2543926F025",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Fiber One Oats & Chocolate "
+      },
+      {
+        "onList" : false,
+        "id" : "F91528C5-85C1-4BF3-BAF5-AED94D151FCB",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Honey"
+      },
+      {
+        "onList" : false,
+        "id" : "685C6013-CA3C-4123-9975-BCB279500567",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Peanuts"
+      },
+      {
+        "onList" : false,
+        "id" : "F79A7F40-B3AB-4C17-BEDC-388480D50EE1",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Quaker Oats quick oatmeal"
+      },
+      {
+        "onList" : false,
+        "id" : "F4715D36-ED4F-455A-B8B2-89767D5C9D20",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Raisin Bran, Post or Kellogg’s, 15 oz box"
+      },
+      {
+        "onList" : false,
+        "id" : "ED2B148E-5A8E-4F47-B480-6FB22A1B4260",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Special K Chocolatey Delight, family size"
+      }
+    ],
+    "id" : "FB9D8675-9125-40F6-B585-97175D2D6B8D",
+    "blue" : 0.50578033924102783,
+    "red" : 1,
+    "opacity" : 0.28901734948158264,
+    "visitationOrder" : 75,
+    "name" : "Cereal (7)"
+  },
+  {
+    "green" : 0.25,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "F6DF4932-4AF1-4C2E-A1CE-B3C6CB4CC539",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "English Raisin Bread"
+      },
+      {
+        "onList" : false,
+        "id" : "73C1C865-BB1A-4A2D-B3AD-E0C7F8935190",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "French Boule bread"
+      },
+      {
+        "onList" : false,
+        "id" : "22820270-1F4F-40D3-BBC2-9F7C72FE82E9",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Panini bread, Multi-grain"
+      }
+    ],
+    "id" : "CE31C5B7-B657-4F69-9F5D-625B89D58DB8",
+    "blue" : 0.25,
+    "red" : 0.25,
+    "opacity" : 0.11560693383216858,
+    "visitationOrder" : 5,
+    "name" : "Bakery"
+  },
+  {
+    "green" : 1,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "5A3EBCE5-43D6-49E8-93B7-A16947004D0E",
+        "isAvailable" : true,
+        "quantity" : 2,
+        "name" : "Box frozen chopped spinach"
+      },
+      {
+        "onList" : false,
+        "id" : "44234FB6-0304-439B-A1F8-70AB97FA3010",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Bubba burgers"
+      },
+      {
+        "onList" : false,
+        "id" : "33595CB6-0F28-44B5-8B78-78C82CE61A6A",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Frozen peas"
+      },
+      {
+        "onList" : false,
+        "id" : "8F9251CC-610F-486D-9CF4-162229FD03F7",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Onion Rings"
+      },
+      {
+        "onList" : false,
+        "id" : "5B3610F0-AE06-4AC6-AFAE-E69153BCBDAC",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Potatoes O’Brien (OreIda)\/ hash browns"
+      },
+      {
+        "onList" : false,
+        "id" : "8824A406-6232-4037-B3B4-2BF82983E177",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Zesty Fries"
+      }
+    ],
+    "id" : "34C9C2A2-9A3B-4E6B-BFC9-45B37FB8A863",
+    "blue" : 0,
+    "red" : 0,
+    "opacity" : 0.15606936812400818,
+    "visitationOrder" : 21,
+    "name" : "Frozen Vegetables (17)"
+  },
+  {
+    "green" : 0.89595377445220947,
+    "items" : [
+      {
+        "onList" : true,
+        "id" : "FB763AD2-3DF5-497B-AEDF-88AC37D0D3A5",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Pub cheese, regular"
+      },
+      {
+        "onList" : false,
+        "id" : "F8B1FA0D-909C-4420-8168-E8F634AF1C0F",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Sun Maid Raisins"
+      },
+      {
+        "onList" : false,
+        "id" : "6E9F5DD4-D4C7-4067-82E1-A4D1CE831009",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Tortellini (3 cheese)"
+      }
+    ],
+    "id" : "69A9F0F3-57C3-46D4-AF5A-5783FF083777",
+    "blue" : 0.5,
+    "red" : 0.92485547065734863,
+    "opacity" : 0.5,
+    "visitationOrder" : 9,
+    "name" : "Beyond Deli"
+  },
+  {
+    "green" : 0.10000000000000001,
+    "items" : [
+      {
+        "onList" : false,
+        "id" : "32F9B9FF-CEF6-4B41-9719-4A60BE6E2FED",
+        "isAvailable" : true,
+        "quantity" : 1,
+        "name" : "Stamps"
+      }
+    ],
+    "id" : "5105940E-3580-41F1-8624-6B8A197B3467",
+    "blue" : 0.10000000000000001,
+    "red" : 0.90000000000000002,
+    "opacity" : 0.10000000000000001,
+    "visitationOrder" : 89,
+    "name" : "Service Desk"
+  }
+]
