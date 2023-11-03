@@ -49,20 +49,20 @@ struct RegularMainView: View {
 			sidebarView
 				.navigationSplitViewColumnWidth(250)
 		} detail: {
-				switch selection {
-					case .shoppingList:
-						ShoppingListView()
-					case .purchasedList:
-						AllMyItemsView()
-					case .locationList:
-						LocationsView()
-					case .preferences:
-						PreferencesView()
-					case .more:
-						MoreView()
-					case .none:	// selection is an optional type, although it will never be nil
-						Text(".none")
-				}
+			switch selection {
+				case .shoppingList:
+					ShoppingListView()
+				case .purchasedList:
+					AllMyItemsView()
+				case .locationList:
+					LocationsView()
+				case .preferences:
+					PreferencesView()
+				case .more:
+					MoreView()
+				case .none:	// selection is an optional type, although selection will never be nil
+					Text(".none")
+			}
 		}
 		.navigationSplitViewStyle(.balanced)
 			// note: this modifier comes from Stewart Lynch.  see NavAppearanceModifier.swift

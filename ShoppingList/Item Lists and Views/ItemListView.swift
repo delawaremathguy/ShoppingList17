@@ -12,9 +12,8 @@ import SwiftUI
 	// MARK: - ItemListView
 
 /*
-this is a subview of the ShoppingListView and the PurchasedItemsView, 
-and shows a sectioned list of Items that is determined by the caller
-(who must do the work that determines how the sectioning should be done).
+this is a subview of the ShoppingListView and the AllMyItemsView,
+and shows a sectioned list of Items that is determined by the caller.
 
 each item that appears has a NavigationLink to a detail view and has a
 contextMenu associated with it; an action from the contextMenu to delete
@@ -25,8 +24,8 @@ struct ItemListView: View {
 	
 	@Environment(\.modelContext) private var modelContext
 	
-	// this is the incoming section layout handed to us
-	// by either the ShoppingListView or the PurchasedItemsView
+	// this is the incoming section layout of items handed to us
+	// by either the ShoppingListView or the AllMyItemsView
 	var itemSections: [ItemSection]
 	
 	// the symbol to show for an Item that is tapped
@@ -48,7 +47,8 @@ struct ItemListView: View {
 	// completes -- and that deletion will again change this array and redraw.
 	@State private var itemsChecked = [Item]()
 	
-		
+	// MARK: - BODY
+	
 	var body: some View {
 		List(itemSections) { section in
 			Section(header: Text(section.title)) {
@@ -89,11 +89,6 @@ struct ItemListView: View {
 	// MARK: - Subviews
 	
 	@ViewBuilder
-	func sectionHeader(section: ItemSection) -> some View {
-			Text(section.title)
-	}
-	
-	@ViewBuilder
 	func ItemContextMenu(item: Item) -> some View {
 		Button {
 			if item.onList {
@@ -125,21 +120,24 @@ struct ItemListView: View {
 	// MARK: Helper Functions
 		
 	func handleItemTapped(_ item: Item) {
-		if !itemsChecked.contains(item) {
-				// put the item into our list of what's about to be removed, and because
-				// itemsChecked is a @State variable, we will see a momentary
-				// animation showing the change.
-			itemsChecked.append(item)
-				// and we queue the actual removal long enough to allow animation to finish
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
-				withAnimation {
-					if item.onList {
-						item.markAsPurchased()
-					} else {
-						item.onList = true
-					}
-					itemsChecked.removeAll(where: { $0 == item })
+		// don't do anything if we're animating
+		guard !itemsChecked.contains(item) else {
+			return
+		}
+		
+		// put the item into our list of what's about to be removed, 
+		// and because itemsChecked is a @State variable, we will
+		// see a momentary animation showing the change.
+		itemsChecked.append(item)
+		// and we queue the actual removal long enough to allow animation to finish
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+			withAnimation {
+				if item.onList {
+					item.markAsPurchased()
+				} else {
+					item.onList = true
 				}
+				itemsChecked.removeAll(where: { $0 == item })
 			}
 		}
 	}

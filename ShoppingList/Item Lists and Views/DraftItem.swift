@@ -22,14 +22,14 @@ this is now a class object that conforms to Observable.
 both the AddNewItemView and the ModifyExistingItemView
 can create one of these as a @StateObject.
 */
-
 @Observable
 class DraftItem {
 	
 	// a SwiftData reference to an Item associated with this data
 	// (nil if data for a new item that does not yet exist)
 	let persistentModelID: PersistentIdentifier?
-	// all of the values here provide suitable defaults for a new item
+	
+	// the properties here are those that can be edited for an Item
 	var name: String
 	var quantity: Int
 	var location: Location
@@ -44,7 +44,7 @@ class DraftItem {
 		persistentModelID = item.persistentModelID
 		name = item.name
 		quantity = Int(item.quantity)
-		location = item.location! // expected to be non-nil
+		location = item.location! // every item has an associated location
 		onList = item.onList
 		isAvailable = item.isAvailable
 		dateText = item.lastPurchased?.formatted(date: .long, time: .omitted) ?? "(Never)"

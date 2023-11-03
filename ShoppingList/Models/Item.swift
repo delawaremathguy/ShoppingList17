@@ -13,12 +13,18 @@ import SwiftUI
 
 // an Item, a.k.a., a Shopping Item, is simply something you would
 // purchase at a grocery store.  we allow you to set the isAvailable
-// flag to indicate that something was on the shopping list when you
-// went to the store, but it was no available.  and whenever you
+// flag to false to indicate that something was on the shopping list when
+// you went to the store, but it was no available.  and whenever you
 // purchase an item on the shopping list, we update its timestamp
 // so you can see when it was last purchased.
 @Model
 public class Item {
+	// note to self: every item has its own UUID.  this is not
+	// all that necessary for purposes of running the app on its
+	// own, but it does have meaning when you export/import your
+	// data.  example: if you import data, we don't want to
+	// create a new Item (or Location) that already exists having
+	// the same UUID.
 	let referenceID: UUID = UUID()
 	
 	var name: String = ""

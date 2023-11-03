@@ -31,8 +31,10 @@ enum DisplayType: Hashable, Identifiable {
 // DisplayType ... we use it in both the ShoppingListView
 // and the AllMyItemsView
 struct DisplayTypePicker: View {
+	
 	// incoming binding to a State variable in the enclosing view
 	@Binding var displayType: DisplayType
+	
 	// selectable options to display in the Picker; which ones
 	// are used depends on the call site and usage context.
 	let options: [DisplayType]

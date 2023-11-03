@@ -9,9 +9,8 @@
 import SwiftUI
 
 // the CompactMainView is a tab view with five tabs.
-// not much happens here, although the 5 tabs each manage
-// their own navigation stack.
-
+// not much happens here (the 5 tabs each manage
+// their own navigation stack).
 struct CompactMainView: View {
 	var body: some View {
 		TabView {

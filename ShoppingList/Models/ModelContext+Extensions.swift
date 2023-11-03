@@ -9,6 +9,9 @@
 import Foundation
 import SwiftData
 
+// in SL16, some of the CRUD functionality appearing below was supplied
+// by the Location and Item classes themselves via static functions.
+// here it makes more sense to have the modelContext do that.
 extension ModelContext {
 	
 	// MARK: -- Item helpers
@@ -56,6 +59,9 @@ extension ModelContext {
 		}
 	}
 		
+	// used for importing Items from an archive file.  if we have the
+	// item, we'll just be sure it's at the right Location; otherwise,
+	// we'll add a new Item to the Location with the given data.
 	private func updateOrInsert(representation: ItemRepresentation, at location: Location) {
 		if let item = item(withID: representation.id) {
 			// we'll not update any property here, although we will make sure that
@@ -70,6 +76,12 @@ extension ModelContext {
 		}
 	}
 
+	// used for importing Locations from an archive file.  if this
+	// represents the unknown location, we'll move any items to
+	// our existing unknown location; if we already have the
+	// location, we'll manage the associated items; otherwise,
+	// we'll add a new Location with a high position number,
+	// at the end.
 	func updateOrInsert(representation: LocationRepresentation) {
 		// if the incoming representation is for an archived unknownLocation, then
 		// we will only be adding items to our (existing) unknown location, and we will
@@ -111,7 +123,7 @@ extension ModelContext {
 	}
 	
 	// finds the highest `user-defined` location position (avoids the unknown location).
-	func lastLocationPosition() -> Int? {
+	private func lastLocationPosition() -> Int? {
 		var fetchDescriptor = FetchDescriptor<Location>()
 		fetchDescriptor.propertiesToFetch = [\.position]
 		do {
@@ -123,6 +135,9 @@ extension ModelContext {
 		}
 	}
 
+	// locates an Location with the given referenceID, if any.  the
+	// incoming argument is an optional for convenience: it makes
+	// the call site a little cleaner in some cases.
 	func location(withID referenceID: UUID?) -> Location? {
 		guard let referenceID else { return nil }
 		let predicate = #Predicate<Location> { $0.referenceID == referenceID }
@@ -137,15 +152,15 @@ extension ModelContext {
 		}
 	}
 	
+	// creates an unknown location on your device.
 	@discardableResult func createUnknownLocation() -> Location {
-		let unknownLocation = Location(
-			suggestedName: kUnknownLocationName,
-			atPosition: kUnknownLocationPosition
-		)
+		let unknownLocation = Location(suggestedName: kUnknownLocationName,
+																	 atPosition: kUnknownLocationPosition)
 		insert(unknownLocation)
 		return unknownLocation
 	}
 	
+	// finds the unknown location on your device, creating it if necessary.
 	var unknownLocation: Location {
 		// we only keep one "UnknownLocation" in the data store.  you can find
 		// it easily: its position is the largest 32-bit integer. to make the
@@ -163,7 +178,6 @@ extension ModelContext {
 		// cloud.
 		// there is a way to solve this problem; just not right here,
 		// right now (!)
-
 		let predicate = #Predicate<Location> { $0.position == kUnknownLocationPosition }
 		let fetchDescriptor = FetchDescriptor<Location>(predicate: predicate)
 		do {

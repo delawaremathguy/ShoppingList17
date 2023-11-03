@@ -71,7 +71,7 @@ struct DraftItemForm: View {
 					label: SLFormLabelText(labelText: "Location: ")
 				) {
 					ForEach(locations) { location in
-						Text(location.name).tag(location as Location?)
+						Text(location.name).tag(location)
 					}
 				}
 				

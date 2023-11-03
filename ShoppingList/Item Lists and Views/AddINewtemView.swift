@@ -23,7 +23,6 @@ a new shopping item.  the strategy is simple:
 i make no attempt to alert the user should she tap the Cancel button
 if there have been edits to the original default data.
 */
-	
 struct AddNewItemView: View {
 	
 	@Environment(\.modelContext) private var modelContext
@@ -41,7 +40,7 @@ struct AddNewItemView: View {
 	}
 	
 	// the body is pretty short -- just call up a Form inside a NavigationStack
-	// to edit the fields of data for a new Item, and
+	// to edit the value of a draftItem representing a new Item, and
 	// add Cancel and Save buttons.
 	var body: some View {
 		NavigationStack {
@@ -61,9 +60,8 @@ struct AddNewItemView: View {
 		}
 	}
 	
-	// the save button creates the a item in the
-	// persistent store, links it the draftItem's
-	// location, and dismisses this view
+	// the save button creates the a item in the persistent store,
+	// links it the draftItem's location, and dismisses this view.
 	func saveButton() -> some View {
 		Button("Save") {
 			let item = Item(from: draftItem)

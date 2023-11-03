@@ -15,10 +15,11 @@ let kUnknownLocationPosition: Int = Int(INT32_MAX)
 
 // a Location, a.k.a., an area of a grocery store where items
 // of a certain type can be found.  the `position` value is
-// used to order the Locations so that you can navigate from
+// used to relatively order Locations so that you can navigate from
 // one location to another in a sequence defined by you.
 @Model
 public class Location {
+	// see comment in Item model concerning the use of this UUID.
 	let referenceID: UUID = UUID()
 	
 	var name: String = ""
@@ -41,13 +42,13 @@ public class Location {
 	
 	// used only for the creation of the unknown location.
 	init(suggestedName: String? = nil, atPosition position: Int? = nil) {
-		referenceID = UUID()
 		if let suggestedName { name = suggestedName }
 		if let position { self.position = position }
 	}
 	
+	// used to create a Location in SwiftData, given a representation
+	// of a Location's data that was exported and is now being imported.
 	init(from locationRepresentation: LocationRepresentation, atPosition: Int? = nil) {
-		//referenceID = locationRepresentation.id
 		name = locationRepresentation.name
 		red = locationRepresentation.red
 		green = locationRepresentation.green
@@ -56,6 +57,9 @@ public class Location {
 		position = atPosition ?? 1
 	}
 	
+	// used to create a Location in SwiftData when the user wants
+	// to add a new location, based on information collected in
+	// a draftLocation.
 	init(from draftLocation: DraftLocation, atPosition: Int? = nil) {
 		name = draftLocation.locationName
 		if let components = draftLocation.color.cgColor?.components {
@@ -78,8 +82,8 @@ public class Location {
 
 extension Location {
 	
-	// this is the programmatic interface to reading the items associated
-	// with a Location, already ordered by name.
+	// this is the programmatic access for reading the items
+	// associated with a Location, already ordered by name.
 	var items: [Item] {
 		let array = itemsOptional ?? []
 		return array.sorted(by: \.name)
@@ -104,15 +108,21 @@ extension Location {
 	// MARK: -- Useful Functions
 	
 	func append(item: Item) {
+		// you probably want to remove this assert in practice, but
+		// i found it useful when getting my sea legs in SwiftData
+		// to be sure i have inserted a Location into the SwiftData
+		// context before linking an Item to it.
 		assert(item.modelContext == self.modelContext,
 					 "*** trying to append item to location, but modelContexts not the same or missing.")
-		// this is curious ... there must be something
-		// happening, since itemsOptional appears to be non-nil even when
-		// there are no associated items.
-		// otherwise, how could you append anything to build a relationship?
+
+		// this is curious ... itemsOptional appears to be non-nil even when
+		// there are no associated items. otherwise, how could you append
+		// anything to build a relationship?
 		itemsOptional?.append(item)
 	}
 	
+	// used to update an existing Location in the ModifyExistingLocationView,
+	// based on data values of a DraftLocation.
 	func updateValues(from draftLocation: DraftLocation) {
 		name = draftLocation.locationName
 		if let components = draftLocation.color.cgColor?.components {

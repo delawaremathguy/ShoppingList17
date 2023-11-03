@@ -34,9 +34,13 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
 * The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
 
-### What's Will Happen in the next few Updates?
+### What Will Happen in the next few Updates?
 
-* Although the project seems to run fine on the code side, there's still more testing to do, comments throughout the app have not been fully updated, and I will need to add new screen shots because of some UI changes.  I expect these will be done in about a week, but I felt it time to get the code out there as soon as it appeared to be stable.
+* Although the project seems to run fine on the code side, there's still more testing to do, comments throughout the app have not been fully updated, and I will need to add new screen shots because of some UI changes.  I expect these will be done in about a week, but I felt it time to get the code out there as soon as it appeared to be stable.  (*I may be making some minor, but unannounced updates during this time, most of which will be on the documentation side, but I will announce any bug fixes that show up*.)
+
+### Bugs I am working on or have fixed
+
+* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination are mis-behaving on iPad, which can lead to either a crash or an infinite loop.  No fix yet.
 
 ## General App Structure
 
@@ -86,14 +90,13 @@ Here's what you do next:
 
 * **If you would like to test out this app and decide if it might be of interest to you**, run it on the simulator, go straight to the More... tab on startup and tap the "Load Sample Data" button.  Now you can play with the app.
 
-* **If you plan to install and use this app on a single device**, the app will start with an empty shopping list and a location list having only the special "Unknown Location"; from there you can create your own shopping items and locations associated with those items.  (*Suggestion: add Locations before adding Items!*) 
+* **If you plan to install and use this app on a single device without using iCloud**, then you should first delete the ShoppingList.entitlements file (this is what connects iCloud to the app). After installing on a device, the app will start with an empty shopping list and a location list having only the special "Unknown Location"; from there you can create your own shopping items and locations associated with those items.  (*Suggestion: add Locations before adding Items!*) 
 
-* **If you plan to install and use this app on a device and have it share its data via iCloud with other devices on the same Apple ID**, see advice in previous paragraph; but ~~also go to the PersistentStore.swift file and choose to use `NSPersistentCloudKitContainer`, and follow instructions there about setting up your own CloudKit container.~~
-
+* **If you plan to install and use this app on a device and have it share its data via iCloud with other devices on the same Apple ID**, you may need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials.  If you had already used SL16 with the cloud, then you will also want to archive any data from SL16 to the Files app; then open your iCloud dashboard and clear out the container you've been using (the SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16); then finally install and run SL17 on a device. any existing data can then be imported to repopulate the SwiftData store.
 
 ### App Architecture
 
-The design in this app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.   in particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects by `referenceID`, and to find/manage the unknown location (identified by its `position`).
+The design in this app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.   in particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects, and to find/manage the unknown location (identified by its `position`).
 
 
 ## License

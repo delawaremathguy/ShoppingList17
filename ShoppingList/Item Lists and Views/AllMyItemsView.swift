@@ -9,12 +9,8 @@
 import SwiftData
 import SwiftUI
 
-// a simple list of items that are not on the current shopping list
-// these are the items that were on the shopping list at some time and
-// were later removed -- items we purchased.  you could also call it a
-// catalog, of sorts, although we only show items that we know about
-// that are not already on the shopping list.
-
+// a list of ALL items (this is different than in SL16).
+// you could also call it an item catalog, of sorts.
 struct AllMyItemsView: View {
 	
 	// MARK: - @Environment Properties
@@ -114,23 +110,20 @@ struct AllMyItemsView: View {
 					title: "Items: \(items.count)", items: searchQualifiedItems)]
 				
 			case .byDate:
-				let dictionary = Dictionary(grouping: searchQualifiedItems.filter({ $0.lastPurchased != nil }),
-																		by: { calendar.startOfDay(for: $0.lastPurchased!) })
+				let purchasedItems = searchQualifiedItems.filter { $0.lastPurchased != nil }
+				let dictionary = Dictionary(grouping: purchasedItems) {
+					calendar.startOfDay(for: $0.lastPurchased!)
+				}
+				// the list of sections to build ...
 				var sections = [ItemSection]()
-				var index = 1
 				for key in dictionary.keys.sorted(by: { $0 > $1 }) {
-					sections.append(
-						ItemSection(//index: index,
-							title: key.formatted(date: .complete, time: .omitted), items: dictionary[key]!)
-					)
-					index += 1
+					let newSection = ItemSection(title: key.formatted(date: .complete, time: .omitted),
+																			 items: dictionary[key]!)
+					sections.append(newSection)
 				}
 				let nonPurchasedItems = searchQualifiedItems.filter({ $0.lastPurchased == nil })
 				if !nonPurchasedItems.isEmpty {
-					sections.append(
-						ItemSection(//index: index,
-							title: "Never Purchased", items: nonPurchasedItems)
-					)
+					sections.append(ItemSection(title: "Never Purchased", items: nonPurchasedItems))
 				}
 				return sections
 				
