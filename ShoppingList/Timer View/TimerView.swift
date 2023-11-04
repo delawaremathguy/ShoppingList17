@@ -13,7 +13,7 @@ import SwiftUI
 
 struct TimerView: View {
 	
-	@EnvironmentObject var instoreTimer: InStoreTimer
+	@Environment(InStoreTimer.self) var instoreTimer
 
 	var body: some View {
 		VStack {

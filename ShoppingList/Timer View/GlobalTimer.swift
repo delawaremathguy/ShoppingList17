@@ -22,7 +22,8 @@ import Observation
 // setting the startDate of the timer to either the current date, or the date when
 // we were previously stopped.
 
-class InStoreTimer: ObservableObject {
+@Observable
+class InStoreTimer {
 	
 	// there are three states for this simple timer.  movement between states works this way:
 	//

@@ -40,8 +40,9 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 ### Release adjustments ...
 
-* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think has been fixed (tested on iPhone and iPad OK).
+* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these has been fixed (tested on iPhone and iPad devices OK).
 * (*04Nov*) More cleaning of comments, and two .swift files deleted since they are no longer in use.
+* (*04Nov*) All ObservableObjects now replaced by `@Observable` macro.
 
 ## General App Structure
 

@@ -21,7 +21,7 @@ which places its model context automatically into the environment.
 @main
 struct ShoppingListApp: App {
 	
-	@StateObject var inStoreTimer = InStoreTimer()
+	@State var inStoreTimer = InStoreTimer()
 	
 	let resignActivePublisher =
 		NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
@@ -31,7 +31,7 @@ struct ShoppingListApp: App {
 	var body: some Scene {
 		WindowGroup {
 			MainView()
-				.environmentObject(inStoreTimer)
+				.environment(inStoreTimer)
 				.onReceive(resignActivePublisher) { _ in
 					inStoreTimer.suspendForBackground()
 				}
