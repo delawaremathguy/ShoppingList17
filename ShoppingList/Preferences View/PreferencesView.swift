@@ -8,27 +8,17 @@
 
 import SwiftUI
 
+// this view is for user preferences:
+//
+// Timer Suspension Preference
+// -- whether to suspend the timer when the app goes into the
+//    background.  perhaps useful if you don't want to count
+//    time spent shopping that you're on the phone, or if you're
+//    out browsing on the web.  you be the judge: maybe the phone
+//    call is more a last minute shopping request from home, or
+//    you use the web to compare prices while you're shopping.
 struct PreferencesView: View {
-	
-//	// this view is for user preferences:
-//	//
-//	// Purchased Items History Mark:
-//	// -- first section: items purchased within the last N days
-//	// -- second section: all other items purchased.
-//	// we'll allow N here to be 0 ... 10
-//	//
-//	// Timer Suspension Preference
-//	// -- whether to suspend the timer when the app goes into the
-//	//    background.  perhaps useful if you don't want to count
-//	//    time spent shopping that you're on the phone, or if you're
-//	//    out browsing on the web.  you be the judge: maybe the phone
-//	//    call is more a last minute shopping request from home, or
-//	//    you use the web to compare prices while you're shopping.
-//	
-//	// user default. 0 = purchased today; 3 = purchased up to 3 days ago, ...
-//	@AppStorage(kPurchasedMostRecentlyKey)
-//	private var historyMarker = kPurchasedMostRecentlyDefaultValue
-	
+		
 	// user default.  true ==> turn off timer (counting) when in the background.
 	@AppStorage(kDisableTimerWhenInBackgroundKey)
 	private var suspendTimerWhenInBackground = kDisableTimerWhenInBackgroundDefaultValue
@@ -36,19 +26,6 @@ struct PreferencesView: View {
 	var body: some View {
 		NavigationStack {
 			Form {
-//				Section() {
-//					Stepper(value: $historyMarker, in: 0...10) {
-//						HStack {
-//							SLFormLabelText(labelText: "History mark: ")
-//							Text("\(historyMarker)")
-//						}
-//					}
-//				} header: {
-//					Text("Purchased Items History Mark")
-//				} footer: {
-//					Text("Sets the number of days to look backwards in time to separate out items purchased recently.")
-//				}
-				
 				Section() {
 					Toggle(isOn: $suspendTimerWhenInBackground) {
 						Text("Suspend when in background")

@@ -8,31 +8,30 @@
 
 import SwiftUI
 
-	// the DraftLocationView is a simple Form that allows the user to edit
-	// the fields of a DraftLocation, which in turn stands as an editable "draft"
-	// of the values either associated with an existing Location, or the default
-	// values to use in creating a new Location.
+// the DraftLocationView is a simple Form that allows the user to edit
+// the fields of a DraftLocation, which in turn stands as an editable "draft"
+// of the values either associated with an existing Location, or the default
+// values to use in creating a new Location.
 
 struct DraftLocationForm: View {
 	
 	@Environment(\.modelContext) private var modelContext
 	
-		// incoming data:
-		// -- a DraftLocation (editable values for a Location)
-		// -- an optional action to execute if the user decides to delete
-		//      a draft in the case that it represents an existing Location
+	// incoming data:
+	// -- a DraftLocation (editable values for a Location)
+	// -- an optional action to execute if the user decides to delete
+	//      a draft in the case that it represents an existing Location
 	@Bindable var draftLocation: DraftLocation
 	var dismissAction: (() -> Void)?
 	
-		// trigger for adding a new item at this Location
+	// trigger for adding a new item at this Location
 	@State private var isAddNewItemSheetPresented = false
-		// trigger for confirming deletion of the associated Location (if the
-		// draft represents an existing Location that is not the Unknown Location)
+	// trigger for confirming deletion of the associated Location (if the
+	// draft represents an existing Location that is not the Unknown Location)
 	@State private var isConfirmDeleteLocationPresented = false
 
-		// definition of whether we can offer a deletion option in this view
-		// (it's a real location that's not the unknown location)
-	
+	// definition of whether we can offer a deletion option in this view
+	// (it's a real location that's not the unknown location)
 	private var associatedLocation: Location? {
 		if let persistentModelID = draftLocation.persistentModelID {
 			return modelContext.registeredModel<Location>(for: persistentModelID)
@@ -41,6 +40,7 @@ struct DraftLocationForm: View {
 		}
 	}
 
+	// delete only makes sense if we're representing a real Location
 	private var locationCanBeDeleted: Bool {
 		guard let associatedLocation else {
 			return false
@@ -50,8 +50,8 @@ struct DraftLocationForm: View {
 	
 	var body: some View {
 		Form {
-				// 1: Name (Visitation Order) and Colors.  These are shown for both an existing
-				// location and a potential new Location about to be created.
+			// 1: Name (position) and Colors.  These are shown for both an existing
+			// location and a potential new Location about to be created.
 			Section(header: Text("Basic Information")) {
 				HStack {
 					SLFormLabelText(labelText: "Name: ")
@@ -60,7 +60,7 @@ struct DraftLocationForm: View {
 				ColorPicker("Location Color", selection: $draftLocation.color)
 			} // end of Section 1
 			
-				// Section 2: Delete button, if the data is associated with an existing Location
+			// Section 2: Delete button, if the data is associated with an existing Location
 			if locationCanBeDeleted {
 				Section(header: Text("Location Management")) {
 					Button("Delete This Location", role: .destructive)  {
@@ -79,7 +79,7 @@ struct DraftLocationForm: View {
 				} // end of Section
 			} // end of if locationCanBeDeleted ...
 			
-				// Section 3: Items assigned to this Location, if we are editing a Location
+			// Section 3: Items assigned to this Location, if we are editing a Location
 			if let associatedLocation {
 				Section(header: ItemsListHeader()) {
 					SimpleItemsList(items: associatedLocation.items)

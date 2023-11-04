@@ -71,7 +71,7 @@ struct ShoppingListView: View {
 				if items.isEmpty {
 					ContentUnavailableView("There are no items on your Shopping List",
 						systemImage: "cart",
-						description: Text("Tap the + button to add a new item, or move to the My Items tab and select items to place on your Shopping List.")
+						description: Text("Tap the + button to add a new item, or move to the All My Items tab and select items to place on your Shopping List.")
 					)
 				} else {
 					ItemListView(itemSections: itemSections, sfSymbolName: "purchased")
@@ -88,7 +88,20 @@ struct ShoppingListView: View {
 				AddNewItemView(location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
 			}
-		}
+			// i don't like separating this nav destination from where the
+			// links to use it are located -- in the ItemListView -- but
+			// the placement of this matters ... and the best advice that
+			// i've seen about issues involving navigationDestination are to
+			// place this modifier as high up in the view hierarchy as
+			// possible.  and something changed from iOS 16 to iOS 17 for
+			// this modifier, which still leaves me confused about why it
+			// mostly works, but then occasionally fails (either because a
+			// destination cannot be found, or it goes into some sort of
+			// infinite loop and becomes unresponsive.
+			.navigationDestination(for: Item.self) { item in
+				ModifyExistingItemView(item: item)
+			}
+		} // end of NavigationStack
 		
 	} // end of body: some View
 	

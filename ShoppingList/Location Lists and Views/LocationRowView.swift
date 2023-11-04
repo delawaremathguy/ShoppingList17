@@ -12,10 +12,9 @@ import SwiftUI
 
 struct LocationRowView: View {
 	
+	// incoming Location we want to see on screen
 	var location: Location
 	
-	 //var rowData: LocationRowData
-
 	var body: some View {
 		HStack {
 			// color bar at left (new in this code)
@@ -28,11 +27,6 @@ struct LocationRowView: View {
 				Text(subtitle())
 					.font(.caption)
 			}
-			// we do not show the location index in SL16
-//			if !location.isUnknownLocation {
-//				Spacer()
-//				Text(String(location.visitationOrder))
-//			}
 		} // end of HStack
 	} // end of body: some View
 	

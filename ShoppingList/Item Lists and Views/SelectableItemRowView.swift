@@ -12,21 +12,22 @@ import SwiftUI
 
 struct SelectableItemRowView: View {
 	
-		// incoming are an item description, whether that item is selected or not, what symbol
-		// to use for animation, and what to do if the selector is tapped. 
+	// incoming are an item description, whether that item is selected
+	// or not, what symbol to use for animation, and what to do if
+	//the selector is tapped.
 	var item: Item
 	var selected: Bool
 	var sfSymbolName: String
 	var tapAction: () -> ()
 	
-	var isInPurchasedList: Bool { sfSymbolName == "cart" }
+	var isInAllMyItemsView: Bool { sfSymbolName == "cart" }
 	
 	var body: some View {
 		HStack {
 			tapCircle()
 			item.color
 				.frame(width: 10, height: 36)
-				// name and location
+			// name and location
 			VStack(alignment: .leading) {
 				
 				if item.isAvailable {
@@ -42,13 +43,16 @@ struct SelectableItemRowView: View {
 			}
 			
 			Spacer()
-			if isInPurchasedList && item.onList {
+			
+			// show "cart" if on shopping list and we're in
+			// the AllMyItemsView
+			if isInAllMyItemsView && item.onList {
 				Image(systemName: "cart")
 					.foregroundStyle(.green)
 					.padding(.trailing, 5)
 			}
 			
-				// quantity at the right
+			// quantity at the right
 			Text("\(item.quantity)")
 				.font(.headline)
 				.foregroundColor(Color.blue)

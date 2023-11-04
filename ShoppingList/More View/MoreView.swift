@@ -10,22 +10,23 @@ import SwiftData
 import SwiftUI
 import UniformTypeIdentifiers
 
-	// this is a new view to hold the timer (really, the timer does not need its own
-	// tab) and two buttons to import/export an shopping list archive.
-	// future: for an iPad, we could break out the timer as a separate item
-	// in the sidebar; but who really brings an iPad with them when they shop?
+// this is a new view to hold the timer (really, the timer does not need its own
+// tab) and two buttons to import/export an shopping list archive.
+// future: for an iPad, we could break out the timer as a separate item
+// in the sidebar; but who really brings an iPad with them when they shop?
 struct MoreView: View {
 	
+	// our hook into SwiftData
 	@Environment(\.modelContext) private var modelContext
 	
-		// @State variables to handle presenting of file importer and file
-		// exporter, as well as what document we want to export.
+	// @State variables to handle presenting of file importer and file
+	// exporter, as well as what document we want to export.
 	@State private var isFileImporterPresented = false
 	@State private var isFileExporterPresented = false
 	@State private var archiveDocument: ArchiveDocument?
 	
-		// controls for presenting an alert after exporting or importing data
-		// to tell you what happened.
+	// controls for presenting an alert after exporting or importing data
+	// to tell you what happened.
 	@State private var isAlertPresented = false
 	@State private var alertTitle: String = ""
 	@State private var alertMessage: String = ""
@@ -70,7 +71,7 @@ struct MoreView: View {
 			}
 			.navigationBarTitle("More ...")
 			.alert(alertTitle, isPresented: $isAlertPresented) {
-				Button("OK", action: { /* do nothing ... the alert will dismiss when OK is tapped */ })
+				Button("OK", action: { /* do nothing ... the alert dismisses when OK is tapped */ })
 			} message: {
 				Text(alertMessage)
 			}

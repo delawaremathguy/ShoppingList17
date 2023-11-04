@@ -10,8 +10,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-	// **** see the more lengthy discussion over in DraftItem.swift as to why we are
-	// using a class that's Observable.
+// **** see the companion discussion over in DraftItem.swift ****
 
 @Observable
 class DraftLocation {

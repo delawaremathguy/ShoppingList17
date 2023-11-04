@@ -74,6 +74,9 @@ struct AllMyItemsView: View {
 			.searchable(text: $searchText)
 			.onAppear { searchText = "" } // clear searchText, get a clean screen
 			.navigationBarTitle("All My Items")
+//			.navigationDestination(for: Item.self) { item in
+//				ModifyExistingItemView(item: item)
+//			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 			}
@@ -81,7 +84,11 @@ struct AllMyItemsView: View {
 				AddNewItemView(suggestedName: searchText, location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
 			}
-		}
+			.navigationDestination(for: Item.self) { item in
+				ModifyExistingItemView(item: item)
+			}
+
+		} // end of NavigationStack
 	} // end of var body: some View
 	
 	// MARK: - Subviews

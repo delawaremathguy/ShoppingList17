@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Observation
 
 // with a timer in this the app, it's a real question of whether the timer should be
 // stopped when you switch to a different app or get a phone call.  so, you decide.
@@ -14,8 +15,6 @@ import Foundation
 // i am in the store because it's probably part of the "shopping experience," e.g., if i
 // have to call my wife with a question about which brand of salad dressing to get.
 // this boolean determines this behaviour (so my preference is "false")
-
-// fileprivate let kDisableTimerWhenAppIsNotActive = false
 
 // note: if you don't disable the timer when in the background, what we'll really be
 // doing is remembering how much time we had accumulated before we went into the
@@ -39,7 +38,7 @@ class InStoreTimer: ObservableObject {
 	// -- calling stop() shuts down the timer and moves back to the .stopped state
 	// -- calling suspend() moves into the .suspended state
 	//
-	// .suspsended:
+	// .suspended:
 	// -- upon entry, shuts down the timer, updates totalAccumulatedTime, and remembers its shutdown date
 	// -- calling start() moves to the .running state
 	
@@ -63,9 +62,7 @@ class InStoreTimer: ObservableObject {
 	// this is what people need to see: its accumulated time, which is the sum of
 	// any the previouslyAccumulatedTime plus any current run time.  it gets updated by the timer
 	// while running every second, which causes a subscriber to see the update.
-	@Published var totalAccumulatedTime: TimeInterval = 0
-
-	// now we let people ask us questions or tell us to do things
+	var totalAccumulatedTime: TimeInterval = 0
 	var isSuspended: Bool { return state == .suspended }
 	var isRunning: Bool { return state == .running }
 	var isStopped: Bool { return state == .stopped }

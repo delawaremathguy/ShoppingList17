@@ -65,9 +65,9 @@ struct ItemListView: View {
 			} // end of Section
 		}  // end of List ... phew!
 		.listStyle(.insetGrouped)
-		.navigationDestination(for: Item.self) { item in
-			ModifyExistingItemView(item: item)
-		}
+//		.navigationDestination(for: Item.self) { item in
+//			ModifyExistingItemView(item: item)
+//		}
 		.animation(.default, value: itemSections)
 		.confirmationDialog("Delete \'\(itemToDeleteName)\'?",
 												isPresented: $isConfirmItemDeletePresented,

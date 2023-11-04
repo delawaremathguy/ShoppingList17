@@ -10,8 +10,11 @@ import SwiftUI
 
 struct ModifyExistingLocationView: View {
 	
-	@Environment(\.dismiss) var dismiss: DismissAction
+	// our hook into SwiftData
 	@Environment(\.modelContext) private var modelContext
+	// when done, we'll need to dismiss ourself after tapping
+	// our custom Back button.
+	@Environment(\.dismiss) var dismiss: DismissAction
 
 	// draftLocation will be initialized from the incoming Location
 	@State private var draftLocation: DraftLocation
@@ -34,9 +37,8 @@ struct ModifyExistingLocationView: View {
 	
 	var body: some View {
 		// the trailing closure provides the DraftLocationView with what
-		// to do after the user has
-		// chosen to delete the Location, namely to dismiss this view,"
-		// so we "go back" up the navigation stack
+		// to do after the user has chosen to delete the Location, namely
+		// to dismiss this view, so we "go back" up the navigation stack
 		DraftLocationForm(draftLocation: draftLocation, dismissAction: dismiss.callAsFunction)
 			.navigationBarTitle("Modify Location")
 			.navigationBarTitleDisplayMode(.inline)
@@ -47,8 +49,8 @@ struct ModifyExistingLocationView: View {
 	}
 	
 	func customBackButton() -> some View {
-			//...  see comments in ModifyExistingItemView about using
-			// our own back button.
+		//...  see comments in ModifyExistingItemView about using
+		// our own back button.
 		Button {
 			associatedLocation?.updateValues(from: draftLocation)
 			dismiss()

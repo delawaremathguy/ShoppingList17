@@ -38,9 +38,10 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 * Although the project seems to run fine on the code side, there's still more testing to do, comments throughout the app have not been fully updated, and I will need to add new screen shots because of some UI changes.  I expect these will be done in about a week, but I felt it time to get the code out there as soon as it appeared to be stable.  (*I may be making some minor, but unannounced updates during this time, most of which will be on the documentation side, but I will announce any bug fixes that show up*.)
 
-### Bugs I am working on or have fixed
+### Release adjustments ...
 
-* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination are mis-behaving on iPad, which can lead to either a crash or an infinite loop.  No fix yet.
+* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think has been fixed (tested on iPhone and iPad OK).
+* (*04Nov*) More cleaning of comments, and two .swift files deleted since they are no longer in use.
 
 ## General App Structure
 

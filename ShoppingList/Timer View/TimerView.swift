@@ -16,41 +16,39 @@ struct TimerView: View {
 	@EnvironmentObject var instoreTimer: InStoreTimer
 
 	var body: some View {
-			VStack {
-
-				Spacer()
-				
-				Text("Elased Time")
-					.font(.title)
-				Text(timeString(accumulatedTime: instoreTimer.totalAccumulatedTime))
-					.font(.custom("Times", size: 72))
-					.foregroundColor(instoreTimer.isRunning ? .green : .gray)
-				
-				Spacer()
-				
-				HStack(spacing: 40) {
-					Button(action: { instoreTimer.start() } ){
-						Text("Start")
-							.font(.title)
-					}
-					.disabled(instoreTimer.isRunning)
-					Button(action: { instoreTimer.stop() } ){
-						Text("Stop")
-							.font(.title)
-					}
-					.disabled(!instoreTimer.isRunning)
-					Button(action: { instoreTimer.reset() } ){
-						Text("Reset")
-							.font(.title)
-					}
-					.disabled(!instoreTimer.isStopped)
+		VStack {
+			
+			Spacer()
+			
+			Text("Elased Time")
+				.font(.title)
+			Text(timeString(accumulatedTime: instoreTimer.totalAccumulatedTime))
+				.font(.custom("Times", size: 72))
+				.foregroundColor(instoreTimer.isRunning ? .green : .gray)
+			
+			Spacer()
+			
+			HStack(spacing: 40) {
+				Button(action: { instoreTimer.start() } ){
+					Text("Start")
+						.font(.title)
 				}
-				
-				Spacer()
-				
+				.disabled(instoreTimer.isRunning)
+				Button(action: { instoreTimer.stop() } ){
+					Text("Stop")
+						.font(.title)
+				}
+				.disabled(!instoreTimer.isRunning)
+				Button(action: { instoreTimer.reset() } ){
+					Text("Reset")
+						.font(.title)
+				}
+				.disabled(!instoreTimer.isStopped)
 			}
-//			.navigationBarTitle("In-Store Timer")
-		
+			
+			Spacer()
+			
+		}
 	}
 	
 	func timeString(accumulatedTime: TimeInterval) -> String {
