@@ -78,9 +78,9 @@ The main screen is a TabView (in a compact size class, such as in portrait orien
 
 * The fifth tab is a "More..." tab that contains 
 
-  -- an in-store timer to track how long it takes you to complete shopping (not shown), 
-  -- buttons to export or import shopping list archives, 
-  -- and (for development purposes only) a button so you can load sample data so you can try out the app when running on the simulator.
+  - an in-store timer to track how long it takes you to complete shopping (not shown), 
+  - buttons to export or import shopping list archives, 
+  - and (for development purposes only) a button so you can load sample data so you can try out the app when running on the simulator.
 
 ![](Img9.jpg) 
 
