@@ -18,7 +18,9 @@ This is the fifth iteration of my original ShoppingList project and will yet aga
 
 Feel free to use this as is, to develop further, to completely ignore, or even just to inspect and then send me a note or Open an Issue to tell me I am doing this all wrong.  
 
-## Initial Release of 2 November, 2023
+## Pre-Release of 2 November, 2023
+
+> It looks like everything's working just about the way it should right now, so I am hereby pre-releasing it, with the official release maybe around 9 or 10 November.
 
 ### What's Changed Since SL16?
 
@@ -34,15 +36,13 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
 * The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
 
-### What Will Happen in the next few Updates?
+### What Will Happen in the next few days?
 
 * Although the project seems to run fine on the code side, there's still more testing to do, comments throughout the app have not been fully updated, and I will need to add new screen shots because of some UI changes.  I expect these will be done in about a week, but I felt it time to get the code out there as soon as it appeared to be stable.  (*I may be making some minor, but unannounced updates during this time, most of which will be on the documentation side, but I will announce any bug fixes that show up*.)
 
 ### Release adjustments ...
 
 * (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these has been fixed (tested on iPhone and iPad devices OK).
-* (*04Nov*) More cleaning of comments, and two .swift files deleted since they are no longer in use.
-* (*04Nov*) All ObservableObjects now replaced by `@Observable` macro.
 
 ## General App Structure
 
