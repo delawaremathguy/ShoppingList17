@@ -66,15 +66,16 @@ struct AddNewItemView: View {
 		Button("Save") {
 			let item = Item(from: draftItem)
 			modelContext.insert(item)
-			// note to self: to link an item and location together, it
-			// looks like you should append one (an item) to the
-			// relationship array/set of other (a location).
-			// this is slightly different in Core Data, where you could
-			// simply set the item's location directly on the other
-			// side of the relationship with
-			//    item.location = draftItem.location
-			// but that does not seem to work in SwiftData ??
-			draftItem.location.append(item: item)
+			// note to self: to link an item and location together, my
+			// early tests suggested you should append one (an item) to the
+			// relationship array/set of the other (a location).
+			// i.e., do
+			//    draftItem.location.append(item: item)
+			// doing what i do here (setting the item's location
+			// directly) seemed not to work, but maybe this has been
+			// fixed?  or maybe as long as this is done after inserting
+			// the item into the modelContext it works as it should?
+			item.location = draftItem.location
 			dismiss()
 		}
 		.disabled(!draftItem.canBeSaved)

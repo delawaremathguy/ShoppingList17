@@ -82,8 +82,9 @@ public class Location {
 
 extension Location {
 	
-	// this is the programmatic access for reading the items
-	// associated with a Location, already ordered by name.
+	// this provides programmatic access for reading the items
+	// associated with a Location as a real array and
+	// already sorted by name.
 	var items: [Item] {
 		let array = itemsOptional ?? []
 		return array.sorted(by: \.name)
@@ -107,6 +108,17 @@ extension Location {
 	
 	// MARK: -- Useful Functions
 	
+	// note to self: this function is no longer called in code,
+	// because i have preferred to link a location to an item
+	// with the statement:
+	//   item.location = location
+	// this is how i would have done it in Core Data, so i would
+	// not have to call the CD implementation of an addToItems
+	// function.
+	//
+	// but if you want to do it the other-way-round, this is basically
+	// the equivalent addToItems function of CD and you would write:
+	//   location.append(item: item)
 	func append(item: Item) {
 		// you probably want to remove this assert in practice, but
 		// i found it useful when getting my sea legs in SwiftData
