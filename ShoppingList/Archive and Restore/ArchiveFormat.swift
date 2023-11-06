@@ -8,8 +8,11 @@
 
 import Foundation
 
-	// a simple struct representation of an Item that we use to
-	// save to/restore from disk.
+// a simple struct representation of an Item that we use to
+// save to/restore from disk.  note that the property names
+// remain those used in SL16, even though two of the corresponding
+// model properties have been renamed.  that's necessary to
+// allow older archived data to come in properly.
 struct ItemRepresentation: Codable {
 	var id: UUID
 	var name: String
@@ -24,14 +27,18 @@ struct ItemRepresentation: Codable {
 		onList = item.onList
 		isAvailable = item.isAvailable
 		quantity = item.quantity
-		// this was initially left out
 		dateLastPurchased = item.lastPurchased
 	}
 }
 
-	// a simple struct representation of a Location that we use to
-	// save to/restore from disk.  note that this includes an array
-	// representing associated Items.
+// a simple struct representation of a Location that we use to
+// save to/restore from disk.  note that this includes an array
+// representing associated Items.
+// note also that the property names remain those used in SL16,
+// even though two of the corresponding
+// model properties have been renamed.  that's necessary to
+// allow older archived data to come in properly.
+
 struct LocationRepresentation: Codable {
 	var id: UUID
 	var name: String

@@ -1,5 +1,5 @@
 	//
-	//  PurchasedItemsView.swift
+	//  AllMyItemsView.swift
 	//  ShoppingList
 	//
 	//  Created by Jerry on 5/14/20.
@@ -22,7 +22,7 @@ struct AllMyItemsView: View {
 	
 	// MARK: - @Query
 	
-	@Query(sort: \Item.name) private var items: [Item]
+	@Query(sort: \Item.name, animation: .easeInOut) private var items: [Item]
 	
 	// MARK: - @State and @AppStorage Properties
 	
@@ -38,7 +38,7 @@ struct AllMyItemsView: View {
 	@State private var displayType: DisplayType
 	
 	init() {
-		if UserDefaults.standard.bool(forKey: kPurchasedListIsMultiSectionKey) {
+		if UserDefaults.standard.bool(forKey: kAllMyItemsListIsMultiSectionKey) {
 			_displayType = State(initialValue: .byDate)
 		} else {
 			_displayType = State(initialValue: .byName)
@@ -57,9 +57,9 @@ struct AllMyItemsView: View {
 				DisplayTypePicker(displayType: $displayType, options: [.byName, .byDate])
 
 				// display either an appropriate "List is Empty" view, or
-				// the sectioned list of purchased items.
+				// the sectioned list of all items.
 				if items.isEmpty {
-					ContentUnavailableView("There are no items on your Purchased List",
+					ContentUnavailableView("There are no items on your Items List",
 																 systemImage: "cart",
 																 description: Text("Tap the + button to add a new item.")
 					)

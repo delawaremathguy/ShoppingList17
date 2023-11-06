@@ -15,10 +15,10 @@ import Foundation
 
 // @AppStorage keys
 let kShoppingListIsMultiSectionKey = "kShoppingListIsMultiSectionKey"
-let kPurchasedListIsMultiSectionKey = "kPurchasedListIsMultiSectionKey"
+let kAllMyItemsListIsMultiSectionKey = "kPurchasedListIsMultiSectionKey"
 let kDisableTimerWhenInBackgroundKey = "kDisableTimerWhenInBackgroundKey"
 
 // @AppStorage default values
 let kShoppingListIsMultiSectionDefaultValue = false
-let kPurchasedListIsMultiSectionDefaultValue = false
+let kAllMyItemsListIsMultiSectionDefaultValue = false
 let kDisableTimerWhenInBackgroundDefaultValue = false

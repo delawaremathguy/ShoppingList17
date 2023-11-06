@@ -133,7 +133,15 @@ struct ItemListView: View {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
 			withAnimation {
 				if item.onList {
-					item.markAsPurchased()
+					if sfSymbolName == "cart" {
+						// we're in the AllMyItemsView, so i'll just change the
+						// onList status of the item.  (i need to make this better;
+						// it's pretty cheesy to look at the sfSymbolName ...
+						item.onList = false
+					} else {
+						// we're in the ShoppingList, so mark as purchased
+						item.markAsPurchased()
+					}
 				} else {
 					item.onList = true
 				}

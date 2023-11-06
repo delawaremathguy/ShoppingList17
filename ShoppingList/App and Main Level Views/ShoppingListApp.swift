@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftData
 import SwiftUI
 
 /*
@@ -27,6 +28,17 @@ struct ShoppingListApp: App {
 		NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
 	let enterForegroundPublisher =
 		NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+	let remoteChangePublisher = NotificationCenter.default.publisher(for: NSNotification.Name.NSPersistentStoreRemoteChange)
+	
+	let modelContainer: ModelContainer
+	init() {
+		let schema = Schema([Item.self, Location.self])
+		do {
+			modelContainer =  try ModelContainer(for: schema)
+		} catch let error {
+			fatalError("cannot set up modelContainer: \(error.localizedDescription)")
+		}
+	}
 		
 	var body: some Scene {
 		WindowGroup {
@@ -40,8 +52,11 @@ struct ShoppingListApp: App {
 						inStoreTimer.start()
 					}
 				}
+				.onReceive(remoteChangePublisher) { _ in
+					modelContainer.mainContext.condenseMultipleUnknownLocations()
+				}
 		}
-		.modelContainer(for: [Item.self, Location.self])
+		.modelContainer(modelContainer)
 	}
 	
 	

@@ -17,7 +17,7 @@ struct LocationsView: View {
 	// MARK: - @Query
 	
 	// this is the @Query that ties this view to SwiftData Locations
-	@Query(sort: [SortDescriptor(\Location.position, order: .forward)])
+	@Query(sort: [SortDescriptor(\Location.position, order: .forward)], animation: .easeInOut)
 	private var locations: [Location]
 	
 	// MARK: - @State and @StateObject Properties
@@ -67,6 +67,13 @@ struct LocationsView: View {
 				AddNewLocationView()
 			}
 			.onAppear { handleOnAppear() }
+			.onChange(of: locations) { old, new in
+				if new.count(where: { $0.isUnknownLocation} ) > 1 {
+					modelContext.condenseMultipleUnknownLocations(from: new.filter {
+						$0.isUnknownLocation
+					})
+				}
+			}
 		}
 	} // end of var body: some View
 	
@@ -88,14 +95,22 @@ struct LocationsView: View {
 		// because the unknown location is created lazily, this will
 		// make sure that we'll not be left with an empty screen.
 		// however, this could introduce a subtle problem: if you
-		// are using iCloud, you might
-		// have a "late delivery" from the cloud of an unknown
-		// location created on another device (if this is the first time you're
-		// using the app) ... but i will ignore that here and leave any
-		// fixes for later resolution if it's ever really a thing.
-		if locations.count == 0 {
-			modelContext.createUnknownLocation()
-		}
+		// are using iCloud, you might have a "late delivery" from
+		// the cloud of an unknown location created on another device
+		// (happens the first time you use the app off the cloud).
+		// so we'll fix the multiple unknown location problem here ...
+		
+		// note, also, that i have added the condenseMultipleUnknownLocations
+		// code in an onChange modifier: something could come from the
+		// cloud when we're on-screen.
+		modelContext.condenseMultipleUnknownLocations()
+//		if locations.count == 0 {
+//			modelContext.createUnknownLocation()
+//		} else if locations.count(where: { $0.isUnknownLocation} ) > 1 {
+//			modelContext.condenseMultipleUnknownLocations(from: locations.filter {
+//				$0.isUnknownLocation
+//			})
+//		}
 	}
 	
 	// defines the usual "+" button to add a Location

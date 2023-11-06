@@ -10,7 +10,7 @@ import SwiftUI
 
 /*
 the ModifyExistingItemView is opened via a navigation link from
- the ShoppingListView or the PurchasedItemTabView to do as it says:
+ the ShoppingListView or the AllMyItemsView to do as it says:
  edit an existing shopping item.
 
 this will be an "almost live edit," in the sense that when the user

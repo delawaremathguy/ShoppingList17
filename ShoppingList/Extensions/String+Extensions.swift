@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
 	
-	// this is useful in asking whether the searchText of the PurchasedItemsView
+	// this is useful in asking whether the searchText of the AllMyItemsView
 	// appears in item names; it makes things more straightforward at the call site.
 	func appearsIn(_ str: String) -> Bool {
 		let cleanedSearchText = self.trimmingCharacters(in: .whitespacesAndNewlines)

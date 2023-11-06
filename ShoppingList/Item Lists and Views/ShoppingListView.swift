@@ -19,12 +19,14 @@ struct ShoppingListView: View {
 	// MARK: - @Queries
 
 	// we need items on the shopping list only
-	@Query(filter: #Predicate<Item> { $0.onList }) private var items: [Item]
+	@Query(filter: #Predicate<Item> { $0.onList }, animation: .easeInOut)
+	private var items: [Item]
 
 	// we also need to know when locations change, especially
 	// if re-ordered. see the discussion below for the
 	// computed var itemSections: [ItemSection].
-	@Query(sort: \Location.position) private var locations: [Location]
+	@Query(sort: \Location.position, animation: .easeInOut)
+	private var locations: [Location]
 	
 		// MARK: - @State and @AppStorage Properties
 	

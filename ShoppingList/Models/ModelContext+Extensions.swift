@@ -158,20 +158,37 @@ extension ModelContext {
 	}
 	
 	// creates an unknown location on your device.
-	@discardableResult func createUnknownLocation() -> Location {
+	@discardableResult 
+	private func createUnknownLocation() -> Location {
 		let unknownLocation = Location(suggestedName: kUnknownLocationName,
 																	 atPosition: kUnknownLocationPosition)
 		insert(unknownLocation)
 		return unknownLocation
 	}
 	
+	// finds all Unknown Locations.  yes, we'd like there to be only one,
+	// but because of cloud latency, there could be more than one.
+	private func allUnknownLocations() -> [Location] {
+		let predicate = #Predicate<Location> { $0.position == kUnknownLocationPosition }
+		let fetchDescriptor = FetchDescriptor<Location>(predicate: predicate)
+		do {
+			let locations = try fetch(fetchDescriptor)
+			return locations
+		} catch let error {
+			print("*** cannot fetch locations: \(error.localizedDescription)")
+			return []
+		}
+
+	}
+	
 	// finds the unknown location on your device, creating it if necessary.
 	var unknownLocation: Location {
 		// we only keep one "UnknownLocation" in the data store.  you can find
 		// it easily: its position is the largest 32-bit integer. to make the
-		// app work, however, we need this default location to exist!
+		// app work, however, we need this default location to exist before
+		// we start adding Items.
 		//
-		// so if we ever need to get the unknown location from the database, 
+		// so if we ever need to get the unknown location from the database,
 		// we will fetch it; and if it's not there, we will create it.
 		
 		// NOTE TO SELF: it's possible that you could have multiple
@@ -180,20 +197,48 @@ extension ModelContext {
 		// device but without the cloud turned on (or available).  the
 		// second device will create its own "unknown" location, but
 		// then later discover the unknown location that's in the
-		// cloud.
-		// there is a way to solve this problem; just not right here,
-		// right now (!)
-		let predicate = #Predicate<Location> { $0.position == kUnknownLocationPosition }
-		let fetchDescriptor = FetchDescriptor<Location>(predicate: predicate)
-		do {
-			let locations = try fetch(fetchDescriptor)
-			if locations.isEmpty {
-				return createUnknownLocation()
-			}
-			return locations[0]
-		} catch let error {
-			fatalError("*** cannot fetch locations: \(error.localizedDescription)")
+		// cloud.  the function realUnknownLocationAfterResolution will
+		// try to resolve any ambiguity based on the fetch below.
+		return condenseMultipleUnknownLocations()
+	}
+	
+	@discardableResult
+	func condenseMultipleUnknownLocations(from locations: [Location]? = nil) -> Location {
+		
+		// incoming: a list of locations that look like they are unknown locations,
+		// but if nil, then we have to go find them first
+		var locationsToCondense: [Location]
+		if locations == nil || locations!.isEmpty {
+			locationsToCondense = allUnknownLocations()
+		} else {
+			locationsToCondense = locations!
 		}
+		
+		if locationsToCondense.isEmpty {
+			return createUnknownLocation()
+		}
+		// there is a way to solve the problem of reducing multiple unknown
+		// locations introduced by cloud latency into one. if you find multiple
+		// unknown locations, then
+		//   -- sort them by their referenceID.uuidString values (increasing).
+		//   -- accept whichever appears first among them to be the real, unknown Location;
+		//   -- move items from all other unknown locations to the real, unknown location;
+		//   -- and delete all those other unknown locations.
+		// over time, different devices will come to agree on the real unknown location.
+		
+		// note: this is still under some testing ...
+		let sortedLocations = locationsToCondense
+			.filter({ $0.isUnknownLocation })
+			.sorted { loc1, loc2 in
+				loc1.referenceID.uuidString < loc2.referenceID.uuidString
+			}
+		let realUnknown = sortedLocations[0]
+		let remainingLocations = sortedLocations.dropFirst()
+		for location in remainingLocations {
+			location.items.forEach { $0.location = realUnknown }
+			delete(location)
+		}
+		return realUnknown
 	}
 
 }

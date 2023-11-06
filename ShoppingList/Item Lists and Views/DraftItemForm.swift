@@ -31,7 +31,7 @@ struct DraftItemForm: View {
 	var dismissAction: (() -> Void)?
 	
 	// we need all locations so we can populate the Picker.
-	@Query(sort: \Location.position, order: .forward)
+	@Query(sort: \Location.position, order: .forward, animation: .easeInOut)
 	private var locations: [Location]
 	
 	// used to trigger confirmation alert process for deleting an Item.

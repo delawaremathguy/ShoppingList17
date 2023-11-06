@@ -15,7 +15,7 @@ struct RegularMainView: View {
 	
 	enum NavigationItem {
 		case shoppingList
-		case purchasedList
+		case allMyItemsList
 		case locationList
 		case preferences
 		case more
@@ -30,7 +30,7 @@ struct RegularMainView: View {
 				.tag(NavigationItem.shoppingList)
 			
 			Label("All My Items", systemImage: "list.bullet.clipboard")
-				.tag(NavigationItem.purchasedList)
+				.tag(NavigationItem.allMyItemsList)
 			
 			Label("Locations", systemImage: "map")
 				.tag(NavigationItem.locationList)
@@ -52,7 +52,7 @@ struct RegularMainView: View {
 			switch selection {
 				case .shoppingList:
 					ShoppingListView()
-				case .purchasedList:
+				case .allMyItemsList:
 					AllMyItemsView()
 				case .locationList:
 					LocationsView()

@@ -40,9 +40,11 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 * Although the project seems to run fine on the code side, there's still more testing to do, comments throughout the app have not been fully updated, and I will need to add new screen shots because of some UI changes.  I expect these will be done in about a week, but I felt it time to get the code out there as soon as it appeared to be stable.  (*I may be making some minor, but unannounced updates during this time, most of which will be on the documentation side, but I will announce any bug fixes that show up*.)
 
-### Release adjustments ...
+### Pre-Release adjustments ...
 
 * (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
+* (*06Nov*) Tapping the leading touch area of an item in the All simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
+* (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  Early returns are promising, at least ... but not yet a done deal (!)
 
 ## General App Structure
 
@@ -60,7 +62,7 @@ The main screen is a TabView (in a compact size class, such as in portrait orien
 
 ![](Img4.jpg)  ![](Img5.jpg) 
 
-* Again, tapping on the circular button on the leading edge of an item's display toggles whether the item appears on the shopping list.  Tapping elsewhere on any row allows you to edit an Item, while tapping the "+" button in the navigation bar allows you to add a new item.  Long pressing on a row reveals a context menu to perform some quick actions as described above.
+* Again, tapping on the circular button on the leading edge of an item's display toggles whether the item appears on the shopping list (but *does not mark the item as having been purchased* if the item's status changes from on the list to not on the list).  Tapping elsewhere on any row allows you to edit an Item, while tapping the "+" button in the navigation bar allows you to add a new item.  Long pressing on a row reveals a context menu to perform some quick actions as described above.
 
 * A list of "locations" in a store is displayed in the third tab view. Locations are simply identifiable areas of a store, such as "Dairy," "Fruits & Vegetables," "Deli," "Aisle 12," and so on where items can be found.  
 
@@ -106,12 +108,13 @@ If you plan to install and use this app on a device and have it share its data v
 
 * You may need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials.  
   
-* If you had already used SL16 with the cloud, you may want to first archive any data from SL16 to the Files app; open your iCloud dashboard and clear out the container you've been using (the SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16); then finally install and run SL17 on a device. any existing data can then be imported to repopulate the SwiftData store.
+* If you had already used SL16 with the cloud, you should first archive any data that you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using (the SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16); then finally install and run SL17 on your devices. any existing data can then be imported to repopulate the SwiftData store.
 
 ### App Architecture
 
 The design in this app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.   in particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects, and to find/manage the unknown location (identified by its `position`).
 
+The SwiftData container is organized into models named `Item` and `Location`.  A single Location is associated with (has a `@Relationship` to) many Items.
 
 ## License
 

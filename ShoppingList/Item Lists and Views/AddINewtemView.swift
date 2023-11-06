@@ -10,7 +10,7 @@ import SwiftUI
 
 /*
 the AddNewItemView is opened via a sheet from either the ShoppingListView
-or the PurchasedItemTabView, within a NavigationView, to do as it says: add
+or the AllMyItemsView, within a NavigationView, to do as it says: add
 a new shopping item.  the strategy is simple:
 	
  -- create a default set of values for a new shopping item (a StateObject)
@@ -21,7 +21,8 @@ a new shopping item.  the strategy is simple:
 	 user cannot simply dismiss the AddNew sheet by pulling down on it.
  
 i make no attempt to alert the user should she tap the Cancel button
-if there have been edits to the original default data.
+when there have been edits to the original default data and those
+changes could be lost.
 */
 struct AddNewItemView: View {
 	
@@ -60,7 +61,7 @@ struct AddNewItemView: View {
 		}
 	}
 	
-	// the save button creates the a item in the persistent store,
+	// the save button creates a new item in the persistent store,
 	// links it the draftItem's location, and dismisses this view.
 	func saveButton() -> some View {
 		Button("Save") {
@@ -69,12 +70,14 @@ struct AddNewItemView: View {
 			// note to self: to link an item and location together, my
 			// early tests suggested you should append one (an item) to the
 			// relationship array/set of the other (a location).
-			// i.e., do
+			// i.e., call
 			//    draftItem.location.append(item: item)
 			// doing what i do here (setting the item's location
-			// directly) seemed not to work, but maybe this has been
-			// fixed?  or maybe as long as this is done after inserting
-			// the item into the modelContext it works as it should?
+			// directly) seemed not to work in some of the early betas,
+			// but this seems to work, so maybe this has been
+			// fixed?  (alternatively, you should be sure to insert
+			// the item _before_ establishing this link, and maybe i was
+			// not doing that, and that's why it was not working?)
 			item.location = draftItem.location
 			dismiss()
 		}
