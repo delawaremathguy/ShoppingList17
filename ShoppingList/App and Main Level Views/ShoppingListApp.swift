@@ -39,21 +39,6 @@ struct ShoppingListApp: App {
 			fatalError("cannot set up modelContainer: \(error.localizedDescription)")
 		}
 		
-		// fix error in database ??
-		let fetchDescriptor = FetchDescriptor<Item>()
-		do {
-			let items = try modelContainer.mainContext.fetch(fetchDescriptor)
-			let itemsToDelete = items.filter { $0.name.contains("New Item32") }
-			print("found \(itemsToDelete.count) items to delete.")
-			for item in itemsToDelete {
-				modelContainer.mainContext.delete(item)
-			}
-			try? modelContainer.mainContext.save()
-			
-		} catch let error {
-			print("*** cannot fetch items: \(error.localizedDescription)")
-		}
-
 	}
 		
 	var body: some Scene {
