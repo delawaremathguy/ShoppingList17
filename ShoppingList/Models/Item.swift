@@ -49,7 +49,8 @@ public class Item {
 	}
 	
 	// initializer used when creating an Item
-	// in the AddNewItemView.
+	// in the AddNewItemView.  note: caller must link
+	// the item to a location after inserting the item.
 	init(from draft: DraftItem) {
 		name = draft.name
 		quantity = draft.quantity

@@ -66,14 +66,17 @@ struct LocationsView: View {
 			.sheet(isPresented: $isAddNewLocationSheetPresented) {
 				AddNewLocationView()
 			}
-			.onAppear { handleOnAppear() }
-			.onChange(of: locations) { old, new in
-				if new.count(where: { $0.isUnknownLocation} ) > 1 {
-					modelContext.condenseMultipleUnknownLocations(from: new.filter {
-						$0.isUnknownLocation
-					})
-				}
+			.task {
+				modelContext.condenseMultipleUnknownLocations()
 			}
+//			.onAppear { handleOnAppear() }
+//			.onChange(of: locations) { old, new in
+//				if new.count(where: { $0.isUnknownLocation} ) > 1 {
+//					modelContext.condenseMultipleUnknownLocations(from: new.filter {
+//						$0.isUnknownLocation
+//					})
+//				}
+//			}
 		}
 	} // end of var body: some View
 	

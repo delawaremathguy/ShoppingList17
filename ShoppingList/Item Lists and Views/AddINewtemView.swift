@@ -67,18 +67,8 @@ struct AddNewItemView: View {
 		Button("Save") {
 			let item = Item(from: draftItem)
 			modelContext.insert(item)
-			// note to self: to link an item and location together, my
-			// early tests suggested you should append one (an item) to the
-			// relationship array/set of the other (a location).
-			// i.e., call
-			//    draftItem.location.append(item: item)
-			// doing what i do here (setting the item's location
-			// directly) seemed not to work in some of the early betas,
-			// but this seems to work, so maybe this has been
-			// fixed?  (alternatively, you should be sure to insert
-			// the item _before_ establishing this link, and maybe i was
-			// not doing that, and that's why it was not working?)
-			item.location = draftItem.location
+			draftItem.location.append(item: item)
+//			item.location = draftItem.location
 			dismiss()
 		}
 		.disabled(!draftItem.canBeSaved)

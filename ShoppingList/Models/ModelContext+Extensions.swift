@@ -70,14 +70,14 @@ extension ModelContext {
 			// enough to just write
 			//    item.location = location
 			// and let SwiftData figure it out?
-//			item.location?.itemsOptional?.removeAll() { $0.referenceID == item.referenceID }
-//			location.append(item: item)
-			item.location = location
+			item.location?.itemsOptional?.removeAll() { $0.referenceID == item.referenceID }
+			location.append(item: item)
+//			item.location = location
 		} else {
 			let newItem = Item(from: representation)
 			insert(newItem)
-			newItem.location = location
-//			location.append(item: newItem)
+//			newItem.location = location
+			location.append(item: newItem)
 		}
 	}
 
@@ -194,11 +194,11 @@ extension ModelContext {
 		// NOTE TO SELF: it's possible that you could have multiple
 		// unknown locations: create one on your device, have it sync
 		// with the cloud, then install and run the app on the second
-		// device but without the cloud turned on (or available).  the
-		// second device will create its own "unknown" location, but
-		// then later discover the unknown location that's in the
-		// cloud.  the function realUnknownLocationAfterResolution will
-		// try to resolve any ambiguity based on the fetch below.
+		// device but without the cloud turned on or available.  the
+		// second device might create its own "unknown" location, before
+		// it discovers an existing unknown location that's in the
+		// cloud.  the function condenseMultipleUnknownLocations will
+		// resolve any ambiguity.
 		return condenseMultipleUnknownLocations()
 	}
 	
@@ -216,6 +216,8 @@ extension ModelContext {
 		
 		if locationsToCondense.isEmpty {
 			return createUnknownLocation()
+		} else if locationsToCondense.count == 1 {
+			return locationsToCondense[0]
 		}
 		// there is a way to solve the problem of reducing multiple unknown
 		// locations introduced by cloud latency into one. if you find multiple
@@ -235,7 +237,10 @@ extension ModelContext {
 		let realUnknown = sortedLocations[0]
 		let remainingLocations = sortedLocations.dropFirst()
 		for location in remainingLocations {
-			location.items.forEach { $0.location = realUnknown }
+			location.items.forEach {
+				realUnknown.append(item: $0)
+//				$0.location = realUnknown
+			}
 			delete(location)
 		}
 		return realUnknown

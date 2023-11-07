@@ -28,7 +28,7 @@ struct ShoppingListApp: App {
 		NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
 	let enterForegroundPublisher =
 		NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-	let remoteChangePublisher = NotificationCenter.default.publisher(for: NSNotification.Name.NSPersistentStoreRemoteChange)
+//	let remoteChangePublisher = NotificationCenter.default.publisher(for: NSNotification.Name.NSPersistentStoreRemoteChange)
 	
 	let modelContainer: ModelContainer
 	init() {
@@ -38,6 +38,22 @@ struct ShoppingListApp: App {
 		} catch let error {
 			fatalError("cannot set up modelContainer: \(error.localizedDescription)")
 		}
+		
+		// fix error in database ??
+		let fetchDescriptor = FetchDescriptor<Item>()
+		do {
+			let items = try modelContainer.mainContext.fetch(fetchDescriptor)
+			let itemsToDelete = items.filter { $0.name.contains("New Item32") }
+			print("found \(itemsToDelete.count) items to delete.")
+			for item in itemsToDelete {
+				modelContainer.mainContext.delete(item)
+			}
+			try? modelContainer.mainContext.save()
+			
+		} catch let error {
+			print("*** cannot fetch items: \(error.localizedDescription)")
+		}
+
 	}
 		
 	var body: some Scene {
@@ -52,9 +68,11 @@ struct ShoppingListApp: App {
 						inStoreTimer.start()
 					}
 				}
-				.onReceive(remoteChangePublisher) { _ in
-					modelContainer.mainContext.condenseMultipleUnknownLocations()
-				}
+//				.onReceive(remoteChangePublisher) { _ in
+//					DispatchQueue.main.async {
+//						modelContainer.mainContext.condenseMultipleUnknownLocations()
+//					}
+//				}
 		}
 		.modelContainer(modelContainer)
 	}

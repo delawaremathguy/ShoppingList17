@@ -118,12 +118,12 @@ struct DraftLocationForm: View {
 		let itemsToMove = associatedLocation.items
 		for item in itemsToMove {
 			// this code seems a little long-winded:
-			//    modelContext.unknownLocation.append(item: item)
+			modelContext.unknownLocation.append(item: item)
 			// it should be enough to just write
 			//    item.location = modelContext.unknownLocation
 			// and let SwiftData figure it out?  testing so far
-			// seems to say it works fine.
-			item.location = modelContext.unknownLocation
+			// seems to say it mostly works, but i am suspicious.
+			// item.location = modelContext.unknownLocation
 		}
 		modelContext.delete(associatedLocation)
 		try? modelContext.save()

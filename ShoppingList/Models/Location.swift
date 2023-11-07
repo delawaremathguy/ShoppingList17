@@ -108,17 +108,21 @@ extension Location {
 	
 	// MARK: -- Useful Functions
 	
-	// note to self: this function is no longer called in code,
-	// because i have preferred to link a location to an item
+	// note to self: this function has come and gone during
+	// development. i would prefer to link a location to an item
 	// with the statement:
 	//   item.location = location
-	// this is how i would have done it in Core Data, so i would
+	// (this is how i would have done it in Core Data, so i would
 	// not have to call the CD implementation of an addToItems
-	// function.
+	// function.)
 	//
-	// but if you want to do it the other-way-round, this is basically
+	// but we can do it the other-way-round: append the item to
+	// the location's optional array of items. this is basically
 	// the equivalent addToItems function of CD and you would write:
 	//   location.append(item: item)
+	//
+	// and from testing, it seems that using this append form may be
+	// required to work properly with observation.
 	func append(item: Item) {
 		// you probably want to remove this assert in practice, but
 		// i found it useful when getting my sea legs in SwiftData

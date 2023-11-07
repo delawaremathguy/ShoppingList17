@@ -45,6 +45,7 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
 * (*06Nov*) Tapping the leading touch area of an item in the All simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
 * (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  Early returns are promising, at least ... but not yet a done deal (!)
+* (*07Nov*) Still cleaning up yesterday'' subtlety of handling multiple locations introduced by cloud latency when installing on a second or third device on your Apple ID.
 
 ## General App Structure
 
