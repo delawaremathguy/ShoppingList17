@@ -76,8 +76,8 @@ extension ModelContext {
 		} else {
 			let newItem = Item(from: representation)
 			insert(newItem)
-//			newItem.location = location
 			location.append(item: newItem)
+//			newItem.location = location
 		}
 	}
 
@@ -156,16 +156,7 @@ extension ModelContext {
 			return nil
 		}
 	}
-	
-	// creates an unknown location on your device.
-	@discardableResult 
-	private func createUnknownLocation() -> Location {
-		let unknownLocation = Location(suggestedName: kUnknownLocationName,
-																	 atPosition: kUnknownLocationPosition)
-		insert(unknownLocation)
-		return unknownLocation
-	}
-	
+		
 	// finds all Unknown Locations.  yes, we'd like there to be only one,
 	// but because of cloud latency, there could be more than one.
 	private func allUnknownLocations() -> [Location] {
@@ -189,48 +180,73 @@ extension ModelContext {
 		// we start adding Items.
 		//
 		// so if we ever need to get the unknown location from the database,
-		// we will fetch it; and if it's not there, we will create it.
-		
-		// NOTE TO SELF: it's possible that you could have multiple
-		// unknown locations: create one on your device, have it sync
-		// with the cloud, then install and run the app on the second
-		// device but without the cloud turned on or available.  the
-		// second device might create its own "unknown" location, before
-		// it discovers an existing unknown location that's in the
-		// cloud.  the function condenseMultipleUnknownLocations will
-		// resolve any ambiguity.
-		return condenseMultipleUnknownLocations()
+		// we will fetch it; and if it's not there, we will create it.  and
+		// there's also a third possibility of having more than one, so we
+		// hand all of the necessary logic off to resolveMultipleUnknownLocations
+		// to figure out what to do.
+		return resolveMultipleUnknownLocations()
 	}
 	
+	// QUESTION: why can there be multiple unknown locations?
+	// this only happens in a limited number of cases when you are
+	// using the cloud for syncing across multiple devices on the same
+	// Apple ID (this should never happen on a stand-alone device with
+	// no intention of using the cloud for sharing).
+	//
+	// EXAMPLE:
+	//
+	// (1A) install and run on a first device
+	// (1B) an unknown location is created on your device
+	// (1C) sync with the cloud
+	//
+	// (2A) install and run on the second device but without
+	//      the cloud turned on or available.
+	// (2B) the second device creates its own unknown location,
+	//      before it can discover an existing unknown location
+	//      in the cloud.
+	// (2C) eventually, your second device finds the cloud and
+	//      discovers an already-existing unknown location.
+
+	// this function returns an unknown location that is accepted
+	// as the unique unknown location known on a single device and
+	// agreed to as the unknown location by all devices sharing
+	// data across the same Apple ID.
 	@discardableResult
-	func condenseMultipleUnknownLocations(from locations: [Location]? = nil) -> Location {
-		
-		// incoming: a list of locations that look like they are unknown locations,
-		// but if nil, then we have to go find them first
-		var locationsToCondense: [Location]
-		if locations == nil || locations!.isEmpty {
-			locationsToCondense = allUnknownLocations()
-		} else {
-			locationsToCondense = locations!
+	func resolveMultipleUnknownLocations() -> Location {
+		// get all unknown locations
+		let locationsToCondense = allUnknownLocations()
+
+		// create the unknown location now if we don't yet have one
+		if locationsToCondense.isEmpty {
+			let location = Location(suggestedName: kUnknownLocationName,
+															atPosition: kUnknownLocationPosition)
+			insert(location)
+			return location
 		}
 		
-		if locationsToCondense.isEmpty {
-			return createUnknownLocation()
-		} else if locationsToCondense.count == 1 {
+		// finding one unknown location is almost always the case,
+		// so return the one we found
+		if locationsToCondense.count == 1 {
 			return locationsToCondense[0]
 		}
-		// there is a way to solve the problem of reducing multiple unknown
-		// locations introduced by cloud latency into one. if you find multiple
-		// unknown locations, then
-		//   -- sort them by their referenceID.uuidString values (increasing).
-		//   -- accept whichever appears first among them to be the real, unknown Location;
-		//   -- move items from all other unknown locations to the real, unknown location;
-		//   -- and delete all those other unknown locations.
+		
+		// so we have multiple unknown locations, probably because of an
+		// iCloud syncing issue when installing on multiple devices
+		// on the same Apple ID.  but we want the unknown location
+		// to be unique.
+		//
+		// there is a way to solve the problem of reducing such multiple
+		// unknown locations introduced by multiple devices into one.
+		// indeed, if you find multiple unknown locations:
+		//   - sort them by their referenceID.uuidString values (increasing).
+		//   - accept whichever appears first among them to be the real, unknown Location;
+		//   - move items from all other unknown locations to the real, unknown location;
+		//   - and delete all those other unknown locations.
 		// over time, different devices will come to agree on the real unknown location.
 		
-		// note: this is still under some testing ...
+		// note: this seems to work in my tests ... fingers crossed for now.
 		let sortedLocations = locationsToCondense
-			.filter({ $0.isUnknownLocation })
+			.filter { $0.isUnknownLocation }
 			.sorted { loc1, loc2 in
 				loc1.referenceID.uuidString < loc2.referenceID.uuidString
 			}
@@ -243,6 +259,7 @@ extension ModelContext {
 			}
 			delete(location)
 		}
+		try? save()
 		return realUnknown
 	}
 

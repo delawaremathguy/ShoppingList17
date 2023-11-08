@@ -18,8 +18,9 @@ struct ShoppingListView: View {
 	
 	// MARK: - @Queries
 
-	// we need items on the shopping list only
-	@Query(filter: #Predicate<Item> { $0.onList }, animation: .easeInOut)
+	// we need items on the shopping list ... let SwiftData sort them for us
+	@Query(filter: #Predicate<Item> { $0.onList },
+				 sort: \Item.name, order: .forward, animation: .easeInOut)
 	private var items: [Item]
 
 	// we also need to know when locations change, especially
@@ -151,6 +152,7 @@ struct ShoppingListView: View {
 	// MARK: - Helper Functions
 		
 	private var itemSections: [ItemSection] {
+		// (updated from SL16 code)
 		// if we have nothing on the list, there's nothing for ItemListView to show
 		if items.isEmpty {
 			return []
@@ -158,10 +160,13 @@ struct ShoppingListView: View {
 
 		switch displayType {
 				
+				// byName is simple: list items alphabatically
 			case .byName:
 				return [ItemSection(title: "Items Remaining: \(items.count)",
-														items: items.sorted(by: { $0.name < $1.name }))]
+														items: items)]
 				
+				// byLocation just pulls out locations that have items on the SL
+				// sorted by their position, then for each, pull its items
 			case .byLocation:
 				let activeLocations =
 					locations.filter({ $0.items.count(where: { $0.onList }) > 0 })

@@ -18,9 +18,7 @@ This is the fifth iteration of my original ShoppingList project and will yet aga
 
 Feel free to use this as is, to develop further, to completely ignore, or even just to inspect and then send me a note or Open an Issue to tell me I am doing this all wrong.  
 
-## Pre-Release of 2 November, 2023
-
-> It looks like everything's working just about the way it should right now, so I am hereby pre-releasing it, with the official release maybe around 9 or 10 November.
+## Official Release of 8 November, 2023
 
 ### What's Changed Since SL16?
 
@@ -36,16 +34,13 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
 * The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
 
-### What Will Happen in the next few days?
-
-* Although the project seems to run fine on the code side, there's still more testing to do, comments throughout the app have not been fully updated, and I will need to add new screen shots because of some UI changes.  I expect these will be done in about a week, but I felt it time to get the code out there as soon as it appeared to be stable.  (*I may be making some minor, but unannounced updates during this time, most of which will be on the documentation side, but I will announce any bug fixes that show up*.)
-
-### Pre-Release adjustments ...
+### Minor adjustments since the pre-release a week ago ...
 
 * (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
 * (*06Nov*) Tapping the leading touch area of an item in the All simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
 * (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  Early returns are promising, at least ... but not yet a done deal (!)
-* (*07Nov*) Still cleaning up yesterday'' subtlety of handling multiple locations introduced by cloud latency when installing on a second or third device on your Apple ID.
+* (*07Nov*) Still cleaning up yesterday's subtlety of handling multiple unknown locations introduced by cloud latency when installing on a second or third device on your Apple ID.
+* (*08Nov*) I think I'm done with the cloud latency/multiple device issue.  We're now officially released.  Please open an issue of put up a PR if you find anything amiss.
 
 ## General App Structure
 
@@ -91,11 +86,18 @@ Other notes for Operation:
 
 * The shopping list has a "share" icon in the navigation bar that will bring up a share sheet, so that you can send off a copy of your list by email, text, or social media.
 
-* The list of locations always shows a special location to mean that "I don't really know where this item is yet, but I'll figure it out at the store." This **Unknown Location** always appears last in the list of Locations, so shopping items with this unknown location will come at the bottom of the shopping list. 
+* The list of locations always shows a special location to mean that "I don't really know where this item is yet, but I'll figure it out at the store." This **Unknown Location** always appears last in the list of Locations, and is the default location to which to associate a new item. (The unknown location will come at the end of the shopping list.)
 
 * What happens to Items at a Location when the Location is deleted?  The Items are not deleted, but are moved to the Unknown Location.
 
-## What Should You do with this Project?
+### App Architecture Notes
+
+The SwiftData container is organized into models named `Item` and `Location`.  A single Location is associated with (has a `@Relationship` to) many Items.
+
+This app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.  in particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects, and to find/manage the unknown location (identified by its `position`).
+
+
+## What Can You do with this Project?
 
 If you would like to test out this app and decide if it might be of interest to you:
 
@@ -105,17 +107,12 @@ If you plan to install and use this app on a single device without using iCloud:
 
 * You should first delete the ShoppingList.entitlements file (this is what connects iCloud to the app). After installing on a device, the app will start with an empty shopping list and a location list having only the special "Unknown Location"; from there you can create your own shopping items and locations associated with those items.  (*Suggestion: add Locations before adding Items!*) 
 
-If you plan to install and use this app on a device and have it share its data via iCloud with other devices on the same Apple ID
+If you plan to install and use this app on a device and either have it simply backup data in the cloud, or share its data through the cloud with other devices on the same Apple ID:
 
-* You may need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials.  
+* You will need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials.  
   
-* If you had already used SL16 with the cloud, you should first archive any data that you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using (the SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16); then finally install and run SL17 on your devices. any existing data can then be imported to repopulate the SwiftData store.
+* WARNING: The SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16.  If you have been using SL16 with the cloud, you should first archive any data  you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using; then finally install and run SL17 on your device(s).  Existing data can now be imported to repopulate the SwiftData store.
 
-### App Architecture
-
-The design in this app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.   in particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects, and to find/manage the unknown location (identified by its `position`).
-
-The SwiftData container is organized into models named `Item` and `Location`.  A single Location is associated with (has a `@Relationship` to) many Items.
 
 ## License
 

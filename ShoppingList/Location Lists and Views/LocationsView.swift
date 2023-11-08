@@ -67,7 +67,7 @@ struct LocationsView: View {
 				AddNewLocationView()
 			}
 			.task {
-				modelContext.condenseMultipleUnknownLocations()
+				modelContext.resolveMultipleUnknownLocations()
 			}
 //			.onAppear { handleOnAppear() }
 //			.onChange(of: locations) { old, new in
@@ -106,7 +106,7 @@ struct LocationsView: View {
 		// note, also, that i have added the condenseMultipleUnknownLocations
 		// code in an onChange modifier: something could come from the
 		// cloud when we're on-screen.
-		modelContext.condenseMultipleUnknownLocations()
+		modelContext.resolveMultipleUnknownLocations()
 //		if locations.count == 0 {
 //			modelContext.createUnknownLocation()
 //		} else if locations.count(where: { $0.isUnknownLocation} ) > 1 {
