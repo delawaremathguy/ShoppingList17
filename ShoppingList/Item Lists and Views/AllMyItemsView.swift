@@ -55,19 +55,24 @@ struct AllMyItemsView: View {
 					.frame(height: 1)
 				
 				DisplayTypePicker(displayType: $displayType, options: [.byName, .byDate])
-
+				
 				// display either an appropriate "List is Empty" view, or
 				// the sectioned list of all items.
 				if items.isEmpty {
-					ContentUnavailableView("There are no items on your Items List",
-																 systemImage: "cart",
-																 description: Text("Tap the + button to add a new item.")
-					)
+					ContentUnavailableView {
+						Label("You have entered no items yet", systemImage: "cart.badge.plus")
+					} description: {
+						Text("Tap the + button in the navigation bar to add a new item\nor tap this \"Add New Item\" button.\nThe item will be placed on your shopping list.")
+					} actions: {
+						Button("Add New Item") {
+							isAddNewItemSheetPresented = true
+						}
+						.buttonStyle(.borderedProminent)
+					}
 				} else if !searchText.isEmpty && items.count(where: { searchText.appearsIn($0.name) }) == 0  {
-					ContentUnavailableView.search
+					ContentUnavailableView.search(text: searchText)
 				} else {
-					ItemListView(itemSections: itemSections,
-											 sfSymbolName: "cart")
+					ItemListView(itemSections: itemSections, sfSymbolName: "cart")
 				} // end of if-else
 				
 			} // end of VStack

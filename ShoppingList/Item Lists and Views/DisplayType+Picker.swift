@@ -40,7 +40,9 @@ struct DisplayTypePicker: View {
 	let options: [DisplayType]
 	
 	var body: some View {
-		HStack(spacing: 2) {
+		HStack(spacing: 4) {
+			Spacer()
+			
 			Text("Display by:")
 				.font(.subheadline)
 			
@@ -50,7 +52,9 @@ struct DisplayTypePicker: View {
 				}
 			}
 			.pickerStyle(.segmented)
-			.padding(8)
+			.padding(.vertical, 8)
+			
+			Spacer()
 		}
 		.padding(.horizontal, 16)
 		.background(Color.systemGray6)

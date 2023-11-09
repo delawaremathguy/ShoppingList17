@@ -73,8 +73,8 @@ struct ShoppingListView: View {
 				// computed sections variable.
 				if items.isEmpty {
 					ContentUnavailableView("There are no items on your Shopping List",
-						systemImage: "cart",
-						description: Text("Tap the + button to add a new item, or move to the All My Items tab and select items to place on your Shopping List.")
+						systemImage: "cart.badge.plus",
+						description: Text("Tap the + button in the navigation bar to add a new item,\nor move to the All My Items tab and select items to place on your Shopping List.")
 					)
 				} else {
 					ItemListView(itemSections: itemSections, sfSymbolName: "purchased")

@@ -16,7 +16,7 @@ for use with the Timer now displayed in the More... tab.
 we also attach .onReceive modifiers to the MainView to watch being
 moved into and out of the background to properly handle what to do
 with the timer.  Finally, we establish the SwiftData model container
-which places its model context automatically into the environment.
+and attach is to the WindowGroup/place it into the environment.
 */
 
 @main
@@ -28,9 +28,13 @@ struct ShoppingListApp: App {
 		NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
 	let enterForegroundPublisher =
 		NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-//	let remoteChangePublisher = NotificationCenter.default.publisher(for: NSNotification.Name.NSPersistentStoreRemoteChange)
 	
 	let modelContainer: ModelContainer
+
+	// i like the idea of separately initializing the ModelContainer
+	// here, where we could exert more control over its creation (e.g.,
+	// we could change its name) and better handle data migrations that
+	// might be necessary in the future.
 	init() {
 		let schema = Schema([Item.self, Location.self])
 		do {
@@ -38,7 +42,6 @@ struct ShoppingListApp: App {
 		} catch let error {
 			fatalError("cannot set up modelContainer: \(error.localizedDescription)")
 		}
-		
 	}
 		
 	var body: some Scene {
@@ -53,11 +56,6 @@ struct ShoppingListApp: App {
 						inStoreTimer.start()
 					}
 				}
-//				.onReceive(remoteChangePublisher) { _ in
-//					DispatchQueue.main.async {
-//						modelContainer.mainContext.condenseMultipleUnknownLocations()
-//					}
-//				}
 		}
 		.modelContainer(modelContainer)
 	}
