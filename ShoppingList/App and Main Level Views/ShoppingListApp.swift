@@ -35,6 +35,8 @@ struct ShoppingListApp: App {
 	// here, where we could exert more control over its creation (e.g.,
 	// we could change its name) and better handle data migrations that
 	// might be necessary in the future.
+	// reference: Stewart Lynch, SwiftData Containers and Preview Data
+	//   https://www.youtube.com/watch?v=tZq4mvqH9Fg
 	init() {
 		let schema = Schema([Item.self, Location.self])
 		do {
