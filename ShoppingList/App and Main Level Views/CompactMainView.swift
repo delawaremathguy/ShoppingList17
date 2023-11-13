@@ -21,33 +21,34 @@ enum NavigationItem: Int, Hashable {
 // their own navigation stack).
 struct CompactMainView: View {
 	
-	@State private var selection: NavigationItem? = .shoppingList
+	// note to self: this cannot be an optional type; otherwise
+	// the programmatic tab switching i want does not work.
+	@State private var selection: NavigationItem = .shoppingList
 
 	var body: some View {
 		TabView(selection: $selection) {
-			// passing along a way to move directly from the ShoppingListView
-			// tab over to the AllMyItemsView tab is not currently working
-			// (although it does work on the iPad with NavigationSplitView)
-			// and i'll try to figure this out at some point.
-			ShoppingListView() { /*selection = .allMyItemsList*/ }
-				.tag(NavigationItem.shoppingList)
+			// for ShoppingListView, we are passing along a way to
+			// move directly from the ShoppingListView tab over to
+			// the AllMyItemsView tab.
+			ShoppingListView(goToAllMyItems: { selection = .allMyItemsList })
 				.tabItem { Label("Shopping List", systemImage: "cart") }
-			
+				.tag(NavigationItem.shoppingList)
+
 			AllMyItemsView()
-				.tag(NavigationItem.allMyItemsList)
 				.tabItem { Label("All My Items", systemImage: "list.bullet.clipboard") }
+				.tag(NavigationItem.allMyItemsList)
 			
 			LocationsView()
-				.tag(NavigationItem.locationList)
 				.tabItem { Label("Locations", systemImage: "map") }
+				.tag(NavigationItem.locationList)
 			
 			PreferencesView()
-				.tag(NavigationItem.preferences)
 				.tabItem { Label("Preferences", systemImage: "gear") }
+				.tag(NavigationItem.preferences)
 			
 			MoreView()
-				.tag(NavigationItem.more)
 				.tabItem { Label("More", systemImage: "ellipsis") }
+				.tag(NavigationItem.more)
 
 		} // end of TabView
 		// .onChange is here only for testing purposes !

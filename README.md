@@ -44,7 +44,7 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 ### Minor adjustments since the official release of 8 November
 
-* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.  this works is regular size classes which uses a NavigationSplitView, but does not (yet) work in compact size classes (which uses a tab views).
+* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.  ~~this works is regular size classes which uses a NavigationSplitView, but does not (yet) work in compact size classes (which uses a tab views).~~ (*now fixed*)
 * (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
 
 

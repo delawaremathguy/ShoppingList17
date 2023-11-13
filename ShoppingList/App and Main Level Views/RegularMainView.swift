@@ -43,7 +43,7 @@ struct RegularMainView: View {
 		} detail: {
 			switch selection {
 				case .shoppingList:
-					ShoppingListView() { selection =  NavigationItem.allMyItemsList }
+					ShoppingListView(goToAllMyItems: { selection = .allMyItemsList })
 				case .allMyItemsList:
 					AllMyItemsView()
 				case .locationList:

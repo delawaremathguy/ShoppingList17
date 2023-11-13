@@ -155,20 +155,21 @@ struct ShoppingListView: View {
 	// be readable.
 	func noItemsOnShoppingListView() -> some View {
 		ContentUnavailableView {
-			Label("There are no items on your Shopping List", systemImage: "cart.badge.plus")
+			Label("There are no items on your Shopping List", systemImage: "cart.badge.questionmark")
 		} description: {
 			Text("Tap the + button in the navigation bar to add a new item, or move to the All My Items tab and select items to place on your Shopping List.")
 		} actions: {
-// this is not working ... will try to figure it out sometime soon
-//			Button("Go to All My Items") {
-//				goToAllMyItems()
-//			}
-//			.buttonStyle(.borderedProminent)
-			Button("Add New Item") {
-				isAddNewItemSheetPresented = true
+			HStack(spacing: 30) {
+				Spacer()
+				Button("Go to All My Items") {
+					goToAllMyItems()
+				}
+				Button("Add New Item") {
+					isAddNewItemSheetPresented = true
+				}
+				Spacer()
 			}
 			.buttonStyle(.borderedProminent)
-
 		}
 	}
 
