@@ -12,15 +12,7 @@ import SwiftUI
 // the first column has the same role that the tab bar of the TabView
 // has in the CompactMainView.
 struct RegularMainView: View {
-	
-	enum NavigationItem {
-		case shoppingList
-		case allMyItemsList
-		case locationList
-		case preferences
-		case more
-	}
-	
+		
 	@State private var selection: NavigationItem? = .shoppingList
 	
 	var sidebarView: some View {
@@ -51,7 +43,7 @@ struct RegularMainView: View {
 		} detail: {
 			switch selection {
 				case .shoppingList:
-					ShoppingListView()
+					ShoppingListView() { selection =  NavigationItem.allMyItemsList }
 				case .allMyItemsList:
 					AllMyItemsView()
 				case .locationList:

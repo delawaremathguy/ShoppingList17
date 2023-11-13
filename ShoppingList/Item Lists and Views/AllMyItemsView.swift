@@ -35,6 +35,7 @@ struct AllMyItemsView: View {
 	// items currently checked, on their way to the shopping list
 	@State private var itemsChecked = [Item]()
 	
+	// how we display the items
 	@State private var displayType: DisplayType
 	
 	init() {
@@ -59,17 +60,8 @@ struct AllMyItemsView: View {
 				// display either an appropriate "List is Empty" view, or
 				// the sectioned list of all items.
 				if items.isEmpty {
-					ContentUnavailableView {
-						Label("You have entered no items yet", systemImage: "cart.badge.plus")
-					} description: {
-						Text("Tap the + button in the navigation bar to add a new item\nor tap this \"Add New Item\" button.\nThe item will be placed on your shopping list.")
-					} actions: {
-						Button("Add New Item") {
-							isAddNewItemSheetPresented = true
-						}
-						.buttonStyle(.borderedProminent)
-					}
-				} else if !searchText.isEmpty && items.count(where: { searchText.appearsIn($0.name) }) == 0  {
+					appHasNoItemsView()
+				} else if items.count(where: { searchText.appearsIn($0.name) }) == 0  {
 					ContentUnavailableView.search(text: searchText)
 				} else {
 					ItemListView(itemSections: itemSections, sfSymbolName: "cart")
@@ -78,10 +70,6 @@ struct AllMyItemsView: View {
 			} // end of VStack
 			.searchable(text: $searchText)
 			.onAppear { searchText = "" } // clear searchText, get a clean screen
-			.navigationBarTitle("All My Items")
-//			.navigationDestination(for: Item.self) { item in
-//				ModifyExistingItemView(item: item)
-//			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 			}
@@ -89,6 +77,7 @@ struct AllMyItemsView: View {
 				AddNewItemView(suggestedName: searchText, location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
 			}
+			.navigationBarTitle("All My Items")
 			.navigationDestination(for: Item.self) { item in
 				ModifyExistingItemView(item: item)
 			}
@@ -106,20 +95,38 @@ struct AllMyItemsView: View {
 		}
 	}
 	
+	// the full ContentUnavailableView when the user has
+	// not yet entered any items in the app.  i make this
+	// a separate view, only because it's 10 less lines of view
+	// code so the body can pretty much fit on one screen and
+	// be readable.
+	func appHasNoItemsView() -> some View {
+		ContentUnavailableView {
+			Label("You have entered no items yet", systemImage: "cart.badge.plus")
+		} description: {
+			Text("Tap the + button in the navigation bar to add a new item or tap this \"Add New Item\" button. The item will be placed on your shopping list.")
+		} actions: {
+			Button("Add New Item") {
+				isAddNewItemSheetPresented = true
+			}
+			.buttonStyle(.borderedProminent)
+		}
+
+	}
+	
 	// MARK: - Helper Functions
 	
-	// itemSections breaks out the Items into sections,
-	// where we can produce either one section for everything, 
-	// or else sections for each purchase date, plus one
-	// for those never purchased.
+	// itemSections breaks out the Items into sections for display,
+	// where we can produce either one section for everything,
+	// or else a section for each purchase date, plus one more
+	// section for items never purchased.
 	var itemSections: [ItemSection] {
 		// reduce items by search criteria
-		let searchQualifiedItems = items.filter({ searchText.appearsIn($0.name) })
+		let searchQualifiedItems = items.filter { searchText.appearsIn($0.name) }
 		
 		switch displayType {
 			case .byName:
-				return [ItemSection(//index: 1,
-					title: "Items: \(items.count)", items: searchQualifiedItems)]
+				return [ItemSection(title: "Items: \(items.count)", items: searchQualifiedItems)]
 				
 			case .byDate:
 				let purchasedItems = searchQualifiedItems.filter { $0.lastPurchased != nil }
@@ -133,7 +140,7 @@ struct AllMyItemsView: View {
 																			 items: dictionary[key]!)
 					sections.append(newSection)
 				}
-				let nonPurchasedItems = searchQualifiedItems.filter({ $0.lastPurchased == nil })
+				let nonPurchasedItems = searchQualifiedItems.filter { $0.lastPurchased == nil }
 				if !nonPurchasedItems.isEmpty {
 					sections.append(ItemSection(title: "Never Purchased", items: nonPurchasedItems))
 				}

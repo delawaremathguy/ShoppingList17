@@ -36,9 +36,10 @@ public class Location {
 	// note: the name is `itemsOptional` to remind me that this must
 	// be optional to work with iCloud, but also that i do not
 	// want to use this directly: it's really a Set and the order
-	// of the associated Items is unpredictable.
+	// of the associated Items is unpredictable.  and frankly, i
+	// want to keep it private (this may change in the future).
 	@Relationship(deleteRule: .noAction, inverse: \Item.location)
-	var itemsOptional: [Item]?
+	fileprivate var itemsOptional: [Item]?
 	
 	// used only for the creation of the unknown location.
 	init(suggestedName: String? = nil, atPosition position: Int? = nil) {
@@ -122,8 +123,14 @@ extension Location {
 	//   location.append(item: item)
 	//
 	// and from testing, it seems that using this append form may be
-	// required to work properly with observation.
-	func append(item: Item) {
+	// required to work properly with observation, and such is implied
+	// in this article by Mohammed Azam:
+	//   https://azamsharp.com/2023/07/04/the-ultimate-swift-data-guide.html
+	//
+	// note: was named `append`, but now renamed to `addToItems`, which
+	// is not only a better name, but makes it more like what Core Data
+	// would supply for you.
+	func addToItems(item: Item) {
 		// you probably want to remove this assert in practice, but
 		// i found it useful when getting my sea legs in SwiftData
 		// to be sure i have inserted a Location into the SwiftData
@@ -135,6 +142,13 @@ extension Location {
 		// there are no associated items. otherwise, how could you append
 		// anything to build a relationship?
 		itemsOptional?.append(item)
+	}
+	
+	// this is the inverse of addToItems.
+	func removeFromItems(item: Item) {
+		itemsOptional?.removeAll() {
+			$0.referenceID == item.referenceID
+		}
 	}
 	
 	// used to update an existing Location in the ModifyExistingLocationView,

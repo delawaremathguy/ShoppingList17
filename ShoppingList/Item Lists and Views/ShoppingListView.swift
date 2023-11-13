@@ -40,6 +40,10 @@ struct ShoppingListView: View {
 	// how we are displayed
 	@State private var displayType: DisplayType
 	
+	// use this function if the user wants to programmatically go
+	// over to look at the AllMyItemsView.
+	private var goToAllMyItems: () -> Void
+	
 	// we use a custom init to properly set the display type, currently
 	// a value we keep in UserDefaults.  because we're in an init(),
 	// we cannot use @AppStorage, so we call UserDefaults directly.
@@ -48,12 +52,13 @@ struct ShoppingListView: View {
 	// in UserDefaults, the screen will appear as a simple list and then
 	// immediately redraw in sections for .byLocation ... and the
 	// animation of this is both annoying and unnecessary.
-	init() {
+	init(goToAllMyItems: @escaping () -> Void) {
 		if UserDefaults.standard.bool(forKey: kShoppingListIsMultiSectionKey) {
 			_displayType = State(initialValue: .byLocation)
 		} else {
 			_displayType = State(initialValue: .byName)
 		}
+		self.goToAllMyItems = goToAllMyItems
 	}
 	
 		// MARK: - BODY
@@ -68,14 +73,9 @@ struct ShoppingListView: View {
 				DisplayTypePicker(displayType: $displayType, options: [.byName, .byLocation])
 				
 				// we display either a "List is Empty" view, or the list of items
-				// on the shopping list.  what is displayed in the shopping list is
-				// determined by the multiSectionDisplay state variable, using the
-				// computed sections variable.
+				// on the shopping list.
 				if items.isEmpty {
-					ContentUnavailableView("There are no items on your Shopping List",
-						systemImage: "cart.badge.plus",
-						description: Text("Tap the + button in the navigation bar to add a new item,\nor move to the All My Items tab and select items to place on your Shopping List.")
-					)
+					noItemsOnShoppingListView()
 				} else {
 					ItemListView(itemSections: itemSections, sfSymbolName: "purchased")
 					Divider()
@@ -136,7 +136,6 @@ struct ShoppingListView: View {
 				}
 			}
 
-			
 			if !items.allSatisfy({ $0.isAvailable })  {
 				Spacer()
 				Button("Mark All Available") {
@@ -148,6 +147,31 @@ struct ShoppingListView: View {
 		} // end of HStack
 		.padding(.vertical, 6)
 	}
+	
+	// the full ContentUnavailableView when the user has
+	// not yet entered any items in the app.  i make this
+	// a separate view, only because it's 10 less lines of view
+	// code so the body can pretty much fit on one screen and
+	// be readable.
+	func noItemsOnShoppingListView() -> some View {
+		ContentUnavailableView {
+			Label("There are no items on your Shopping List", systemImage: "cart.badge.plus")
+		} description: {
+			Text("Tap the + button in the navigation bar to add a new item, or move to the All My Items tab and select items to place on your Shopping List.")
+		} actions: {
+// this is not working ... will try to figure it out sometime soon
+//			Button("Go to All My Items") {
+//				goToAllMyItems()
+//			}
+//			.buttonStyle(.borderedProminent)
+			Button("Add New Item") {
+				isAddNewItemSheetPresented = true
+			}
+			.buttonStyle(.borderedProminent)
+
+		}
+	}
+
 
 	// MARK: - Helper Functions
 		

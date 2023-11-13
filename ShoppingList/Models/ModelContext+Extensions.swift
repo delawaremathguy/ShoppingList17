@@ -66,18 +66,14 @@ extension ModelContext {
 		if let item = item(withID: representation.id) {
 			// we'll not update any property here, although we will make sure that
 			// it is associated with the location that was given to us.
-			// although this code seems a little long-winded?  would it be
-			// enough to just write
-			//    item.location = location
-			// and let SwiftData figure it out?
-			item.location?.itemsOptional?.removeAll() { $0.referenceID == item.referenceID }
-			location.append(item: item)
-//			item.location = location
+			if let currentLocation = item.location, currentLocation != location {
+				currentLocation.removeFromItems(item: item)
+			}
+			location.addToItems(item: item)
 		} else {
 			let newItem = Item(from: representation)
 			insert(newItem)
-			location.append(item: newItem)
-//			newItem.location = location
+			location.addToItems(item: newItem)
 		}
 	}
 
@@ -254,7 +250,7 @@ extension ModelContext {
 		let remainingLocations = sortedLocations.dropFirst()
 		for location in remainingLocations {
 			location.items.forEach {
-				realUnknown.append(item: $0)
+				realUnknown.addToItems(item: $0)
 //				$0.location = realUnknown
 			}
 			delete(location)

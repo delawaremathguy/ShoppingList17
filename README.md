@@ -34,7 +34,7 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
 * The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
 
-### Minor adjustments since the pre-release a week ago ...
+### Minor adjustments since the pre-release of 2 November ...
 
 * (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
 * (*06Nov*) Tapping the leading touch area of an item in the All simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
@@ -42,7 +42,13 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * (*07Nov*) Still cleaning up yesterday's subtlety of handling multiple unknown locations introduced by cloud latency when installing on a second or third device on your Apple ID.
 * (*08Nov*) I think I'm done with the cloud latency/multiple device issue.  We're now officially released.  Please open an issue of put up a PR if you find anything amiss.
 
-## General App Structure
+### Minor adjustments since the official release of 8 November
+
+* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.  this works is regular size classes which uses a NavigationSplitView, but does not (yet) work in compact size classes (which uses a tab views).
+* (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
+
+
+## General App Overview
 
 The main screen is a TabView (in a compact size class, such as in portrait orientation on an iPhone) or Split View (in a regular size class, such as landscape orientation on an iPad).
 

@@ -67,7 +67,7 @@ struct AddNewItemView: View {
 		Button("Save") {
 			let item = Item(from: draftItem)
 			modelContext.insert(item)
-			draftItem.location.append(item: item)
+			draftItem.location.addToItems(item: item)
 //			item.location = draftItem.location
 			dismiss()
 		}
