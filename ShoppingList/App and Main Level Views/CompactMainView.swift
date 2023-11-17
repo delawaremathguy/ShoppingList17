@@ -21,6 +21,8 @@ enum NavigationItem: Int, Hashable {
 // their own navigation stack).
 struct CompactMainView: View {
 	
+	//@Environment(\.modelContext) private var modelContext
+	
 	// note to self: this cannot be an optional type; otherwise
 	// the programmatic tab switching i want does not work.
 	@State private var selection: NavigationItem = .shoppingList
@@ -33,6 +35,9 @@ struct CompactMainView: View {
 			ShoppingListView(goToAllMyItems: { selection = .allMyItemsList })
 				.tabItem { Label("Shopping List", systemImage: "cart") }
 				.tag(NavigationItem.shoppingList)
+				// i would like to add a badge modifier here, but it won't update
+				// as items are marked purchased ... only when you change tabs.
+				//.badge(modelContext.itemCount(onListOnly: true))
 
 			AllMyItemsView()
 				.tabItem { Label("All My Items", systemImage: "list.bullet.clipboard") }

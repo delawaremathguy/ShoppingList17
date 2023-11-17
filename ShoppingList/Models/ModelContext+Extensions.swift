@@ -16,7 +16,7 @@ extension ModelContext {
 	
 	// MARK: -- Item helpers
 		
-	// locates an Item with the given referenceID, if any.  the
+	// finds an Item with the given referenceID, if any.  the
 	// incoming argument is an optional for convenience: it makes
 	// the call site a little cleaner in some cases.
 	func item(withID referenceID: UUID?) -> Item? {
@@ -34,8 +34,11 @@ extension ModelContext {
 	}
 	
 	// a simple "how many items do we have" computation.
-	func itemCount() -> Int {
-		let fetchDescriptor = FetchDescriptor<Item>()
+	func itemCount(onShoppingListOnly: Bool = false) -> Int {
+		var fetchDescriptor = FetchDescriptor<Item>()
+		if onShoppingListOnly {
+			fetchDescriptor.predicate = #Predicate { $0.onList }
+		}
 		do {
 			let count = try fetchCount(fetchDescriptor)
 			return count
@@ -136,7 +139,7 @@ extension ModelContext {
 		}
 	}
 
-	// locates an Location with the given referenceID, if any.  the
+	// finds a Location with the given referenceID, if any.  the
 	// incoming argument is an optional for convenience: it makes
 	// the call site a little cleaner in some cases.
 	func location(withID referenceID: UUID?) -> Location? {
@@ -168,7 +171,7 @@ extension ModelContext {
 
 	}
 	
-	// finds the unknown location on your device, creating it if necessary.
+	// returns `the` unknown location on your device, creating it if necessary.
 	var unknownLocation: Location {
 		// we only keep one "UnknownLocation" in the data store.  you can find
 		// it easily: its position is the largest 32-bit integer. to make the
@@ -176,43 +179,44 @@ extension ModelContext {
 		// we start adding Items.
 		//
 		// so if we ever need to get the unknown location from the database,
-		// we will fetch it; and if it's not there, we will create it.  and
-		// there's also a third possibility of having more than one, so we
-		// hand all of the necessary logic off to resolveMultipleUnknownLocations
+		// we will fetch it; and if it's not there, we will create it.  but
+		// there's also a third possibility of having more than one
+		// unknown location (as you'll discover below), so we hand all of the
+		// necessary logic off to resolveMultipleUnknownLocations
 		// to figure out what to do.
 		return resolveMultipleUnknownLocations()
 	}
 	
 	// QUESTION: why can there be multiple unknown locations?
 	// this only happens in a limited number of cases when you are
-	// using the cloud for syncing across multiple devices on the same
+	// using the cloud and syncing across multiple devices on the same
 	// Apple ID (this should never happen on a stand-alone device with
 	// no intention of using the cloud for sharing).
 	//
 	// EXAMPLE:
 	//
-	// (1A) install and run on a first device
-	// (1B) an unknown location is created on your device
+	// (1A) install app and run on a first device
+	// (1B) an unknown location is (lazily!) created on your device
 	// (1C) sync with the cloud
 	//
-	// (2A) install and run on the second device but without
-	//      the cloud turned on or available.
-	// (2B) the second device creates its own unknown location,
-	//      before it can discover an existing unknown location
-	//      in the cloud.
-	// (2C) eventually, your second device finds the cloud and
-	//      discovers an already-existing unknown location.
+	// (2A) install app and run on the second device, but with
+	//      the cloud turned off or with simply being unavailable
+	//      (e.g., you're not connected to the internet).
+	// (2B) the second device (lazily!) creates its own unknown location.
+	// (2C) the second device eventually connects to the cloud and then
+	//      discovers an existing unknown location from the first device.
+	// (2D) now you have two unknown locations.  these have to be resolved.
 
 	// this function returns an unknown location that is accepted
-	// as the unique unknown location known on a single device and
-	// agreed to as the unknown location by all devices sharing
-	// data across the same Apple ID.
+	// as the unique unknown location known on your device and is
+	// also eventually agreed to as the unknown location of all devices
+	// sharing data across the same Apple ID.
 	@discardableResult
 	func resolveMultipleUnknownLocations() -> Location {
 		// get all unknown locations
 		let locationsToCondense = allUnknownLocations()
 
-		// create the unknown location now if we don't yet have one
+		// A. create the unknown location now if we don't yet have one
 		if locationsToCondense.isEmpty {
 			let location = Location(suggestedName: kUnknownLocationName,
 															atPosition: kUnknownLocationPosition)
@@ -220,16 +224,16 @@ extension ModelContext {
 			return location
 		}
 		
-		// finding one unknown location is almost always the case,
+		// B. finding one unknown location is almost always the case,
 		// so return the one we found
 		if locationsToCondense.count == 1 {
 			return locationsToCondense[0]
 		}
 		
-		// so we have multiple unknown locations, probably because of an
+		// C.  we have multiple unknown locations, probably because of an
 		// iCloud syncing issue when installing on multiple devices
 		// on the same Apple ID.  but we want the unknown location
-		// to be unique.
+		// to be unique across all your devices.
 		//
 		// there is a way to solve the problem of reducing such multiple
 		// unknown locations introduced by multiple devices into one.
@@ -238,9 +242,13 @@ extension ModelContext {
 		//   - accept whichever appears first among them to be the real, unknown Location;
 		//   - move items from all other unknown locations to the real, unknown location;
 		//   - and delete all those other unknown locations.
-		// over time, different devices will come to agree on the real unknown location.
+		// over time, different devices will come to agree on a single, unknown location.
 		
-		// note: this seems to work in my tests ... fingers crossed for now.
+		// note: this code has worked in my tests ... let me know if
+		// you see any problems.  [my fear: we may be doing this somewhat
+		// "underneath" SwiftUI and this could lead to one of those "purple"
+		// warnings, but i have not seen this in the three of four times i
+		// have tested with real devices.]
 		let sortedLocations = locationsToCondense
 			.filter { $0.isUnknownLocation }
 			.sorted { loc1, loc2 in
@@ -250,8 +258,8 @@ extension ModelContext {
 		let remainingLocations = sortedLocations.dropFirst()
 		for location in remainingLocations {
 			location.items.forEach {
+				//location.removeFromItems(item: $0)	// (not sure this is really necessary)
 				realUnknown.addToItems(item: $0)
-//				$0.location = realUnknown
 			}
 			delete(location)
 		}

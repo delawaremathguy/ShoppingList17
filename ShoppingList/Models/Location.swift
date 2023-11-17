@@ -131,8 +131,8 @@ extension Location {
 	// is not only a better name, but makes it more like what Core Data
 	// would supply for you.
 	func addToItems(item: Item) {
-		// you probably want to remove this assert in practice, but
-		// i found it useful when getting my sea legs in SwiftData
+		// you probably want to remove this assertion in practice, but
+		// i found it useful when getting my sea legs in SwiftData,
 		// to be sure i have inserted a Location into the SwiftData
 		// context before linking an Item to it.
 		assert(item.modelContext == self.modelContext,

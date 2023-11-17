@@ -35,6 +35,10 @@ struct AllMyItemsView: View {
 	// items currently checked, on their way to the shopping list
 	@State private var itemsChecked = [Item]()
 	
+	// hook back to userDefaults in the language of SL16
+	@AppStorage(kAllMyItemsListIsMultiSectionKey)
+	private var isMultiSectionList = kAllMyItemsListIsMultiSectionDefaultValue
+
 	// how we display the items
 	@State private var displayType: DisplayType
 	
@@ -76,6 +80,9 @@ struct AllMyItemsView: View {
 			.sheet(isPresented: $isAddNewItemSheetPresented) {
 				AddNewItemView(suggestedName: searchText, location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
+			}
+			.onChange(of: displayType) { oldValue, newValue in
+				isMultiSectionList = (newValue == .byDate)
 			}
 			.navigationBarTitle("All My Items")
 			.navigationDestination(for: Item.self) { item in

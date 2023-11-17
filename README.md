@@ -29,7 +29,7 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * the `visitationOrder` property of a Core Data Location has been renamed to `position` in the corresponding SwiftData Location model.
 * the `dateLastPurchased` property of a Core Data Item has been renamed to `lastPurchased` in the corresponding SwiftData Item model.
 * the `id` properties of Core Data Items and Locations have been renamed to `referenceID` in the corresponding SwiftData models, since models in SwiftData are already Identifiable and you can not have your own `id` property.
-* Although I did briefly test the possibility of using an existing Core Data store from iOS16, that appears to be either not possible or at least fairly complicated.  Given the level of this project, I think doing anything in this direction is really beyond the scope of what we have here.  However, if you have been using ShoppingList already and don't want to lose existing data, SL16 added the capability to archive your data through the Files App; and now SL17 can import that data from the Files App.
+* Although I did briefly test the possibility of using an existing Core Data store from iOS16, that appears to be either not possible or at least fairly complicated.  Given the level of this project, I think doing anything in this direction is really beyond the scope of what we have here.  However, if you have been using ShoppingList already and don't want to lose existing data, SL16 added the capability to archive your data to the Files App; and now SL17 can import that data from the Files App.
 * What was previously called the "Purchased List," which included only "items not on the shopping list," has been changed to be a listing of **all** your items, whether on the shopping list or not.  This view is now the "All My Items" list.  Items that are on the shopping list will appear with a cart icon on the right side.  This way, there will be no confusion in maybe adding something new to the shopping list that's already on the list (but not displayed).
 * The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
 * The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
@@ -37,8 +37,8 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 ### Minor adjustments since the pre-release of 2 November ...
 
 * (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
-* (*06Nov*) Tapping the leading touch area of an item in the All simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
-* (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  Early returns are promising, at least ... but not yet a done deal (!)
+* (*06Nov*) Tapping the leading touch area of an item in the AllMyItems list simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
+* (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  ~~Early returns are promising, at least ... but not yet a done deal (!)~~
 * (*07Nov*) Still cleaning up yesterday's subtlety of handling multiple unknown locations introduced by cloud latency when installing on a second or third device on your Apple ID.
 * (*08Nov*) I think I'm done with the cloud latency/multiple device issue.  We're now officially released.  Please open an issue of put up a PR if you find anything amiss.
 
@@ -46,6 +46,7 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 * (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.  ~~this works is regular size classes which uses a NavigationSplitView, but does not (yet) work in compact size classes (which uses a tab views).~~ (*now fixed*)
 * (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
+* (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMtItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
 
 
 ## General App Overview

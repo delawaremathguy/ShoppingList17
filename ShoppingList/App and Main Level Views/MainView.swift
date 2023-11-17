@@ -15,11 +15,12 @@ struct MainView: View {
 	
 	var body: some View {
 		if horizontalSizeClass == .compact {
-			// standard tab view for an iPhone in portrait, etc.
+			// standard tab view for an iPhone in portrait, or even
+			// some iPad presentations which take up only part of
+			// a window and have a compact size.
 			CompactMainView()
 		} else {
-			// this looks better on the iPad since the introduction of NavigationSplitView
-			// and it behaves better than before.
+			// this looks better on the iPad with NavigationSplitView
 			RegularMainView()
 		}
 		

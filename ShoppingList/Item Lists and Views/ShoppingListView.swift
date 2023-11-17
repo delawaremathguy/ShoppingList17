@@ -37,14 +37,21 @@ struct ShoppingListView: View {
 		// control to bring up a sheet used to add a new item
 	@State private var isAddNewItemSheetPresented = false
 	
-	// how we are displayed
-	@State private var displayType: DisplayType
+	// hook back to userDefaults in the language of SL16
+	@AppStorage(kShoppingListIsMultiSectionKey)
+	private var isMultiSectionShoppingList = kShoppingListIsMultiSectionDefaultValue
+
+	// how we are displayed, but in terms of the value of
+	// kShoppingListIsMultiSectionKey in AppStorage from SL16.
+	// appropriately updates User Defaults when changed.
+	@State var displayType: DisplayType = .byName
 	
 	// use this function if the user wants to programmatically go
 	// over to look at the AllMyItemsView.
 	private var goToAllMyItems: () -> Void
 	
-	// we use a custom init to properly set the display type, currently
+	// we use a custom init to properly set both goToAllMyItems and
+	// the initial display type, currently based on
 	// a value we keep in UserDefaults.  because we're in an init(),
 	// we cannot use @AppStorage, so we call UserDefaults directly.
 	// a question to ask: why not just use @AppStorage and set the
@@ -103,6 +110,9 @@ struct ShoppingListView: View {
 			// infinite loop and becomes unresponsive.
 			.navigationDestination(for: Item.self) { item in
 				ModifyExistingItemView(item: item)
+			}
+			.onChange(of: displayType) { oldValue, newValue in
+				isMultiSectionShoppingList = (newValue == .byLocation)
 			}
 		} // end of NavigationStack
 		
