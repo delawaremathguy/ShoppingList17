@@ -13,12 +13,14 @@ import SwiftUI
 // has in the CompactMainView.
 struct RegularMainView: View {
 		
+	@Environment(ShoppingListCount.self) private var shoppingListCount
 	@State private var selection: NavigationItem? = .shoppingList
 	
 	var sidebarView: some View {
 		List(selection: $selection) {
 			
 			Label("Shopping List", systemImage: "cart")
+				.badge(shoppingListCount.onListCount) // i am surprised this works!
 				.tag(NavigationItem.shoppingList)
 			
 			Label("All My Items", systemImage: "list.bullet.clipboard")

@@ -15,7 +15,8 @@ struct ShoppingListView: View {
 	
 	// our hook into SwiftData
 	@Environment(\.modelContext) private var modelContext
-	
+	@Environment(ShoppingListCount.self) private var shoppingListCount
+
 	// MARK: - @Queries
 
 	// we need items on the shopping list ... let SwiftData sort them for us
@@ -60,11 +61,8 @@ struct ShoppingListView: View {
 	// immediately redraw in sections for .byLocation ... and the
 	// animation of this is both annoying and unnecessary.
 	init(goToAllMyItems: @escaping () -> Void) {
-		if UserDefaults.standard.bool(forKey: kShoppingListIsMultiSectionKey) {
-			_displayType = State(initialValue: .byLocation)
-		} else {
-			_displayType = State(initialValue: .byName)
-		}
+		let isMultiSection = UserDefaults.standard.bool(forKey: kShoppingListIsMultiSectionKey)
+		_displayType = State(initialValue: isMultiSection ? .byName : .byLocation)
 		self.goToAllMyItems = goToAllMyItems
 	}
 	
@@ -143,6 +141,7 @@ struct ShoppingListView: View {
 													titleVisibility: .visible) {
 				Button("Yes", role: .destructive) {
 					items.forEach { $0.markAsPurchased() }
+					shoppingListCount.countChanged()
 				}
 			}
 

@@ -23,6 +23,7 @@ an Item will require bringing up an alert to confirm the deletion.
 struct ItemListView: View {
 	
 	@Environment(\.modelContext) private var modelContext
+	@Environment(ShoppingListCount.self) private var shoppingListCount
 	
 	// this is the incoming section layout of items handed to us
 	// by either the ShoppingListView or the AllMyItemsView
@@ -76,6 +77,7 @@ struct ItemListView: View {
 				if let itemToDelete { // it should be non-nil if called!
 					withAnimation {
 						modelContext.delete(itemToDelete)
+						shoppingListCount.countChanged()
 						try? modelContext.save()
 					}
 				}
@@ -96,6 +98,7 @@ struct ItemListView: View {
 			} else {
 				item.onList = true
 			}
+			shoppingListCount.countChanged()
 		} label: {
 			Text(item.onList ? "Mark as Purchased" : "Move to ShoppingList")
 			Image(systemName: item.onList ? "purchased" : "cart")
@@ -145,6 +148,7 @@ struct ItemListView: View {
 				} else {
 					item.onList = true
 				}
+				shoppingListCount.countChanged()
 				itemsChecked.removeAll(where: { $0 == item })
 			}
 		}

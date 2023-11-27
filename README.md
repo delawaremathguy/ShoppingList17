@@ -44,9 +44,10 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 ### Minor adjustments since the official release of 8 November
 
-* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.  ~~this works is regular size classes which uses a NavigationSplitView, but does not (yet) work in compact size classes (which uses a tab views).~~ (*now fixed*)
+* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.
 * (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
-* (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMtItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
+* (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMyItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
+* (*27Nov*) Added a badge to the shopping list icon (in a TabView) or shopping list label (in a NavSplitView sidebar) to show the count of items on the shopping list.
 
 
 ## General App Overview

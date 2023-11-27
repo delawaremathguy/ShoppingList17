@@ -11,7 +11,7 @@ import SwiftUI
 	// MARK: - SelectableItemRowView
 
 struct SelectableItemRowView: View {
-	
+		
 	// incoming are an item description, whether that item is selected
 	// or not, what symbol to use for animation, and what to do if
 	//the selector is tapped.

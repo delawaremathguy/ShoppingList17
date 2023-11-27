@@ -19,6 +19,7 @@ import SwiftUI
 struct DraftItemForm: View {
 	
 	@Environment(\.modelContext) private var modelContext
+	@Environment(ShoppingListCount.self) private var shoppingListCount
 	
 	// incoming data `draftItem` represents either
 	// -- default data for an Item that we can edit and save, or
@@ -108,6 +109,7 @@ struct DraftItemForm: View {
 															titleVisibility: .visible) {
 						Button("Yes", role: .destructive) {
 							modelContext.delete(associatedItem!)
+							shoppingListCount.countChanged()
 							try? modelContext.save()
 							dismissAction?()
 						}

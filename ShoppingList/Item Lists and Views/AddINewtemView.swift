@@ -28,6 +28,7 @@ struct AddNewItemView: View {
 	
 	@Environment(\.modelContext) private var modelContext
 	@Environment(\.dismiss) private var dismiss
+	@Environment(ShoppingListCount.self) private var shoppingListCount
 	
 	// this draftItem object contains all of the information
 	// for a new Item that is needed from the User
@@ -68,7 +69,7 @@ struct AddNewItemView: View {
 			let item = Item(from: draftItem)
 			modelContext.insert(item)
 			draftItem.location.addToItems(item: item)
-//			item.location = draftItem.location
+			shoppingListCount.countChanged()
 			dismiss()
 		}
 		.disabled(!draftItem.canBeSaved)

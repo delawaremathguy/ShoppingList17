@@ -37,6 +37,7 @@ struct ModifyExistingItemView: View {
 	
 	@Environment(\.modelContext) private var modelContext
 	@Environment(\.dismiss) private var dismiss: DismissAction
+	@Environment(ShoppingListCount.self) private var shoppingListCount
 	
 	// an editable copy of the Item's data -- a "draft," if you will
 	@State private var draftItem: DraftItem
@@ -93,6 +94,7 @@ struct ModifyExistingItemView: View {
 			// and confirmed the deletion, then this draft no longer represents a
 			// real Item.
 			associatedItem?.updateValues(from: draftItem)
+			shoppingListCount.countChanged()
 			dismiss()
 		} label: {
 			HStack(spacing: 5) {

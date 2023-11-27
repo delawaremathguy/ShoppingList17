@@ -16,6 +16,7 @@ import SwiftUI
 struct DraftLocationForm: View {
 	
 	@Environment(\.modelContext) private var modelContext
+	@Environment(ShoppingListCount.self) private var shoppingListCount
 	
 	// incoming data:
 	// -- a DraftLocation (editable values for a Location)
@@ -137,6 +138,8 @@ struct DraftLocationForm: View {
 struct SimpleItemsList: View {
 	
 	@Environment(\.modelContext) private var modelContext
+	@Environment(ShoppingListCount.self) private var shoppingListCount
+
 	var items: [Item]
 		
 	var body: some View {
@@ -167,6 +170,7 @@ struct SimpleItemsList: View {
 			} else {
 				item.onList = true
 			}
+			shoppingListCount.countChanged()
 		} label: {
 			Text(item.onList ? "Mark as Purchased" : "Move to ShoppingList")
 			Image(systemName: item.onList ? "purchased" : "cart")
