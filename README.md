@@ -20,6 +20,8 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 
 ## Official Release of 8 November, 2023
 
+### For latest update of 07 December, 2023 ... keep reading below.
+
 ### What's Changed Since SL16?
 
 * Use of Core Data in previous incarnations of this project has been replaced with SwiftData (the SwiftData models are *essentially* updated Core Data entities of previous versions).  There is no PersistentStore object.  
@@ -48,6 +50,7 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
 * (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMyItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
 * (*27Nov*) Added a badge to the shopping list icon (in a TabView) or shopping list label (in a NavSplitView sidebar) to show the count of items on the shopping list.
+* (*07Dec*) "Fixed" a crash when navigating from LocationsView to edit a Location in ModifyExistingLocationView?  (It started crashing in the simulator, but was working fine on device).)
 
 
 ## General App Overview
@@ -119,7 +122,7 @@ If you plan to install and use this app on a device and either have it simply ba
 
 * You will need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials.  
   
-* WARNING: The SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16.  If you have been using SL16 with the cloud, you should first archive any data  you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using; then finally install and run SL17 on your device(s).  Existing data can now be imported to repopulate the SwiftData store.
+* WARNING: The SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16.  If you have been using SL16 with the cloud, you should first archive any data  you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using; then finally install and run SL17 on your device(s).  Existing data can now be imported to populate the SwiftData store (on just **one** of your devices; any other will naturally pick up the data through the cloud).
 
 
 ## License

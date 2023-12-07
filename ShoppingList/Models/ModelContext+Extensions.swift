@@ -127,17 +127,17 @@ extension ModelContext {
 	}
 	
 	// finds the highest `user-defined` location position (avoids the unknown location).
-	private func lastLocationPosition() -> Int? {
-		var fetchDescriptor = FetchDescriptor<Location>()
-		fetchDescriptor.propertiesToFetch = [\.position]
-		do {
-			let locations = try fetch<Location>(fetchDescriptor)
-			return locations.map({ $0.position }).filter({ $0 < kUnknownLocationPosition }).max()
-		} catch let error {
-			print("*** cannot fetch locations: \(error.localizedDescription)")
-			return nil
-		}
+private func lastLocationPosition() -> Int? {
+	var fetchDescriptor = FetchDescriptor<Location>()
+	fetchDescriptor.propertiesToFetch = [\.position]
+	do {
+		let locations = try fetch<Location>(fetchDescriptor)
+		return locations.map({ $0.position }).filter({ $0 < kUnknownLocationPosition }).max()
+	} catch let error {
+		print("*** cannot fetch locations: \(error.localizedDescription)")
+		return nil
 	}
+}
 
 	// finds a Location with the given referenceID, if any.  the
 	// incoming argument is an optional for convenience: it makes

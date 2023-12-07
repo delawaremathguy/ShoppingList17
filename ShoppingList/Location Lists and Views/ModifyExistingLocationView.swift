@@ -20,7 +20,8 @@ struct ModifyExistingLocationView: View {
 	@State private var draftLocation: DraftLocation
 	
 	init(location: Location) {
-		_draftLocation = State(wrappedValue: DraftLocation(location: location))
+		let draft = DraftLocation(location: location)
+		_draftLocation = State(wrappedValue: draft)
 	}
 	
 	// we'll need a reference to the real Location being modified
