@@ -93,7 +93,10 @@ struct ShoppingListView: View {
 				ToolbarItem(placement: .navigationBarTrailing, content: trailingButtons)
 			}
 			.sheet(isPresented: $isAddNewItemSheetPresented) {
-				AddNewItemView(location: modelContext.unknownLocation)
+				NavigationStack {
+					AddOrModifyItemView(initialLocation: modelContext.unknownLocation)
+				}
+//				AddNewItemView(location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
 			}
 			// i don't like separating this nav destination from where the
@@ -105,9 +108,10 @@ struct ShoppingListView: View {
 			// this modifier, which still leaves me confused about why it
 			// mostly works, but then occasionally fails (either because a
 			// destination cannot be found, or it goes into some sort of
-			// infinite loop and becomes unresponsive.
+			// infinite loop and becomes unresponsive).
 			.navigationDestination(for: Item.self) { item in
-				ModifyExistingItemView(item: item)
+				AddOrModifyItemView(from: item)
+//				ModifyExistingItemView(item: item)
 			}
 			.onChange(of: displayType) { oldValue, newValue in
 				isMultiSectionShoppingList = (newValue == .byLocation)
@@ -194,7 +198,7 @@ struct ShoppingListView: View {
 
 		switch displayType {
 				
-				// byName is simple: list items alphabatically
+				// byName is simple: list items alphabetically
 			case .byName:
 				return [ItemSection(title: "Items Remaining: \(items.count)",
 														items: items)]

@@ -78,7 +78,10 @@ struct AllMyItemsView: View {
 				ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 			}
 			.sheet(isPresented: $isAddNewItemSheetPresented) {
-				AddNewItemView(suggestedName: searchText, location: modelContext.unknownLocation)
+				NavigationStack {
+					AddOrModifyItemView(suggestedName: searchText, initialLocation: modelContext.unknownLocation)
+				}
+//				AddNewItemView(suggestedName: searchText, location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
 			}
 			.onChange(of: displayType) { oldValue, newValue in
@@ -86,7 +89,8 @@ struct AllMyItemsView: View {
 			}
 			.navigationBarTitle("All My Items")
 			.navigationDestination(for: Item.self) { item in
-				ModifyExistingItemView(item: item)
+				AddOrModifyItemView(from: item)
+//				ModifyExistingItemView(item: item)
 			}
 
 		} // end of NavigationStack

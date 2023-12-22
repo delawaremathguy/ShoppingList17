@@ -50,7 +50,8 @@ Feel free to use this as is, to develop further, to completely ignore, or even j
 * (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
 * (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMyItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
 * (*27Nov*) Added a badge to the shopping list icon (in a TabView) or shopping list label (in a NavSplitView sidebar) to show the count of items on the shopping list.
-* (*07Dec*) "Fixed" a crash when navigating from LocationsView to edit a Location in ModifyExistingLocationView?  (It started crashing in the simulator, but was working fine on device).)
+* (*07Dec*) "Fixed" a crash when navigating from LocationsView to edit a Location in ModifyExistingLocationView?  (It started crashing in the simulator, but was working fine on device.)
+* (*22Dec*) AddNewItemView and ModifyExistingItemView have been combined into a single, yet dual-purpose view; and the notion of using a `DraftItem` has been supplanted by using an Item model object directly, which can either be an Item that already exists in the model context (when editing an existing Item), or a new Item that has not yet been inserted into the model context (when adding a new Item).  Consequently, four files (all commented out, for the moment) have been replaced by one.
 
 
 ## General App Overview

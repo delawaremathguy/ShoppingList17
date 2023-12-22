@@ -89,7 +89,10 @@ struct DraftLocationForm: View {
 			
 		} // end of Form
 		.sheet(isPresented: $isAddNewItemSheetPresented) {
-			AddNewItemView(location: associatedLocation ?? modelContext.unknownLocation)
+			NavigationStack {
+				AddOrModifyItemView(initialLocation: associatedLocation ?? modelContext.unknownLocation)
+			}
+//			AddNewItemView(location: associatedLocation ?? modelContext.unknownLocation)
 				.interactiveDismissDisabled()
 		}
 
@@ -145,7 +148,8 @@ struct SimpleItemsList: View {
 	var body: some View {
 		ForEach(items) { item in
 			NavigationLink {
-				ModifyExistingItemView(item: item)
+				AddOrModifyItemView(from: item)
+//				ModifyExistingItemView(item: item)
 			} label: {
 				HStack {
 					Text(item.name)

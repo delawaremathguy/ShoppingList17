@@ -39,6 +39,17 @@ public class Item {
 	@Relationship(deleteRule: .nullify)
 	var location: Location?
 	
+	var dateText: String {
+		lastPurchased?.formatted(date: .long, time: .omitted) ?? "(Never)"
+	}
+	
+	var canBeSaved: Bool {
+		!name.isEmpty
+	}
+	
+	// generic initializer
+	init() { /* nothing to do here */ }
+	
 	// initializer used when importing data from Files.
 	init(from representation: ItemRepresentation) {
 		name = representation.name
@@ -51,12 +62,12 @@ public class Item {
 	// initializer used when creating an Item
 	// in the AddNewItemView.  note: caller must link
 	// the item to a location after inserting the item.
-	init(from draft: DraftItem) {
-		name = draft.name
-		quantity = draft.quantity
-		onList = draft.onList
-		isAvailable = draft.isAvailable
-	}
+//	init(from draft: DraftItem) {
+//		name = draft.name
+//		quantity = draft.quantity
+//		onList = draft.onList
+//		isAvailable = draft.isAvailable
+//	}
 	
 }
 
@@ -77,13 +88,13 @@ extension Item {
 extension Item {
 
 	// used when updating an Item in the ModifyExistingItemView.
-	func updateValues(from draftItem: DraftItem) {
-		name = draftItem.name
-		quantity = draftItem.quantity
-		onList = draftItem.onList
-		isAvailable = draftItem.isAvailable
-		location = draftItem.location
-	}
+//	func updateValues(from draftItem: DraftItem) {
+//		name = draftItem.name
+//		quantity = draftItem.quantity
+//		onList = draftItem.onList
+//		isAvailable = draftItem.isAvailable
+//		location = draftItem.location
+//	}
 	
 	// call this function when tapping on an item in the
 	// shopping list so we can timestamp it.

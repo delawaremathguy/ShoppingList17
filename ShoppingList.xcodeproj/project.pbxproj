@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D606198124815F8C005CE575 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D606198024815F8C005CE575 /* LICENSE */; };
+		D60BBB5C2B35F2D900196A57 /* AddOrModifyItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60BBB5B2B35F2D900196A57 /* AddOrModifyItemView.swift */; };
 		D612E16124898EBB007E1412 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D612E16024898EBB007E1412 /* Sequence+Extensions.swift */; };
 		D614343B2763AA49009CC73B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D614343A2763AA49009CC73B /* CloudKit.framework */; };
 		D61434412763BAA1009CC73B /* AddNewLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61434402763BAA1009CC73B /* AddNewLocationView.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		D606198024815F8C005CE575 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D60BBB5B2B35F2D900196A57 /* AddOrModifyItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrModifyItemView.swift; sourceTree = "<group>"; };
 		D612E16024898EBB007E1412 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		D61434382763AA33009CC73B /* ShoppingList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShoppingList.entitlements; sourceTree = "<group>"; };
 		D614343A2763AA49009CC73B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -235,6 +237,7 @@
 				D6997DDD27619673007B4C1C /* ModifyExistingItemView.swift */,
 				D6C7685B2572B3B500E0F4B0 /* SelectableItemRowView.swift */,
 				D62B88312451162D0051A7CE /* ShoppingListView.swift */,
+				D60BBB5B2B35F2D900196A57 /* AddOrModifyItemView.swift */,
 			);
 			path = "Item Lists and Views";
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				D64387FA2995492D0084B354 /* RegularMainView.swift in Sources */,
 				D61434452764E0C1009CC73B /* ModifyExistingLocationView.swift in Sources */,
 				D674D6FA294CD1D000AEAEF7 /* UserDefaultDefinitions.swift in Sources */,
+				D60BBB5C2B35F2D900196A57 /* AddOrModifyItemView.swift in Sources */,
 				D66FF35424926B6400B3ABC8 /* PreferencesView.swift in Sources */,
 				D6C91D8724A8EC09008C8DFF /* DraftItem.swift in Sources */,
 				D61434432763BB65009CC73B /* DraftLocationForm.swift in Sources */,

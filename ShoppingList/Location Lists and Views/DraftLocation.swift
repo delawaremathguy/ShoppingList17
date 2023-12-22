@@ -11,6 +11,10 @@ import SwiftData
 import SwiftUI
 
 // **** see the companion discussion over in DraftItem.swift ****
+// (note: DraftItem.swift is older code and is on its way out; i will
+// soon consolidate the actions of AddNewLocation and ModifyExistingLocation
+// into a single view using a SwiftData model object directly to be
+// similar to AddOrModifyItemView.
 
 @Observable
 class DraftLocation {
