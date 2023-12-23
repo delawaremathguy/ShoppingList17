@@ -18,43 +18,13 @@ This is the fifth iteration of my original ShoppingList project and will yet aga
 
 Feel free to use this as is, to develop further, to completely ignore, or even just to inspect and then send me a note or Open an Issue to tell me I am doing this all wrong.  
 
-## Official Release of 8 November, 2023
 
-### For latest update of 07 December, 2023 ... keep reading below.
-
-### What's Changed Since SL16?
-
-* Use of Core Data in previous incarnations of this project has been replaced with SwiftData (the SwiftData models are *essentially* updated Core Data entities of previous versions).  There is no PersistentStore object.  
-* `@FetchRequest`s have been replaced with `@Query`s.
-* Use of `ObservableObject`s has been replaced with the `@Observation` framework.
-* I now use an extension on the SwiftData modelContext to support basic create and delete operations on model objects.
-* the `visitationOrder` property of a Core Data Location has been renamed to `position` in the corresponding SwiftData Location model.
-* the `dateLastPurchased` property of a Core Data Item has been renamed to `lastPurchased` in the corresponding SwiftData Item model.
-* the `id` properties of Core Data Items and Locations have been renamed to `referenceID` in the corresponding SwiftData models, since models in SwiftData are already Identifiable and you can not have your own `id` property.
-* Although I did briefly test the possibility of using an existing Core Data store from iOS16, that appears to be either not possible or at least fairly complicated.  Given the level of this project, I think doing anything in this direction is really beyond the scope of what we have here.  However, if you have been using ShoppingList already and don't want to lose existing data, SL16 added the capability to archive your data to the Files App; and now SL17 can import that data from the Files App.
-* What was previously called the "Purchased List," which included only "items not on the shopping list," has been changed to be a listing of **all** your items, whether on the shopping list or not.  This view is now the "All My Items" list.  Items that are on the shopping list will appear with a cart icon on the right side.  This way, there will be no confusion in maybe adding something new to the shopping list that's already on the list (but not displayed).
-* The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
-* The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
-
-### Minor adjustments since the pre-release of 2 November ...
-
-* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
-* (*06Nov*) Tapping the leading touch area of an item in the AllMyItems list simply toggles the "onList" status of the item.  If toggling from "on" to "off" list, the item will now *not be marked as having been purchased*.  
-* (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  ~~Early returns are promising, at least ... but not yet a done deal (!)~~
-* (*07Nov*) Still cleaning up yesterday's subtlety of handling multiple unknown locations introduced by cloud latency when installing on a second or third device on your Apple ID.
-* (*08Nov*) I think I'm done with the cloud latency/multiple device issue.  We're now officially released.  Please open an issue of put up a PR if you find anything amiss.
-
-### Minor adjustments since the official release of 8 November
-
-* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.
-* (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
-* (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMyItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
-* (*27Nov*) Added a badge to the shopping list icon (in a TabView) or shopping list label (in a NavSplitView sidebar) to show the count of items on the shopping list.
-* (*07Dec*) "Fixed" a crash when navigating from LocationsView to edit a Location in ModifyExistingLocationView?  (It started crashing in the simulator, but was working fine on device.)
-* (*22Dec*) AddNewItemView and ModifyExistingItemView have been combined into a single, yet dual-purpose view; and the notion of using a `DraftItem` has been supplanted by using an Item model object directly, which can either be an Item that already exists in the model context (when editing an existing Item), or a new Item that has not yet been inserted into the model context (when adding a new Item).  Consequently, four files (all commented out, for the moment) have been replaced by one.
+> The most recent update of note to SL17 was posted on 22 December, 2023.  Please see the Programming Comments and Change Log for details.
 
 
 ## General App Overview
+
+You should read this section to understand how the app works from the user's perspective.
 
 The main screen is a TabView (in a compact size class, such as in portrait orientation on an iPhone) or Split View (in a regular size class, such as landscape orientation on an iPad).
 
@@ -102,12 +72,6 @@ Other notes for Operation:
 
 * What happens to Items at a Location when the Location is deleted?  The Items are not deleted, but are moved to the Unknown Location.
 
-### App Architecture Notes
-
-The SwiftData container is organized into models named `Item` and `Location`.  A single Location is associated with (has a `@Relationship` to) many Items.
-
-This app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.  in particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects, and to find/manage the unknown location (identified by its `position`).
-
 
 ## What Can You do with this Project?
 
@@ -121,9 +85,49 @@ If you plan to install and use this app on a single device without using iCloud:
 
 If you plan to install and use this app on a device and either have it simply backup data in the cloud, or share its data through the cloud with other devices on the same Apple ID:
 
-* You will need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials.  
+* You must be enrolled in the Apple Developer program to use the cloud.  You will also need to update your bundle identifier, your iCloud container identifier, and establish your correct app signing credentials. 
   
-* WARNING: The SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16.  If you have been using SL16 with the cloud, you should first archive any data  you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using; then finally install and run SL17 on your device(s).  Existing data can now be imported to populate the SwiftData store (on just **one** of your devices; any other will naturally pick up the data through the cloud).
+* WARNING: The SwiftData use of iCloud in SL17 is incompatible with the previous Core Data use of iCloud in SL16.  If you have been using SL16 with the cloud, you should first archive any data  you want to keep from SL16 to the Files app; delete the app from all your devices; open your iCloud dashboard and clear out the container you've been using; then finally install and run SL17 on your device(s).  Existing data can now be imported to populate the SwiftData store (on just **one** of your devices; any other devices will naturally pick up the data through the cloud).
+
+
+## Programming Comments and Change Log
+
+### App Architecture Notes
+
+This app represents a basic, @Query-driven SwiftUI app structure, with very few hints of MVVM scattered about.  In particular, the `ModelContext` class has been extended with methods to support adding model objects, to help out with lookups of objects, and to find/manage the unknown location (identified by its `position`).
+
+The SwiftData container is organized into models named `Item` and `Location`.  A single Location is associated with (has a `@Relationship` to) many Items.
+
+### What's Changed Since SL16?
+
+* Use of Core Data in previous incarnations of this project has been replaced with SwiftData (the SwiftData models are *essentially* updated Core Data entities of previous versions).  There is no PersistentStore object.  
+* `@FetchRequest`s have been replaced with `@Query`s.
+* Use of `ObservableObject`s has been replaced with the `@Observation` framework.
+* I now use an extension on the SwiftData modelContext to support basic create and delete operations on model objects.
+* the `visitationOrder` property of a Core Data Location has been renamed to `position` in the corresponding SwiftData Location model.
+* the `dateLastPurchased` property of a Core Data Item has been renamed to `lastPurchased` in the corresponding SwiftData Item model.
+* the `id` properties of Core Data Items and Locations have been renamed to `referenceID` in the corresponding SwiftData models, since models in SwiftData are already Identifiable and you can not have your own `id` property.
+* Although I did briefly test the possibility of using an existing Core Data store from iOS16, that appears to be either not possible or at least fairly complicated.  Given the level of this project, I think doing anything in this direction is really beyond the scope of what we have here.  However, if you have been using ShoppingList already and don't want to lose existing data, SL16 added the capability to archive your data to the Files App; and now SL17 can import that data from the Files App.
+* What was previously called the "Purchased List," which included only "items not on the shopping list," has been changed to be a listing of **all** your items, whether on the shopping list or not.  This view is now the "All My Items" list.  Items that are on the shopping list will appear with a cart icon on the right side.  This way, there will be no confusion in maybe adding something new to the shopping list that's already on the list (but not displayed).
+* The previous notion of sectioning out what is now the "All My Items" list into those recently purchased and then everything else has been re-envisioned.  The new UI offers a segmented control above the list with options to display either by name or by (most recent) purchase date.  The notion of a "history mark" preference has been removed, and the previous sectioning controls that were attached to the first section's header have been removed.
+* The "Shopping List" tab UI has also been changed to have a segmented control above the list with options to display either by name or by location, and the previous sectioning controls that were attached to the first section's header have been removed.
+
+### Adjustments to the pre-release of 2 November, prior to the official release of 8 November ...
+
+* (*02Nov*) NavigationStack and NavigationSplitView and .navigationDestination were initially mis-behaving on iPad, but I think these have been fixed (tested on iPhone and iPad devices OK).
+* (*06Nov*) Tapping the leading touch area of an item in the AllMyItems list simply toggles the "onList" status of the item.  If toggling from "on" to "off" list in an item's detail view', the item will now *not be marked as having been purchased*.  
+* (*06Nov*) I have added code to unify any unknown locations that arise in the app due to iCloud latency and connection issues across devices.  ~~Early returns are promising, at least ... but not yet a done deal (!)~~
+* (*07Nov*) Still cleaning up yesterday's subtlety of handling multiple unknown locations introduced by cloud latency when installing on a second or third device on your Apple ID.
+* (*08Nov*) I think I'm done with the cloud latency/multiple device issue.  We're now officially released.  Please open an issue of put up a PR if you find anything amiss.
+
+### Adjustments since the official release of 8 November
+
+* (*13Nov*) Added some buttons to the ContentUnavailableView in the ShoppingListView to add a new item to the shopping list directly, or to navigate over to the AllMyItemsView to pick items there.
+* (*13Nov*) Location.append(:Item) now renamed to Location.addToItems(:Item).  a reciprocal Location.removeFromItems(:Item) has been added, and the relationship Location.itemsOptional is now marked `fileprivate`.
+* (*17Nov*) Fixed issue with multi-section list presentations in ShoppingListView and AllMyItemsView not properly persisting display choice in UserDefaults by adding an onChange() modifier to each view.
+* (*27Nov*) Added a badge to the shopping list icon (in a TabView) or shopping list label (in a NavSplitView sidebar) to show the count of items on the shopping list.
+* (*07Dec*) "Fixed" a crash when navigating from LocationsView to edit a Location in ModifyExistingLocationView?  (It started crashing in the simulator, but was working fine on device.)
+* (*22Dec*) AddNewItemView and ModifyExistingItemView have been combined into a single, yet dual-purpose view; and the notion of using a `DraftItem` has been supplanted by using an Item model object directly, which can either be an Item that already exists in the model context (when editing an existing Item), or a new Item that has not yet been inserted into the model context (when adding a new Item).  Consequently, four files (all commented out, for the moment) have been replaced by one.
 
 
 ## License

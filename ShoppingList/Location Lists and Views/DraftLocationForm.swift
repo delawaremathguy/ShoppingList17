@@ -58,7 +58,8 @@ struct DraftLocationForm: View {
 					SLFormLabelText(labelText: "Name: ")
 					TextField("Location name", text: $draftLocation.locationName)
 				}
-				ColorPicker("Location Color", selection: $draftLocation.color)
+				ColorPicker("Location Color:", selection: $draftLocation.color)
+					.bold()
 			} // end of Section 1
 			
 			// Section 2: Delete button, if the data is associated with an existing Location

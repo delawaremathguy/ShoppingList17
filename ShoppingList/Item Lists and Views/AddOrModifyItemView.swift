@@ -12,10 +12,12 @@ import SwiftUI
 /*
  the AddOrModifyItemView can be opened:
  -- via a navigation link from the ShoppingListView or the
-    AllMyItemsView to edit an existing shopping item,
+    AllMyItemsView or the DraftLocationForm to edit an
+    existing shopping item,
  -- or in a sheet from the ShoppingListView or the
-    AllMyItemsView when we're adding a new Item (although please
-    wrap us in a navigationStack when doing this).
+    AllMyItemsView or the DraftLocationForm when we're adding
+    a new Item (although please wrap us in a navigationStack
+		when doing this).
 */
 
 struct AddOrModifyItemView: View {
@@ -28,11 +30,14 @@ struct AddOrModifyItemView: View {
 	// Item within the model context (i.e., we're editing a known
 	// Item), or just a plain, vanilla Item that's not yet assigned
 	// to the model context (i.e., we're adding a new Item).
-	@State private var editableItem: Item
+	//@State
+	@Bindable private var editableItem: Item
+	
 	// we're being used for two purposes ... adding a new item and
 	// editing an existing item.  let's keep track of this!
 	private var addingNewItem: Bool
-	// and we will pull out the Item's location to edit separately,
+	
+	// and we pull out the Item's location to edit separately,
 	// because when adding a new Item, we cannot link the new Item
 	// (which is not yet inserted in the model context) to an existing
 	// Location (which is in the model context).
@@ -52,7 +57,7 @@ struct AddOrModifyItemView: View {
 	// custom init here to set up when we're bringing in an existing
 	// Item that can be edited.
 	init(from item: Item) {
-		_editableItem = State(wrappedValue: item)
+		editableItem = item
 		_selectedLocation = State(wrappedValue: item.location!)
 		addingNewItem = false
 	}
@@ -64,7 +69,7 @@ struct AddOrModifyItemView: View {
 		if let suggestedName {
 			newItem.name = suggestedName
 		}
-		_editableItem = State(wrappedValue: newItem)
+		editableItem = newItem
 		_selectedLocation = State(wrappedValue: location)
 		addingNewItem = true
 	}
@@ -164,10 +169,16 @@ struct AddOrModifyItemView: View {
 	// in the right direction for all languages because of the use of the
 	// SFSymbol "chevron.backward."
 	
-	// for the moment, i have disabled the Back button if the item's name
-	// is empty.  perhaps a better strategy is to just put up a confirmation
-	// alert of the form "the item name cannot be empty.  do you wish to continue
-	// editing or do you want to delete this item?"
+	// for the moment, i have disabled the Back button if we have executed
+	// an item deletion (although i don;t think this can happen).
+	//
+	// i should probably also disable the Back button
+	// if the name field is empty, but when have you ever seen this in
+	// any UI?  so to deal with the possibility of going back with an
+	// empty name field, we could put up a confirmation alert of the form
+  // "the item name cannot be empty.  do you wish to continue
+	// editing or do you want to delete this item?"  (but i don't like
+	// either one of these.)
 	func customBackButton() -> some View {
 		Button {
 			editableItem.location = selectedLocation
@@ -205,7 +216,6 @@ struct AddOrModifyItemView: View {
 		}
 		.disabled(!editableItem.canBeSaved)
 	}
-	
 	
 }
 
