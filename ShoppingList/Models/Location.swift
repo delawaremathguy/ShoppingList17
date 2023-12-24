@@ -61,21 +61,21 @@ public class Location {
 	// used to create a Location in SwiftData when the user wants
 	// to add a new location, based on information collected in
 	// a draftLocation.
-	init(from draftLocation: DraftLocation, atPosition: Int? = nil) {
-		name = draftLocation.locationName
-		if let components = draftLocation.color.cgColor?.components {
-			red = Double(components[0])
-			green = Double(components[1])
-			blue = Double(components[2])
-			opacity = Double(components[3])
-		} else {
-			red = 0.0
-			green = 1.0
-			blue = 0.0
-			opacity = 0.5
-		}
-		position = atPosition ?? 1
-	}
+//	init(from draftLocation: DraftLocation, atPosition: Int? = nil) {
+//		name = draftLocation.locationName
+//		if let components = draftLocation.color.cgColor?.components {
+//			red = Double(components[0])
+//			green = Double(components[1])
+//			blue = Double(components[2])
+//			opacity = Double(components[3])
+//		} else {
+//			red = 0.0
+//			green = 1.0
+//			blue = 0.0
+//			opacity = 0.5
+//		}
+//		position = atPosition ?? 1
+//	}
 
 }
 
@@ -146,26 +146,24 @@ extension Location {
 	
 	// this is the inverse of addToItems.
 	func removeFromItems(item: Item) {
-		itemsOptional?.removeAll() {
-			$0.referenceID == item.referenceID
-		}
+		itemsOptional?.removeAll(where: { $0.referenceID == item.referenceID })
 	}
 	
 	// used to update an existing Location in the ModifyExistingLocationView,
 	// based on data values of a DraftLocation.
-	func updateValues(from draftLocation: DraftLocation) {
-		name = draftLocation.locationName
-		if let components = draftLocation.color.cgColor?.components {
-			red = Double(components[0])
-			green = Double(components[1])
-			blue = Double(components[2])
-			opacity = Double(components[3])
-		} else {
-			red = 0.0
-			green = 1.0
-			blue = 0.0
-			opacity = 0.5
-		}
-	}
+//	func updateValues(from draftLocation: DraftLocation) {
+//		name = draftLocation.locationName
+//		if let components = draftLocation.color.cgColor?.components {
+//			red = Double(components[0])
+//			green = Double(components[1])
+//			blue = Double(components[2])
+//			opacity = Double(components[3])
+//		} else {
+//			red = 0.0
+//			green = 1.0
+//			blue = 0.0
+//			opacity = 0.5
+//		}
+//	}
 	
 }

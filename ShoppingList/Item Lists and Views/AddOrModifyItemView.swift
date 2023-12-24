@@ -12,10 +12,10 @@ import SwiftUI
 /*
  the AddOrModifyItemView can be opened:
  -- via a navigation link from the ShoppingListView or the
-    AllMyItemsView or the DraftLocationForm to edit an
+    AllMyItemsView or the AddOrModifyLocationView to edit an
     existing shopping item,
  -- or in a sheet from the ShoppingListView or the
-    AllMyItemsView or the DraftLocationForm when we're adding
+    AllMyItemsView or the AddOrModifyLocationView when we're adding
     a new Item (although please wrap us in a navigationStack
 		when doing this).
 */

@@ -58,13 +58,17 @@ struct LocationsView: View {
 			} // end of VStack
 			.navigationBarTitle("Locations")
 			.navigationDestination(for: Location.self) { location in
-				ModifyExistingLocationView(location: location)
+					AddOrModifyLocationView(from: location)
+					//				ModifyExistingLocationView(location: location)
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 			}
 			.sheet(isPresented: $isAddNewLocationSheetPresented) {
-				AddNewLocationView()
+				//AddNewLocationView()
+				NavigationStack {
+					AddOrModifyLocationView()
+				}
 			}
 			.task {
 				modelContext.resolveMultipleUnknownLocations()

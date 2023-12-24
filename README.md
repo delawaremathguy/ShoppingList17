@@ -19,7 +19,7 @@ This is the fifth iteration of my original ShoppingList project and will yet aga
 Feel free to use this as is, to develop further, to completely ignore, or even just to inspect and then send me a note or Open an Issue to tell me I am doing this all wrong.  
 
 
-> The most recent update of note to SL17 was posted on 22 December, 2023.  Please see the Programming Comments and Change Log for details.
+> The most recent update of note to SL17 was posted on 24 December, 2023.  Please see the Programming Comments and Change Log for details.
 
 
 ## General App Overview
@@ -128,6 +128,7 @@ The SwiftData container is organized into models named `Item` and `Location`.  A
 * (*27Nov*) Added a badge to the shopping list icon (in a TabView) or shopping list label (in a NavSplitView sidebar) to show the count of items on the shopping list.
 * (*07Dec*) "Fixed" a crash when navigating from LocationsView to edit a Location in ModifyExistingLocationView?  (It started crashing in the simulator, but was working fine on device.)
 * (*22Dec*) AddNewItemView and ModifyExistingItemView have been combined into a single, yet dual-purpose view; and the notion of using a `DraftItem` has been supplanted by using an Item model object directly, which can either be an Item that already exists in the model context (when editing an existing Item), or a new Item that has not yet been inserted into the model context (when adding a new Item).  Consequently, four files (all commented out, for the moment) have been replaced by one.
+* (*24Dec*) A code-combining operation has also now been performed on the AddNewLocationView and ModifyExistingLocationView, reducing four files into one that's much simpler to understand.  Indeed, the notion of creating a `DraftLocation` is unnecessary: we can use just a Location directly.  It only matters whether the location is already in the model context (so you have a live edit of an existing location), or whether the location is not yet inserted into the model context and it substitutes as a `draft` (when you are creating a new location) that is simply discarded if you cancel or inserted into the context if you save.  Thank you SwiftData.
 
 
 ## License
