@@ -57,9 +57,9 @@ struct CompactMainView: View {
 
 		} // end of TabView
 		// .onChange is here only for testing purposes !
-		.onChange(of: selection) { oldValue, newValue in
-			print("change from \(String(describing: oldValue)) to \(String(describing: newValue))")
-		}
+//		.onChange(of: selection) { oldValue, newValue in
+//			print("change from \(String(describing: oldValue)) to \(String(describing: newValue))")
+//		}
 	} // end of var body: some View
 }
 

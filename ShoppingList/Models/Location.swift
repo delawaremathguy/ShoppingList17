@@ -120,9 +120,9 @@ extension Location {
 	// but we can do it the other-way-round: append the item to
 	// the location's optional array of items. this is basically
 	// the equivalent addToItems function of CD and you would write:
-	//   location.append(item: item)
+	//   location.addToItems(item: item)
 	//
-	// and from testing, it seems that using this append form may be
+	// and from testing, it seems that using this addToItems form may be
 	// required to work properly with observation, and such is implied
 	// in this article by Mohammed Azam:
 	//   https://azamsharp.com/2023/07/04/the-ultimate-swift-data-guide.html

@@ -14,7 +14,7 @@ import SwiftUI
 // an Item, a.k.a., a Shopping Item, is simply something you would
 // purchase at a grocery store.  we allow you to set the isAvailable
 // flag to false to indicate that something was on the shopping list when
-// you went to the store, but it was no available.  and whenever you
+// you went to the store, but it was not available.  and whenever you
 // purchase an item on the shopping list, we update its timestamp
 // so you can see when it was last purchased.
 @Model
@@ -38,14 +38,6 @@ public class Item {
 	// from its associated Location.
 	@Relationship(deleteRule: .nullify)
 	var location: Location?
-	
-	var dateText: String {
-		lastPurchased?.formatted(date: .long, time: .omitted) ?? "(Never)"
-	}
-	
-	var canBeSaved: Bool {
-		!name.isEmpty
-	}
 	
 	// generic initializer
 	init() { /* nothing to do here */ }
@@ -80,6 +72,16 @@ extension Item {
 	
 	// the name of its associated Location
 	var locationName: String { location?.name ?? "No Name" }
+	
+	// display date last purchased
+	var dateText: String {
+		lastPurchased?.formatted(date: .long, time: .omitted) ?? "(Never)"
+	}
+	
+	// items must have a name to be savable when creating a new Item
+	var canBeSaved: Bool {
+		!name.isEmpty
+	}
 	
 }
 

@@ -141,16 +141,26 @@ struct AllMyItemsView: View {
 				
 			case .byDate:
 				let purchasedItems = searchQualifiedItems.filter { $0.lastPurchased != nil }
-				let dictionary = Dictionary(grouping: purchasedItems) {
-					calendar.startOfDay(for: $0.lastPurchased!)
-				}
-				// the list of sections to build ...
-				var sections = [ItemSection]()
-				for key in dictionary.keys.sorted(by: { $0 > $1 }) {
-					let newSection = ItemSection(title: key.formatted(date: .complete, time: .omitted),
-																			 items: dictionary[key]!)
-					sections.append(newSection)
-				}
+				
+				// get sections for all items that have been purchased
+				var sections = Dictionary(grouping: purchasedItems,
+																	by: { calendar.startOfDay(for: $0.lastPurchased!) })
+					.sorted(by: { $0.key > $1.key })
+					.map({ $0.value })
+					.map({ ItemSection(title: $0.first!.dateText, items: $0) })
+
+//				let dictionary = Dictionary(grouping: purchasedItems) {
+//					calendar.startOfDay(for: $0.lastPurchased!)
+//				}
+//				// the list of sections to build ...
+//				var sections = [ItemSection]()
+//				for key in dictionary.keys.sorted(by: { $0 > $1 }) {
+//					let newSection = ItemSection(title: key.formatted(date: .complete, time: .omitted),
+//																			 items: dictionary[key]!)
+//					sections.append(newSection)
+//				}
+				
+				// and then through in unpurchased items
 				let nonPurchasedItems = searchQualifiedItems.filter { $0.lastPurchased == nil }
 				if !nonPurchasedItems.isEmpty {
 					sections.append(ItemSection(title: "Never Purchased", items: nonPurchasedItems))

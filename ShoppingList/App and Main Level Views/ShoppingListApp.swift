@@ -32,7 +32,7 @@ class ShoppingListCount {
 	// using a fetchedResultsController) or perhaps i could make this
 	// an observer of some SwiftData/Core Data notification ... but that's
 	// something i will leave for later ...
-	// (it looks like the only notifications that SwiftData post
+	// (it looks like the only notifications that SwiftData posts
 	// are for willSave and didSave?)
 	func countChanged() {
 		onListCount = modelContext.itemCount(onShoppingListOnly: true)

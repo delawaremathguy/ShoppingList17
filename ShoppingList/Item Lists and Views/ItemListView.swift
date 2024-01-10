@@ -55,8 +55,7 @@ struct ItemListView: View {
 			Section(header: Text(section.title)) {
 				ForEach(section.items) { item in
 					NavigationLink(value: item) {
-						SelectableItemRowView(item: item,
-																	selected: itemsChecked.contains(item),
+						SelectableItemRowView(item: item, selected: itemsChecked.contains(item),
 																	sfSymbolName: sfSymbolName) { handleItemTapped(item) }
 					}
 					.contextMenu {

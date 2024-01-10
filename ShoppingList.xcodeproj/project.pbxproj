@@ -206,10 +206,10 @@
 		D63F9451297EDFC2002AA6E2 /* App and Main Level Views */ = {
 			isa = PBXGroup;
 			children = (
-				D63C05552566B9DE000A63FC /* ShoppingListApp.swift */,
-				D64387F7299548290084B354 /* MainView.swift */,
 				D6B8A95324636711005F8EF2 /* CompactMainView.swift */,
+				D64387F7299548290084B354 /* MainView.swift */,
 				D64387F92995492D0084B354 /* RegularMainView.swift */,
+				D63C05552566B9DE000A63FC /* ShoppingListApp.swift */,
 			);
 			path = "App and Main Level Views";
 			sourceTree = "<group>";
