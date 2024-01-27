@@ -39,7 +39,7 @@ struct ArchiveDocument: FileDocument {
 		}
 	}
 	
-		// instance property: a JSON data representing locations (and their associated items)
+		// the only instance property: an array of location representations
 	let locationRepresentations: [LocationRepresentation]
 	
 		// MARK: Initializers

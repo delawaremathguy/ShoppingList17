@@ -210,7 +210,7 @@ struct AddOrModifyItemView: View {
 	func saveButton() -> some View {
 		Button("Save") {
 			modelContext.insert(editableItem)
-			selectedLocation.addToItems(item: editableItem)
+			selectedLocation.addToItems(editableItem)
 			shoppingListCount.countChanged()
 			dismiss()
 		}

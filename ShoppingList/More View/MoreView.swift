@@ -181,7 +181,7 @@ extension MoreView {
 				isAlertPresented = true
 				
 					// success ==> we have a valid ArchiveDocument that was read from disk
-					// without error, so pull all its data by locationRepresentations and ask
+					// without error, so pull out all the locationRepresentations and ask
 					// the Location class to figure out what to do with them in its
 					// updateOrInsert method.
 			case .success(let archiveDocument):

@@ -81,16 +81,14 @@ struct AllMyItemsView: View {
 				NavigationStack {
 					AddOrModifyItemView(suggestedName: searchText, initialLocation: modelContext.unknownLocation)
 				}
-//				AddNewItemView(suggestedName: searchText, location: modelContext.unknownLocation)
-					.interactiveDismissDisabled()
+				.interactiveDismissDisabled()
 			}
-			.onChange(of: displayType) { oldValue, newValue in
+			.onChange(of: displayType) { _, newValue in
 				isMultiSectionList = (newValue == .byDate)
 			}
 			.navigationBarTitle("All My Items")
 			.navigationDestination(for: Item.self) { item in
 				AddOrModifyItemView(from: item)
-//				ModifyExistingItemView(item: item)
 			}
 
 		} // end of NavigationStack
@@ -142,25 +140,16 @@ struct AllMyItemsView: View {
 			case .byDate:
 				let purchasedItems = searchQualifiedItems.filter { $0.lastPurchased != nil }
 				
-				// get sections for all items that have been purchased
-				var sections = Dictionary(grouping: purchasedItems,
-																	by: { calendar.startOfDay(for: $0.lastPurchased!) })
-					.sorted(by: { $0.key > $1.key })
-					.map({ $0.value })
-					.map({ ItemSection(title: $0.first!.dateText, items: $0) })
-
-//				let dictionary = Dictionary(grouping: purchasedItems) {
-//					calendar.startOfDay(for: $0.lastPurchased!)
-//				}
-//				// the list of sections to build ...
-//				var sections = [ItemSection]()
-//				for key in dictionary.keys.sorted(by: { $0 > $1 }) {
-//					let newSection = ItemSection(title: key.formatted(date: .complete, time: .omitted),
-//																			 items: dictionary[key]!)
-//					sections.append(newSection)
-//				}
+				// get sections for all items that have been purchased by grouping
+				// into a dictionary by date, sorting the dictionary entries in decreasing order
+				// of the date keys, then making sections out of these using the keys to
+				// determine the heading (representation of a Date) and the dictionary
+				// values to provide the items purchased on that date.
+				var sections = Dictionary(grouping: purchasedItems) { calendar.startOfDay(for: $0.lastPurchased!) }
+					.sorted { $0.key > $1.key }
+					.map { ItemSection(title: $0.key.formatted(date: .long, time: .omitted), items: $0.value) }
 				
-				// and then through in unpurchased items
+				// and then throw in unpurchased items
 				let nonPurchasedItems = searchQualifiedItems.filter { $0.lastPurchased == nil }
 				if !nonPurchasedItems.isEmpty {
 					sections.append(ItemSection(title: "Never Purchased", items: nonPurchasedItems))

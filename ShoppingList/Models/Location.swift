@@ -130,7 +130,7 @@ extension Location {
 	// note: was named `append`, but now renamed to `addToItems`, which
 	// is not only a better name, but makes it more like what Core Data
 	// would supply for you.
-	func addToItems(item: Item) {
+	func addToItems(_ item: Item) {
 		// you probably want to remove this assertion in practice, but
 		// i found it useful when getting my sea legs in SwiftData,
 		// to be sure i have inserted a Location into the SwiftData

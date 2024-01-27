@@ -131,7 +131,7 @@ struct AddOrModifyLocationView: View {
 		// move all items at this location to the unknownLocation
 		let itemsToMove = location.items
 		for item in itemsToMove {
-			modelContext.unknownLocation.addToItems(item: item)
+			modelContext.unknownLocation.addToItems(item)
 		}
 		modelContext.delete(location)
 		try? modelContext.save()

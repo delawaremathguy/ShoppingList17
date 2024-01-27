@@ -72,11 +72,11 @@ extension ModelContext {
 			if let currentLocation = item.location, currentLocation != location {
 				currentLocation.removeFromItems(item: item)
 			}
-			location.addToItems(item: item)
+			location.addToItems(item)
 		} else {
 			let newItem = Item(from: representation)
 			insert(newItem)
-			location.addToItems(item: newItem)
+			location.addToItems(newItem)
 		}
 	}
 
@@ -259,7 +259,7 @@ extension ModelContext {
 		for location in remainingLocations {
 			location.items.forEach {
 				//location.removeFromItems(item: $0)	// (not sure this is really necessary)
-				realUnknown.addToItems(item: $0)
+				realUnknown.addToItems($0)
 			}
 			delete(location)
 		}
