@@ -73,14 +73,6 @@ struct LocationsView: View {
 			.task {
 				modelContext.resolveMultipleUnknownLocations()
 			}
-//			.onAppear { handleOnAppear() }
-//			.onChange(of: locations) { old, new in
-//				if new.count(where: { $0.isUnknownLocation} ) > 1 {
-//					modelContext.condenseMultipleUnknownLocations(from: new.filter {
-//						$0.isUnknownLocation
-//					})
-//				}
-//			}
 		}
 	} // end of var body: some View
 	
@@ -97,29 +89,7 @@ struct LocationsView: View {
 			position += 1
 		}
 	}
-	
-	func handleOnAppear() {
-		// because the unknown location is created lazily, this will
-		// make sure that we'll not be left with an empty screen.
-		// however, this could introduce a subtle problem: if you
-		// are using iCloud, you might have a "late delivery" from
-		// the cloud of an unknown location created on another device
-		// (happens the first time you use the app off the cloud).
-		// so we'll fix the multiple unknown location problem here ...
 		
-		// note, also, that i have added the condenseMultipleUnknownLocations
-		// code in an onChange modifier: something could come from the
-		// cloud when we're on-screen.
-		modelContext.resolveMultipleUnknownLocations()
-//		if locations.count == 0 {
-//			modelContext.createUnknownLocation()
-//		} else if locations.count(where: { $0.isUnknownLocation} ) > 1 {
-//			modelContext.condenseMultipleUnknownLocations(from: locations.filter {
-//				$0.isUnknownLocation
-//			})
-//		}
-	}
-	
 	// defines the usual "+" button to add a Location
 	func addNewButton() -> some View {
 		Button {

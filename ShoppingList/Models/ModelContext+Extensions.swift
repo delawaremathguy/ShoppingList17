@@ -70,7 +70,7 @@ extension ModelContext {
 			// we'll not update any property here, although we will make sure that
 			// it is associated with the location that was given to us.
 			if let currentLocation = item.location, currentLocation != location {
-				currentLocation.removeFromItems(item: item)
+				currentLocation.removeFromItems(item)
 			}
 			location.addToItems(item)
 		} else {
@@ -179,8 +179,9 @@ extension ModelContext {
 		// we start adding Items.
 		//
 		// so if we ever need to get the unknown location from the database,
-		// we will fetch it; and if it's not there, we will create it.  but
-		// there's also a third possibility of having more than one
+		// we will fetch it; and if it's not there, we will create it.  
+		// 
+		// but there's also a third possibility of having more than one
 		// unknown location (as you'll discover below), so we hand all of the
 		// necessary logic off to resolveMultipleUnknownLocations
 		// to figure out what to do.
@@ -200,7 +201,7 @@ extension ModelContext {
 	// (1C) sync with the cloud
 	//
 	// (2A) install app and run on the second device, but with
-	//      the cloud turned off or with simply being unavailable
+	//      the cloud turned off or with it simply being unavailable
 	//      (e.g., you're not connected to the internet).
 	// (2B) the second device (lazily!) creates its own unknown location.
 	// (2C) the second device eventually connects to the cloud and then
@@ -211,26 +212,11 @@ extension ModelContext {
 	// as the unique unknown location known on your device and is
 	// also eventually agreed to as the unknown location of all devices
 	// sharing data across the same Apple ID.
+	
 	@discardableResult
 	func resolveMultipleUnknownLocations() -> Location {
-		// get all unknown locations
-		let locationsToCondense = allUnknownLocations()
-
-		// A. create the unknown location now if we don't yet have one
-		if locationsToCondense.isEmpty {
-			let location = Location(suggestedName: kUnknownLocationName,
-															atPosition: kUnknownLocationPosition)
-			insert(location)
-			return location
-		}
 		
-		// B. finding one unknown location is almost always the case,
-		// so return the one we found
-		if locationsToCondense.count == 1 {
-			return locationsToCondense[0]
-		}
-		
-		// C.  we have multiple unknown locations, probably because of an
+		// we have multiple unknown locations, probably because of an
 		// iCloud syncing issue when installing on multiple devices
 		// on the same Apple ID.  but we want the unknown location
 		// to be unique across all your devices.
@@ -249,7 +235,31 @@ extension ModelContext {
 		// "underneath" SwiftUI and this could lead to one of those "purple"
 		// warnings, but i have not seen this in the three of four times i
 		// have tested with real devices.]
-		let sortedLocations = locationsToCondense
+		
+		// get all unknown locations
+		let unknownLocations = allUnknownLocations()
+		
+		// A. create the unknown location now if we don't yet have one
+		if unknownLocations.isEmpty {
+			let location = Location(suggestedName: kUnknownLocationName,
+															atPosition: kUnknownLocationPosition)
+			insert(location)
+			return location
+		}
+		
+		// B. finding one unknown location is almost always the case,
+		// so return the one we found
+		if unknownLocations.count == 1 {
+			return unknownLocations[0]
+		}
+		
+		// BUT:
+		// there's also a third possibility of having more than one
+		// unknown location (as you'll discover below), so we hand all of the
+		// necessary logic off to resolveMultipleUnknownLocations
+		// to figure out what to do.
+		
+		let sortedLocations = unknownLocations
 			.filter { $0.isUnknownLocation }
 			.sorted { loc1, loc2 in
 				loc1.referenceID.uuidString < loc2.referenceID.uuidString
@@ -258,7 +268,7 @@ extension ModelContext {
 		let remainingLocations = sortedLocations.dropFirst()
 		for location in remainingLocations {
 			location.items.forEach {
-				//location.removeFromItems(item: $0)	// (not sure this is really necessary)
+				location.removeFromItems($0)	// (not sure this is really necessary)
 				realUnknown.addToItems($0)
 			}
 			delete(location)

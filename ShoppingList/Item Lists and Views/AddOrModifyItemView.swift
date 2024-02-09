@@ -170,7 +170,7 @@ struct AddOrModifyItemView: View {
 	// SFSymbol "chevron.backward."
 	
 	// for the moment, i have disabled the Back button if we have executed
-	// an item deletion (although i don;t think this can happen).
+	// an item deletion (although i don't think this can happen).
 	//
 	// i should probably also disable the Back button
 	// if the name field is empty, but when have you ever seen this in

@@ -11,8 +11,8 @@ import Foundation
 extension Array {
 	
 	// this is a generic function you can use on an array
-	// to break it into subarrays according to some "Hashable
-	// value", such as "by date" or "by the name's first letter,"
+	// to break it into subarrays according to some Hashable
+	// value, such as "by date" or "by the name's first letter,"
 	// and you can specify how to order the subarrays within an
 	// enclosing array according to this value.
 	//
@@ -45,7 +45,7 @@ extension Array {
 	//   [["Dan", "Bob"], ... , ["Charlie"]]
 	//
 	// note: i don't use this anywhere in the project ... but i do use its basic operation
-	// more directly in the AllMyItems view (it's simpler in that case to have the
+	// more directly in the AllMyItemsView (it's simpler in that case to have the
 	// dictionary elements themselves available, with both the key and value).
 	func grouped<T: Hashable>(by groupingFunction: (Element) -> T,
 														orderedBy orderingFunction: (T, T) -> Bool) -> Array<Array<Element>> {

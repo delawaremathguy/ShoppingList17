@@ -145,7 +145,7 @@ extension Location {
 	}
 	
 	// this is the inverse of addToItems.
-	func removeFromItems(item: Item) {
+	func removeFromItems(_ item: Item) {
 		itemsOptional?.removeAll(where: { $0.referenceID == item.referenceID })
 	}
 	
