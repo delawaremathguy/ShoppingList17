@@ -58,6 +58,8 @@ struct ShoppingListApp: App {
 		NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
 	let enterForegroundPublisher =
 		NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+	let remoteStoreChangePublisher =
+		NotificationCenter.default.publisher(for: .NSPersistentStoreRemoteChange)
 	
 	// the modelContainer for SwiftData
 	let modelContainer: ModelContainer
@@ -94,6 +96,18 @@ struct ShoppingListApp: App {
 						inStoreTimer.start()
 					}
 				}
+				.onReceive(enterForegroundPublisher) { _ in
+					if inStoreTimer.isSuspended {
+						inStoreTimer.start()
+					}
+				}
+			// we need to watch this for the case of the cloud telling us
+			// that data has been synced ... the shopping list count
+			// may have changed as a result
+				.onReceive(remoteStoreChangePublisher) { _ in
+					shoppingListCount.countChanged()
+				}
+
 		}
 		.modelContainer(modelContainer)
 	}
