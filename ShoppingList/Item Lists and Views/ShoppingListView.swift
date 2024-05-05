@@ -99,6 +99,15 @@ struct ShoppingListView: View {
 //				AddNewItemView(location: modelContext.unknownLocation)
 					.interactiveDismissDisabled()
 			}
+			.onAppear {
+				// this seems a little bit of a hack, and i am not totally
+				// convinced this will do much ... but let's at least hope
+				// this gives us a shot at getting the count right for the
+				// problem of background updates received via iCloud
+				// for items on the shopping list being modified on a
+				// different device.
+				shoppingListCount.countChanged()
+			}
 			// i don't like separating this nav destination from where the
 			// links to use it are located -- in the ItemListView -- but
 			// the placement of this matters ... and the best advice that

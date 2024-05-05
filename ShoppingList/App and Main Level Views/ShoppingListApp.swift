@@ -96,17 +96,25 @@ struct ShoppingListApp: App {
 						inStoreTimer.start()
 					}
 				}
-				.onReceive(enterForegroundPublisher) { _ in
-					if inStoreTimer.isSuspended {
-						inStoreTimer.start()
-					}
-				}
+// for some reason, i had this in here twice; just comment out and
+// indicate this in the next
+//				.onReceive(enterForegroundPublisher) { _ in
+//					if inStoreTimer.isSuspended {
+//						inStoreTimer.start()
+//					}
+//				}
+			
 			// we need to watch this for the case of the cloud telling us
 			// that data has been synced ... the shopping list count
 			// may have changed as a result
-				.onReceive(remoteStoreChangePublisher) { _ in
-					shoppingListCount.countChanged()
-				}
+// NOTE: this doesn't really do what i want (e.g., it includes changes
+// made by me within the app).  and i am not convinced that adding
+// this really does anything.  a little more testing is needed on this aspect
+// of keeping the shoppingListCount correct, although if we only had
+// an NSFetchedResultsController available ... did i hear iOS 18 anyone?
+//				.onReceive(remoteStoreChangePublisher) { _ in
+//					shoppingListCount.countChanged()
+//				}
 
 		}
 		.modelContainer(modelContainer)
