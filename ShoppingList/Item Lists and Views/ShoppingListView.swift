@@ -106,7 +106,11 @@ struct ShoppingListView: View {
 				// problem of background updates received via iCloud
 				// for items on the shopping list being modified on a
 				// different device.
-				shoppingListCount.countChanged()
+				DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+					// updating this directly in .onAppear does not really solve the problem (!)
+					// but delaying this for a few seconds should be a reasonable fix.
+					shoppingListCount.countChanged()
+				}
 			}
 			// i don't like separating this nav destination from where the
 			// links to use it are located -- in the ItemListView -- but

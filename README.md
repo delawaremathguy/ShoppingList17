@@ -19,7 +19,7 @@ This is the fifth iteration of my original ShoppingList project and will yet aga
 Feel free to use this as is, to develop further, to completely ignore, or even just to inspect and then send me a note or Open an Issue to tell me I am doing this all wrong.  
 
 
-> The most recent update of note to SL17 was posted on **23 February, 2024**.  Please see the Programming Comments and Change Log for details.
+> The most recent update of note to SL17 was posted on **5 June, 2024**.  Please see the Programming Comments and Change Log for details.
 
 
 ## General App Overview
@@ -131,6 +131,7 @@ The SwiftData container is organized into models named `Item` and `Location`.  A
 * (*24Dec*) A code-combining operation has also now been performed on the AddNewLocationView and ModifyExistingLocationView, reducing four files into one that's much simpler to understand.  Indeed, the notion of creating a `DraftLocation` is unnecessary: we can use just a Location directly.  It only matters whether the location is already in the model context (so you have a live edit of an existing location), or whether the location is not yet inserted into the model context and it substitutes as a `draft` (when you are creating a new location) that is simply discarded if you cancel or inserted into the context if you save.  Thank you SwiftData!
 * (*09Feb*) most everything since 24Dec has been code and comment cleaning ... just wanted people to know that we're still occasionally working on this!
 * (*23Mar*) i have attached an .onReceive() modifier to the MainView in ShoppingListApp.swift to watch for NSPersistentStoreRemoteChanges.  this is necessary to keep the ShoppingListCount updated whenever SwiftData (well, it's 'Core Data underneath) receives updated data from the cloud that could change the count of items on the shopping list.
+* (*05Jun*) the 23Mar change does not really do anything, and adding some quick-fix code in .onAppear to the ShoppingListView didn't really do anything either.  however, i've put in a "delay for a few seconds and then check the shopping list count" sequence in the .onAppear modifier ... it's only band-aid and will probably part of the problem (at least until SwiftData gets an upgrade next week at WWDC). 
 
 
 ## License
